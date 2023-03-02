@@ -1,5 +1,5 @@
 #ifndef TABLE_HPP
-#define TABEL_HPP
+#define TABLE_HPP
 
 #include "RegularDeck.hpp"
 #include "AbilityDeck.hpp"
@@ -26,6 +26,6 @@ class Table {
         //set function
         void setPotAmount(int);
         void setPotAmountByScale(int);
-}
+};
 
 #endif

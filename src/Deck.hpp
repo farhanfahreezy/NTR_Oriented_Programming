@@ -8,14 +8,13 @@
 #include <cstdlib>
 
 class Deck{
-    private:
+    protected:
         std :: vector<std::string> cards;
         int amount;
 
     public:
-        Deck(); //ctor
-
-        void shuffleDeck(); // shuffle deck
+        Deck(int amount); //ctor
+        virtual void shuffleDeck(); // shuffle deck
         std :: string getCard(int idx); 
         int getAmount();
 };
