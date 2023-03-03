@@ -1,15 +1,11 @@
 #ifndef TABLE_HPP
 #define TABEL_HPP
 
-#include "RegularDeck.hpp"
-#include "AbilityDeck.hpp"
+#include "InventoryHolder.hpp"
 
-class Table {
+class Table : private InventoryHolder{
     private:
-        int pot;
         RegularDeck tableDeck;
-        RegularDeck drawDeck;
-        AbilityDeck abilityDrawDeck;
     public:
         //ctor
         Table();
@@ -18,14 +14,11 @@ class Table {
         ~Table();
 
         //get function
-        int getPotAmount();
+
         RegularDeck getTableDeck();
-        RegularDeck getDrawingDeck();
-        AbilityDeck getabilityDrawingDeck();
 
         //set function
-        void setPotAmount(int);
-        void setPotAmountByScale(int);
+        void resetPot();
 }
 
 #endif

@@ -1,43 +1,23 @@
 #include "Table.hpp"
 
-class Table {
+class Table : private InventoryHolder{
         //ctor
-        Table(){
-            this->pot = 64;
+        Table() : InventoryHolder(64,52,7){
             this->tableCards = new RegularDeck(5);
-            this->drawCards = new RegularDeck(52);
-            this->abilityDrawCards = new AbilityDeck(7);
         }
 
         //dtor
-        ~Table(){
+        ~Table() : ~InventoryHolder(){
             delete this->tableCards;
-            delete this->drawCards;
-            delete this->abilityDrawCards;
         }
 
         //get function
-        int getPotAmount(){
-            return this->pot;
-        }
-
         RegularDeck getTableDeck(){
-            return this->tableCards
-        }
-
-        RegularDeck getDrawingDeck(){
-            return this->drawCards;
-        }
-
-        AbilityDeck getabilityDrawingDeck(){
-            return this->abilityDrawCards;
+            return this->tableDeck;
         }
 
         //set function
-        void setPotAmount(int x){
-            this->pot = x;
-        }
-        void setPotAmountByScale(int x){
-            this->pot *= x;
+        void resetPot(){
+            this.setPoint(64);
         }
 }
