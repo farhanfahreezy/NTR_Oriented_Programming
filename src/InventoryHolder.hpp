@@ -1,3 +1,6 @@
+#ifndef INVENTORYHOLDER_H
+#define INVENTORYHOLDER_H
+
 #include <iostream>
 using namespace std;
 
@@ -28,3 +31,5 @@ class InventoryHolder {
         void increasePointByAmount(int);
 
 }
+
+#endif
