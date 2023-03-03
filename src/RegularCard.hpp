@@ -15,5 +15,6 @@ class RegularCard: public Card{
         void setNum(int num);
         void setColor(string color);
         void printInfo();
+        float value();
 };
 #endif

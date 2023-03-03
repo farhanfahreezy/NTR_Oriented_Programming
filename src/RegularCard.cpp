@@ -23,13 +23,31 @@ void RegularCard::setColor(string color){
 
 void RegularCard::printInfo(){
     cout << "Kartu ini adalah " << getNum() << " " << getColor() <<endl;
+    cout << "Value: " << value() << endl;
 }
 
+float RegularCard::value(){
+    float konstan = getNum() * 0.1;
+    int colorValue;
+    if(getColor() == "hijau"){
+        colorValue = 0;
+    }
+    else if(getColor() == "biru"){
+        colorValue = 1;
+    }
+    else if(getColor() == "kuning"){
+        colorValue = 2;
+    }
+    else if(getColor() == "merah"){
+        colorValue = 3;
+    }
+    return konstan + (colorValue*0.03);
+}
 // driver
 /* int main(){
-    RegularCard rc(9,"Merah");
+    RegularCard rc(9,"merah");
     rc.printInfo();
-    rc.setColor("Biru");
+    rc.setColor("biru");
     rc.setNum(3);
     rc.printInfo();
     return 0;
