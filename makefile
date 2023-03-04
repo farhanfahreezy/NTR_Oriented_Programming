@@ -65,3 +65,10 @@ test-regdeck: testb-regdeck clean-obj
 
 testb-regdeck: all
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/RegularDeckTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/RegularDeckTest.exe
+
+# test -abdeck
+test-abdeck: testb-abdeck clean-obj 
+	@$(TEST_BIN_FOLDER)/AbilityDeckTest.exe
+
+testb-abdeck: all
+	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/AbilityDeckTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/AbilityDeckTest.exe

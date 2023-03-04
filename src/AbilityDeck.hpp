@@ -2,7 +2,6 @@
 #define ABILITYDECK_HPP
 
 #include <Deck.hpp>
-#include <AbilityCard.hpp>
 
 class AbilityDeck : public Deck<AbilityCard>{
     public:
