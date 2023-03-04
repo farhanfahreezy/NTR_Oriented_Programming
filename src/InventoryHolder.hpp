@@ -1,5 +1,5 @@
-#ifndef INVENTORYHOLDER_H
-#define INVENTORYHOLDER_H
+#ifndef INVENTORYHOLDER_HPP
+#define INVENTORYHOLDER_HPP
 
 #include <iostream>
 using namespace std;
