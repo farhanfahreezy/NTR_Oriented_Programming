@@ -58,3 +58,10 @@ test-state: testb-state clean-obj
 
 testb-state: all
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/GameStateTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/GameStateTest.exe
+
+# test-regdeck
+test-regdeck: testb-regdeck clean-obj 
+	@$(TEST_BIN_FOLDER)/RegularDeckTest.exe
+
+testb-regdeck: all
+	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/RegularDeckTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/RegularDeckTest.exe

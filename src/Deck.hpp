@@ -1,13 +1,15 @@
 #ifndef DECK_HPP
 #define DECK_HPP
 
-#include "RegularCard.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <sstream>
 #include <cstdlib>
 #include <ctime>
+
+#include <RegularCard.hpp>
+#include <AbilityCard.hpp>
 
 template<class T>
 class Deck{
@@ -20,9 +22,8 @@ class Deck{
         Deck(int amount); //ctor
         Deck& operator=(const Deck&);
         virtual void shuffleDeck(); // shuffle deck
-        std :: string getCard(int idx); 
+        T getCard(int idx); 
         int getAmount();
 };
-
 
 #endif

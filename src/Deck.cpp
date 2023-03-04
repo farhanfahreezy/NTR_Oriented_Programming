@@ -1,4 +1,5 @@
 #include "Deck.hpp"
+#include <algorithm>
 
 using namespace std;
 
@@ -19,10 +20,8 @@ void Deck<T>::shuffleDeck() {
 }
 
 template<class T>
-std::string Deck<T>::getCard(int idx) {
-    std::ostringstream oss;
-    oss << cards[idx];
-    return oss.str();
+T Deck<T>::getCard(int idx) {
+    return cards[idx];
 }
 
 template<class T>
@@ -42,3 +41,6 @@ int Deck<T>::getAmount() {
     }
     
 }*/
+
+template class Deck<RegularCard>;
+template class Deck<AbilityCard>;
