@@ -6,10 +6,6 @@ Table::Table() : InventoryHolder(64,52,7){
     this->tableDeck = RegularDeck(5);
 }
 
-//dtor
-Table::~Table(){
-    delete tableDeck;
-}
 
 //get function
 RegularDeck Table::getTableDeck(){

@@ -11,10 +11,6 @@ InventoryHolder::InventoryHolder(int poin, int n_regulardeck, int n_abilitydeck)
 }
 
 //dtor
-InventoryHolder::~InventoryHolder(){
-    delete regularDeck;
-    delete abilityDeck;
-}
 
 //get function
 int InventoryHolder::getPoint(){
