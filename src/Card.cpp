@@ -1,13 +1,5 @@
 #include "Card.hpp"
 
-Card::Card(string type){
-    this->type = type;
-}
+Card::Card(): Value(){}
 
-string Card::getType(){
-    return this->type;
-}
 
-void Card::printInfo(){
-    cout << "Tipe kartu: " << this->getType() << endl;
-}
