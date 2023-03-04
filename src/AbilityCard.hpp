@@ -8,7 +8,7 @@ class AbilityCard: public Card{
     public:
         AbilityCard(float id);
         void setId(float id);
-        void printInfo();
+        void printInfo() override;
         float value() override;
 };
 #endif

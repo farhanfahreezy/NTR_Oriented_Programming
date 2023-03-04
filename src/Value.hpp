@@ -3,7 +3,6 @@
 
 class Value{
     public:
-        Value();
-        virtual float value();
+        virtual float value() = 0;
 };
 #endif

@@ -19,7 +19,7 @@ class RegularCard: public Card{
         string colorString();
         void setNum(int num);
         void setColor(int color);
-        void printInfo();
+        void printInfo() override;
         float value() override;
 };
 #endif

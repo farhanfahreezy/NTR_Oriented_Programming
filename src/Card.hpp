@@ -7,7 +7,7 @@ using namespace std;
 
 class Card: public Value{
     public:
-        Card();
+        virtual void printInfo() = 0;
 };
 
 #endif

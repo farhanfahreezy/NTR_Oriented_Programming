@@ -1,8 +1,14 @@
 #include "RegularCard.hpp"
 
-RegularCard::RegularCard(int num, int color): Card(){
-    this->num = num;
-    this->color = color;
+RegularCard::RegularCard(int num, int color){
+    if((num > 13 || num < 0) || (color < 0 || color > 3)){
+        throw invalid_argument("Nomor atau warna anda salah.\n");
+    }
+    else{
+        this->num = num;
+        this->color = color;
+    }
+    
 }
 
 int RegularCard::getNum(){
@@ -26,9 +32,6 @@ string RegularCard::colorString(){
     else if(getColor() == 3){
         return "merah";
     }
-    else{
-        return "KARTU SALAH";
-    }
 }
 
 void RegularCard::setNum(int num){
@@ -49,11 +52,11 @@ float RegularCard::value(){
     return konstan + (getColor() * 0.03);
 }
 // driver
-/*int main(){
+/* int main(){
     RegularCard rc(9,1);
     rc.printInfo();
     rc.setColor(3);
     rc.setNum(3);
     rc.printInfo();
     return 0;
-}*/
+} */
