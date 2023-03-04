@@ -6,8 +6,8 @@ using namespace std;
 //ctor
 InventoryHolder::InventoryHolder(int poin, int n_regulardeck, int n_abilitydeck){
     this->point = poin;
-    this->regularDeck = new RegularDeck(n_regulardeck);
-    this->abilityDeck = new AbilityDeck(n_abilitydeck);
+    this->regularDeck = RegularDeck(n_regulardeck);
+    this->abilityDeck = AbilityDeck(n_abilitydeck);
 }
 
 //dtor
