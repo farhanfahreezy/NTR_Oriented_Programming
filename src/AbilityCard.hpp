@@ -4,11 +4,11 @@
 
 class AbilityCard: public Card{
     private:
-        string description;
+        float id;
     public:
-        AbilityCard(string desc);
-        string getDesc();
-        void setDesc(string desc);
+        AbilityCard(float id);
+        void setId(float id);
         void printInfo();
+        float value() override;
 };
 #endif

@@ -7,15 +7,19 @@ using namespace std;
 class RegularCard: public Card{
     private:
         int num;
-        string color;
+        int color;
+        // hijau = 0;
+        // biru = 1;
+        // kuning = 2;
+        // merah = 3;
     public:
-        RegularCard(int num, string color);
-        RegularCard& operator=(const RegularCard&);
+        RegularCard(int num, int color);
         int getNum();
-        string getColor();
+        int getColor();
+        string colorString();
         void setNum(int num);
-        void setColor(string color);
+        void setColor(int color);
         void printInfo();
-        float value();
+        float value() override;
 };
 #endif
