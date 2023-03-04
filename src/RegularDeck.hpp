@@ -2,9 +2,12 @@
 #define REGULARDECK_HPP
 
 #include "Deck.hpp"
+#include "RegularCard.hpp"
 
-class RegularDeck : public Deck{
+template<class T>
+class RegularDeck : public Deck<T>{
     public:
+        RegularDeck();
         RegularDeck(int amount);
 };
 

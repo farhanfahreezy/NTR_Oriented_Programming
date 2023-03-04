@@ -2,6 +2,10 @@
 
 using namespace std;
 
+
+Deck :: Deck(){
+    this->amount = 0;
+}
 Deck :: Deck(int amount){
     {
         this->amount = amount;

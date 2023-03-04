@@ -2,33 +2,34 @@
 
 using namespace std;
 
-RegularDeck :: RegularDeck(int amount) : Deck(amount){
-    this->cards.reserve(52);
-    for(int i = 0; i < 4; i++){
-        for(int j = 0; j < 13; j++){
-            stringstream ss;
-            if(i % 4 == 0){
-                ss << "Hijau";
-            }
-            if(i % 4 == 1){
-                ss << "Kuning";
-            }
-            if(i % 4 == 2){
-                ss << "Biru";
-            } 
-            if(i % 4 == 3){
-                ss << "Merah";
-            }
-            ss << " " << j + 1;
-            string card = ss.str();
-            this->cards.push_back(card);
-        }
-    }
-    this->amount = this->cards.size();
+template<class RegularCard>
+RegularDeck<RegularCard> :: RegularDeck() : Deck<RegularCard>(0){
+    this->amount = 0;
 }
 
-/*int main(){
-    RegularDeck regDeck(52);
+template<class RegularCard>
+RegularDeck<RegularCard> :: RegularDeck(int amount) : Deck<RegularCard>(amount){
+    this->amount = amount;
+    for(int i =0; i < amount; i++){
+        RegularCard regCard;
+        if(i%4 == 0){
+            regCard = RegularCard(i, "Hijau");
+        }
+        if(i%4 == 1){
+            regCard = RegularCard(i, "Biru");
+        }
+        if(i%4 == 2){
+            regCard = RegularCard(i, "Kuning");
+        }
+        if(i%4 == 3){
+            regCard = RegularCard(i, "Merah");
+        }
+        this->cards.push_back(regCard);
+    }
+}
+
+int main(){
+    RegularDeck<RegularCard> regDeck(52);
     for(int i = 0; i < regDeck.getAmount(); i++){
         cout << regDeck.getCard(i) << endl;
     }
@@ -37,4 +38,4 @@ RegularDeck :: RegularDeck(int amount) : Deck(amount){
     for(int i = 0; i < regDeck.getAmount(); i++){
         cout << regDeck.getCard(i) << endl;
     }
-}*/
+}
