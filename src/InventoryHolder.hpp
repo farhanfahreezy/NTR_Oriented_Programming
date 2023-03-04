@@ -7,10 +7,9 @@ using namespace std;
 #include "RegularDeck.hpp"
 #include "AbilityDeck.hpp"
 
-<template T>
 class InventoryHolder {
     private:
-        T point;
+        int point;
         RegularDeck regularDeck;
         AbilityDeck abilityDeck;
     public:
@@ -21,15 +20,15 @@ class InventoryHolder {
         ~InventoryHolder();
 
         //get function
-        T getPoint();
-        RegularDeck getDrawingDeck();
-        AbilityDeck getabilityDrawingDeck();
+        int getPoint();
+        RegularDeck getRegularDeck();
+        AbilityDeck getAbilityDeck();
 
         //set function
         void setPoint(int);
         void increasePointByScale(int);
         void increasePointByAmount(int);
 
-}
+};
 
 #endif

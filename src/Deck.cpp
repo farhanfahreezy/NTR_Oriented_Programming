@@ -8,6 +8,12 @@ Deck :: Deck(int amount){
     }
 }
 
+Deck& Deck::operator=(const Deck& other) {
+    this->amount = amount;
+    this->cards = other.cards;
+    return *this;
+}
+
 void Deck :: shuffleDeck() {
     int n = this->amount;
     for (int i = n - 1; i > 0; i--) {

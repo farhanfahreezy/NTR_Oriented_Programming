@@ -5,6 +5,12 @@ RegularCard::RegularCard(int num, string color): Card("Reg"){
     this->color = color;
 }
 
+RegularCard& RegularCard::operator=(const RegularCard& other) {
+    this->num = other.num;
+    this->color = other.color;
+    return *this;
+}
+
 int RegularCard::getNum(){
     return this->num;
 }
@@ -16,6 +22,7 @@ string RegularCard::getColor(){
 void RegularCard::setNum(int num){
     this->num = num;
 }
+
 
 void RegularCard::setColor(string color){
     this->color = color;

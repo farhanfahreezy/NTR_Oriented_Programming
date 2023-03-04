@@ -3,7 +3,7 @@
 
 #include "InventoryHolder.hpp"
 
-class Table : private InventoryHolder{
+class Table : public InventoryHolder{
     private:
         RegularDeck tableDeck;
     public:
@@ -19,6 +19,6 @@ class Table : private InventoryHolder{
 
         //set function
         void resetPot();
-}
+};
 
 #endif

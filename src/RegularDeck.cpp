@@ -27,6 +27,8 @@ RegularDeck :: RegularDeck(int amount) : Deck(amount){
     this->amount = this->cards.size();
 }
 
+RegularDeck& RegularDeck::operator=(const RegularDeck& other) {
+}
 /*int main(){
     RegularDeck regDeck(52);
     for(int i = 0; i < regDeck.getAmount(); i++){

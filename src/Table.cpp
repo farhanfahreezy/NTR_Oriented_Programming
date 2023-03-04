@@ -1,22 +1,22 @@
 #include "Table.hpp"
+#include "InventoryHolder.hpp"
 
-class Table : private InventoryHolder{
-        //ctor
-        Table() : InventoryHolder(64,52,7){
-            this->tableCards = new RegularDeck(5);
-        }
+//ctor
+Table::Table() : InventoryHolder(64,52,7){
+    this->tableDeck = new RegularDeck(5);
+}
 
-        //dtor
-        ~Table() : ~InventoryHolder(){
-            delete this->tableCards;
-        }
+//dtor
+Table::~Table(){
+    delete tableDeck;
+}
 
-        //get function
-        RegularDeck getTableDeck(){
-            return this->tableDeck;
-        }
+//get function
+RegularDeck Table::getTableDeck(){
+    return this->tableDeck;
+}
 
-        //set function
-        void resetPot(){
-            this.setPoint(64);
-        }
+//set function
+void Table::resetPot(){
+    InventoryHolder::setPoint(64);
+}

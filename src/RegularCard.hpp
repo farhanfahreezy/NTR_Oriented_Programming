@@ -10,6 +10,7 @@ class RegularCard: public Card{
         string color;
     public:
         RegularCard(int num, string color);
+        RegularCard& operator=(const RegularCard&);
         int getNum();
         string getColor();
         void setNum(int num);

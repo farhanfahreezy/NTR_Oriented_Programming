@@ -14,6 +14,7 @@ class Deck{
 
     public:
         Deck(int amount); //ctor
+        Deck& operator=(const Deck&);
         virtual void shuffleDeck(); // shuffle deck
         std :: string getCard(int idx); 
         int getAmount();
