@@ -16,9 +16,6 @@ class InventoryHolder {
         //ctor
         InventoryHolder(int, int, int);
 
-        //dtor
-        ~InventoryHolder();
-
         //get function
         int getPoint();
         RegularDeck getRegularDeck();

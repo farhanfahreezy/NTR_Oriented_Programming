@@ -10,9 +10,6 @@ class Table : public InventoryHolder{
         //ctor
         Table();
 
-        //dtor
-        ~Table();
-
         //get function
 
         RegularDeck getTableDeck();

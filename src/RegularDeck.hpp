@@ -6,7 +6,6 @@
 class RegularDeck : public Deck{
     public:
         RegularDeck(int amount);
-        RegularDeck& operator=(const RegularDeck&);
 };
 
 #endif
