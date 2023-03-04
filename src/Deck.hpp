@@ -6,6 +6,7 @@
 #include <vector>
 #include <sstream>
 #include <cstdlib>
+#include <ctime>
 
 class Deck{
     protected:
