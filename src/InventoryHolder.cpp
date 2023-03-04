@@ -4,7 +4,7 @@ using namespace std;
 #include "InventoryHolder.hpp"
 
 //ctor
-InventoryHolder::InventoryHolder(int poin, int n_regulardeck, int n_abilitydeck){
+InventoryHolder::InventoryHolder(int poin, int n_regulardeck, int n_abilitydeck): regularDeck(n_regulardeck), abilityDeck(n_abilitydeck){
     this->point = poin;
     this->regularDeck = RegularDeck(n_regulardeck);
     this->abilityDeck = AbilityDeck(n_abilitydeck);

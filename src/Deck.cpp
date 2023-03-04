@@ -3,44 +3,31 @@
 using namespace std;
 
 
-Deck :: Deck(){
-    this->amount = 0;
-}
-Deck :: Deck(int amount){
-    {
-        this->amount = amount;
-    }
+template<class T>
+Deck<T>::Deck() {
+    amount = 0;
 }
 
-Deck& Deck::operator=(const Deck& other) {
+template<class T>
+Deck<T>::Deck(int amount) {
     this->amount = amount;
-    this->cards = other.cards;
-    return *this;
 }
 
-void Deck :: shuffleDeck() {
-    int n = this->amount;
-    for (int i = n - 1; i > 0; i--) {
-        srand(time(0));
-        int j = rand() % (i + 1);
-        string temp = this->cards[i];
-        this->cards[i] = this->cards[j];
-        this->cards[j] = temp;
-    }
+template<class T>
+void Deck<T>::shuffleDeck() {
+    std::random_shuffle(cards.begin(), cards.end());
 }
 
-string Deck :: getCard(int idx){
-    if(idx >= 0 && idx < this->amount){
-        return this->cards[idx];
-    } else{
-        return "Invalid index";
-    }
+template<class T>
+std::string Deck<T>::getCard(int idx) {
+    std::ostringstream oss;
+    oss << cards[idx];
+    return oss.str();
 }
 
-int Deck :: getAmount(){
-    return this->amount;
-
-
+template<class T>
+int Deck<T>::getAmount() {
+    return amount;
 }
 
 /*int main(){

@@ -11,19 +11,7 @@ template<class RegularCard>
 RegularDeck<RegularCard> :: RegularDeck(int amount) : Deck<RegularCard>(amount){
     this->amount = amount;
     for(int i =0; i < amount; i++){
-        RegularCard regCard;
-        if(i%4 == 0){
-            regCard = RegularCard(i, "Hijau");
-        }
-        if(i%4 == 1){
-            regCard = RegularCard(i, "Biru");
-        }
-        if(i%4 == 2){
-            regCard = RegularCard(i, "Kuning");
-        }
-        if(i%4 == 3){
-            regCard = RegularCard(i, "Merah");
-        }
+        RegularCard regCard(i, i%4);
         this->cards.push_back(regCard);
     }
 }

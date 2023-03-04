@@ -7,6 +7,7 @@
 #include <vector>
 #include <sstream>
 #include <cstdlib>
+#include <ctime>
 
 template<class T>
 class Deck{

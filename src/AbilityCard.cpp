@@ -2,27 +2,51 @@
 #include <iostream>
 using namespace std;
 
-AbilityCard::AbilityCard(string desc): Card("Ability"){
-    this->description = desc;
+AbilityCard::AbilityCard(float id): Card(){
+    this->id = id;
 }
 
-string AbilityCard::getDesc(){
-    return this->description;
+float AbilityCard::value(){
+    return this->id;
 }
 
-void AbilityCard::setDesc(string desc){
-    this->description = desc;
+void AbilityCard::setId(float id){
+    this->id = id;
 }
 
 void AbilityCard::printInfo(){
-    cout << "Kegunaan kartu ini adalah: " << getDesc() << endl;
+    cout << "Id kartu ini adalah: ";
+    if(value() == 1){
+        cout << "Re-Roll" << endl;
+    }
+    else if(value() == 2){
+        cout << "Quadruple" << endl;
+    }
+    else if(value() == 3){
+        cout << "Quarter" << endl;
+    }
+    else if(value() == 4){
+        cout << "Reverse Direction" << endl;
+    }
+    else if(value() == 5){
+        cout << "Swap Card" << endl;
+    }
+    else if(value() == 6){
+        cout << "Switch" << endl;
+    }
+    else if(value() == 7){
+        cout << "Abilityless" << endl;
+    }
+    else{
+        cout << "Id invalid" << endl;
+    }
 }
 
 // driver
 /* int main(){
     AbilityCard ac("Reverse");
     ac.printInfo();
-    ac.setDesc("Switch");
+    ac.setId("Switch");
     ac.printInfo();
     return 0;
 } */
