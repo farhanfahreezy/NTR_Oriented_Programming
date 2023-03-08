@@ -4,7 +4,7 @@
 #include <queue>
 #include <map>
 #include <iostream>
-#include <Player/Player.hpp>
+#include <../Player/Player.hpp>
 #include <Table.hpp>
 
 class GameState{

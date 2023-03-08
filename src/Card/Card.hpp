@@ -1,7 +1,7 @@
 #ifndef CARD_HPP
 #define CARD_HPP
 
-#include "Value.hpp"
+#include "../Value/Value.hpp"
 #include <iostream>
 using namespace std;
 

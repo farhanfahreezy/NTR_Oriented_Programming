@@ -1,4 +1,4 @@
-#include <Game/GameState.hpp>
+#include <GameState.hpp>
 
 GameState::GameState(int n_players){
     for(int i = 0; i < n_players; turn.push(i++))players.insert(pair<int,Player>(i, Player(i)));
