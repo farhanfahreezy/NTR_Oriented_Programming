@@ -1,6 +1,6 @@
 #ifndef ABILITYCARD_HPP
 #define ABILITYCARD_HPP
-#include "Card.hpp"
+#include <Card/Card.hpp>
 
 class AbilityCard: public Card{
     private:

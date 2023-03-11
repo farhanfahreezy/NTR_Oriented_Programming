@@ -1,7 +1,7 @@
 #ifndef TABLE_HPP
 #define TABLE_HPP
 
-#include "../InventoryHolder/InventoryHolder.hpp"
+#include <InventoryHolder/InventoryHolder.hpp>
 
 class Table : public InventoryHolder{
     private:

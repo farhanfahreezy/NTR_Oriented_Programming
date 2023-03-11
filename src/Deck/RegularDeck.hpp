@@ -1,8 +1,8 @@
 #ifndef REGULARDECK_HPP
 #define REGULARDECK_HPP
 
-#include <Deck.hpp>
-#include <../Card/RegularCard.hpp>
+#include <Deck/Deck.hpp>
+#include <Card/RegularCard.hpp>
 
 class RegularDeck : public Deck<RegularCard>{
     public:

@@ -1,6 +1,6 @@
 #ifndef REGULARCARD_HPP
 #define REGULARCARD_HPP 
-#include "Card.hpp"
+#include <Card/Card.hpp>
 #include <iostream>
 using namespace std;
 

@@ -15,34 +15,39 @@ build: build-all clean-obj
 
 # build-all		- Compiles object files and builds a release-executable file
 build-all: all
-	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o						-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
+	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o									-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
 
 # all			- Compiles object files
-all: game player ungrouped
+all: game inv-holder card deck table player
 
 # game			- Builds all source files in the folder "Game"
 game:
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameState.cpp		-o $(OUTPUT_FOLDER)/GameState.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameState.cpp					-o $(OUTPUT_FOLDER)/GameState.o
+
+# inv-holder	- Builds all source files in the folder "InventoryHolder"
+inv-holder:
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/InventoryHolder/InventoryHolder.cpp	-o $(OUTPUT_FOLDER)/InventoryHolder.o
+
+# card			- Builds all source files in the folder "Card"
+card:
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Card/RegularCard.cpp				-o $(OUTPUT_FOLDER)/RegularCard.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Card/AbilityCard.cpp				-o $(OUTPUT_FOLDER)/AbilityCard.o
+
+# deck			- Builds all source files in the folder "Deck"
+deck:
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Deck/Deck.cpp						-o $(OUTPUT_FOLDER)/Deck.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Deck/RegularDeck.cpp				-o $(OUTPUT_FOLDER)/RegularDeck.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Deck/AbilityDeck.cpp				-o $(OUTPUT_FOLDER)/AbilityDeck.o
+
+# table			- Builds all source files in the folder "Table"
+table:
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Table/Table.cpp						-o $(OUTPUT_FOLDER)/Table.o
 
 # player		- Builds all source files in the folder "Player"
 player:
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Player/Player.cpp		-o $(OUTPUT_FOLDER)/Player.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Player/Player.cpp					-o $(OUTPUT_FOLDER)/Player.o
 
-# ungrouped		- Builds all ungrouped source files
-# TODO: Remove this in favor of grouped recipes
-ungrouped:
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Value.cpp				-o $(OUTPUT_FOLDER)/Value.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Card.cpp				-o $(OUTPUT_FOLDER)/Card.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/RegularCard.cpp			-o $(OUTPUT_FOLDER)/RegularCard.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/AbilityCard.cpp			-o $(OUTPUT_FOLDER)/AbilityCard.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Deck.cpp				-o $(OUTPUT_FOLDER)/Deck.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/RegularDeck.cpp			-o $(OUTPUT_FOLDER)/RegularDeck.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/AbilityDeck.cpp			-o $(OUTPUT_FOLDER)/AbilityDeck.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/InventoryHolder.cpp		-o $(OUTPUT_FOLDER)/InventoryHolder.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Table.cpp				-o $(OUTPUT_FOLDER)/Table.o
-
-# TODO: Add more recipes for other grouped source files
-
+### UTILITIES ###
 # clean-obj		- Removes all object files
 clean-obj:
 ifeq ($(OS),Windows_NT)

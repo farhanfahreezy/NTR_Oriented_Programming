@@ -4,8 +4,8 @@
 #include <iostream>
 using namespace std;
 
-#include "../Deck/RegularDeck.hpp"
-#include "../Deck/AbilityDeck.hpp"
+#include <Deck/RegularDeck.hpp>
+#include <Deck/AbilityDeck.hpp>
 
 class InventoryHolder {
     private:

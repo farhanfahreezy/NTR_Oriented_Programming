@@ -1,8 +1,8 @@
 #include <string>
 #include <iostream>
 
-#include <../Deck/AbilityDeck.hpp>
-#include <../Deck/RegularDeck.hpp>
+#include <Deck/AbilityDeck.hpp>
+#include <Deck/RegularDeck.hpp>
 #include "Player.hpp"
 
 using namespace std;

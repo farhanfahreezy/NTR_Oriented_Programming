@@ -1,5 +1,5 @@
 #include <iostream>
-#include <RegularDeck.hpp>
+#include <Deck/RegularDeck.hpp>
 using namespace std;
 
 int main(){

@@ -4,8 +4,8 @@
 #include <queue>
 #include <map>
 #include <iostream>
-#include <../Player/Player.hpp>
-#include <Table.hpp>
+#include <Player/Player.hpp>
+#include <Table/Table.hpp>
 
 class GameState{
     public:

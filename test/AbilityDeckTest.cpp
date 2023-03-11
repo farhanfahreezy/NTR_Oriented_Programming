@@ -1,5 +1,5 @@
 #include <iostream>
-#include <AbilityDeck.hpp>
+#include <Deck/AbilityDeck.hpp>
 using namespace std;
 
 int main(){

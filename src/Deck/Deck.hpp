@@ -8,8 +8,8 @@
 #include <cstdlib>
 #include <ctime>
 
-#include <../Card/RegularCard.hpp>
-#include <../Card/AbilityCard.hpp>
+#include <Card/RegularCard.hpp>
+#include <Card/AbilityCard.hpp>
 
 template<class T>
 class Deck{
