@@ -46,6 +46,59 @@ void Deck<T>::sortDeckByValue(){
 template<class T>
 void Deck<T>::removeCard(int i) {
     cards.erase(i);
+    amount--;
+}
+
+template<class T>
+void Deck<T>::removeDuplicateNumbers(){
+    std::vector<int> tempvec;
+    for (int i = 1; i<amount ; i++) {
+        if (getCard(i).getNum()==getCard(i-1).getNum()) {
+            tempvec.push_back(getCard(i).value());
+        }
+    }
+
+    for (i = 0; i<tempvec.size(); i++) {
+        for (int j = 0; j < amount; j++) {
+            if (getCard(j).value() == tempvec[i]) {
+                removeCard(j);
+            }
+        }
+    }
+
+}
+
+template<class T>
+int Deck<T>::getFlushType() {
+    std::vector<int> count;
+    count.assign(4,0);
+    for (int i = 0; i<getAmount();i++) {
+        count[getCard(i).getColor()]++;
+    }
+
+    for (int i = 0; i<count.size();i++) {
+        if (count[3-i]>=5) {
+            return i;
+        }
+    }
+}
+
+template<class T>
+void Deck<T>::removeOtherColor(int i) {
+    std::vector<int> tempvec;
+    for (int i = 0; i < getAmount(); i++) {
+        if (getCard(i).getColor() != i) {
+            tempvec.push_back(getCard(i).value());
+        }
+    }
+
+    for (i = 0; i<tempvec.size(); i++) {
+        for (int j = 0; j < amount; j++) {
+            if (getCard(j).value() == tempvec[i]) {
+                removeCard(j);
+            }
+        }
+    }
 }
 
 /*int main(){

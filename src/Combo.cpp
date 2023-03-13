@@ -1,12 +1,12 @@
 #include "Combo.hpp"
-
+// ASUMSI KARTU > 5
 Combo::Combo(){
     this->val = 0;
 }
 
 bool Combo::isPair(RegularDeck oth){
     oth.sortDeckByValue();
-    for (int i=0; i<oth.getAmount()-2;i++) {
+    for (int i=0; i<oth.getAmount()-1;i++) {
         if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
             return true;
         }
@@ -16,9 +16,9 @@ bool Combo::isPair(RegularDeck oth){
 
 bool Combo::isTwoPair(RegularDeck oth){
     oth.sortDeckByValue();
-    for (int i=0; i<oth.getAmount()-2;i++) {
+    for (int i=0; i<oth.getAmount()-3;i++) {
         if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
-            for (int j = i+2; j<oth.getAmount()-2;j++) {
+            for (int j = i+2; j<oth.getAmount()-1;j++) {
                 if (oth.getCard(j).getNum() == oth.getCard(j+1).getNum()) {
                     return true;
                 }
@@ -30,17 +30,18 @@ bool Combo::isTwoPair(RegularDeck oth){
 
 bool Combo::isThreeOfAKind(RegularDeck oth){
     oth.sortDeckByValue();
-    bool tmp = true;
-    for (int i=0; i<oth.getAmount()-3;i++) {
-        for (int j = i; j< i +3;j++) {
+    bool tmp = false, tmp1 = true;
+    for (int i=0; i<oth.getAmount()-2;i++) {
+        for (int j = i; j< i+2;j++) {
             if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
-                tmp = false;
+                tmp1 = false;
             }
         }
-        if (tmp) {
-            return tmp;
+        if (tmp1) {
+            tmp=true;
+            break;
         } else {
-            tmp = true;
+            tmp1 = true;
         }
     }
     return tmp;
@@ -48,38 +49,42 @@ bool Combo::isThreeOfAKind(RegularDeck oth){
 
 bool Combo::isStraight(RegularDeck oth){
     oth.sortDeckByValue();
-    bool tmp = true;
-    for (int i=0;i<3;i++){
-        for (int j=oth.getCard(i).getNum(); j> oth.getCard(i).getNum()-5; j--) {
-            if (j != oth.getCard(i).getNum()) {
-                tmp = false;
+    RegularDeck oth1(oth);
+    oth1.removeDuplicateNumbers();
+    bool tmp1 = true, tmp = false;
+    if (oth1.getAmount()>=5) {
+        for (int i=0;i<oth1.getAmount()-4;i++){
+            for (int j=0; j<4; j++) {
+                if (oth1.getCard(j).getNum() != oth1.getCard(j+1).getNum() + 1) {
+                    tmp1 = false;
+                }
+            }
+            if (tmp1) {
+                tmp = true;
+                break;
+            } else {
+                tmp1 = true;
             }
         }
-        if (tmp) {
-            return tmp;
-        } else {
-            tmp = true;
-        }
+        return tmp;
+    } else {
+        return false;
     }
-    return tmp;
 }
 
 bool Combo::isFlush(RegularDeck oth){
-    oth.sortDeckByValue();
-    bool tmp = true;
-    for (int i=0;i<3;i++){
-        for (int j=i; j<i+5; j++) {
-            if (oth.getCard(j).getColor() != oth.getCard(j).getColor()) {
-                tmp = false;
-            }
-        }
-        if (tmp) {
+    std::vector<int> count;
+    count.assign(4,0);
+    for (int i = 0; i<oth.getAmount();i++) {
+        count[oth.getCard(i).getColor()]++;
+    }
+
+    for (int i = 0; i<count.size();i++) {
+        if (count[i]>=5) {
             return true;
-        } else {
-            tmp = true;
         }
     }
-    return tmp;
+    return false;
 }
 
 bool Combo::isFullHouse(RegularDeck oth){
@@ -87,8 +92,8 @@ bool Combo::isFullHouse(RegularDeck oth){
     int tag;
     bool tmp = false;
     bool tmp1 = true;
-    for (int i=0; i<oth.getAmount()-3;i++) {
-        for (int j = i; j< i +3;j++) {
+    for (int i=0; i<oth.getAmount()-2;i++) {
+        for (int j = i; j< i+2;j++) {
             if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
                 tmp1 = false;
             }
@@ -115,38 +120,47 @@ bool Combo::isFullHouse(RegularDeck oth){
 
 bool Combo::isFourOfAKind(RegularDeck oth){
     oth.sortDeckByValue();
-    bool tmp = true;
-    for (int i=0; i<oth.getAmount()-4;i++) {
-        for (int j = i; j< i+4;j++) {
+    bool tmp1 = true, tmp = false;
+    for (int i=0; i<oth.getAmount()-3;i++) {
+        for (int j = i; j< i+3;j++) {
             if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
-                tmp = false;
+                tmp1 = false;
             }
         }
-        if (tmp) {
-            return tmp;
-        } else {
+        if (tmp1) {
             tmp = true;
+            break;
+        } else {
+            tmp1 = true;
         }
     }
     return tmp;
 }
 
 bool Combo::isStraightFlush(RegularDeck oth){
-    oth.sortDeckByValue();
-    bool tmp = true;
-    for (int i=0;i<3;i++){
-        for (int j=i; j<i+5; j++) {
-            if ((oth.getCard(j).getColor() != oth.getCard(j).getColor())&&(oth.getCard(j).getNum() != oth.getCard(j+1).getNum()+1)){
-                tmp = false;
+    if (isStraight(oth)&&isFlush(oth)) {
+        oth.sortDeckByValue();
+        RegularDeck oth1(oth);
+        bool tmp1 = true,tmp = false;
+        oth1.removeOtherColor(oth.getFlushType());
+        for (int i=0; i<oth1.getAmount()-4; i++) {
+            for (int j = 0; j<4;j++) {
+                if (oth1.getCard(i+j).getNum() != oth1.getCard(i+j+1).getNum()+1) {
+                    tmp1 = false;
+                }
+            }
+            if (tmp1) {
+                tmp = true;
+                break;
+            } else {
+                tmp1 = true;
             }
         }
-        if (tmp) {
-            return true;
-        } else {
-            tmp = true;
-        }
+        return tmp;
+
+    } else {
+        return false;
     }
-    return tmp;
 }
 
 float Combo::value(RegularDeck oth){
@@ -156,21 +170,21 @@ float Combo::value(RegularDeck oth){
     max = oth.getCard(0).value();
 
     if (isPair(oth)) {
-        for (int i=0; i<oth.getAmount()-2;i++) {
+        for (int i=0; i<oth.getAmount()-1;i++) {
             if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
                 max = oth.getCard(i).value() + 1.4;
+                break;
             }
         }
     }
 
     if (isTwoPair(oth)) {
-        for (int i=0; i<oth.getAmount()-2;i++) {
+        for (int i=0; i<oth.getAmount()-1;i++) {
             if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
-                for (int j = i+2; j<oth.getAmount()-2;j++) {
+                for (int j = i+2; j<oth.getAmount()-1;j++) {
                     if (oth.getCard(j).getNum() == oth.getCard(j+1).getNum()) {
-                        if (max < oth.getCard(i).value() + 2.8) {
-                            max = oth.getCard(i).value() + 2.8;
-                        }
+                        max = oth.getCard(i).value() + 2.8;
+                        break;
                     }
                 }
             }
@@ -179,8 +193,8 @@ float Combo::value(RegularDeck oth){
 
     if (isThreeOfAKind(oth)) {
         tmp = true;
-        for (int i=0; i<oth.getAmount()-3;i++) {
-            for (int j = i; j< i +3;j++) {
+        for (int i=0; i<oth.getAmount()-2;i++) {
+            for (int j = i; j< i+2;j++) {
                 if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
                     tmp = false;
                 }
@@ -193,48 +207,35 @@ float Combo::value(RegularDeck oth){
     }
 
     if (isStraight(oth)) {
-        tmp = true;
-        for (int i=0;i<3;i++){
-            for (int j=oth.getCard(i).getNum(); j> oth.getCard(i).getNum()-5; j--) {
-                if (j != oth.getCard(i).getNum()) {
-                    tmp = false;
+        RegularDeck oth1(oth);
+        oth1.removeDuplicateNumbers();
+        bool tmp1 = true;
+        for (int i=0;i<oth1.getAmount()-4;i++){
+            for (int j=0; j<5; j--) {
+                if (oth1.getCard(j).getNum() != oth1.getCard(j+1).getNum() + 1) {
+                    tmp1 = false;
                 }
             }
-            if (tmp) {
-                max = oth.getCard(i).value()+5.6;
+            if (tmp1) {
+                max = oth1.getCard(i).getNum() + 5.6;
                 break;
-            } 
+            } else {
+                tmp1 = true;
+            }
         }
     }
 
     if (isFlush(oth)) {
-    tmp = true;
-    int mtemp = 0;
-        for (int i=0;i<3;i++){
-            for (int j=i; j<i+5; j++) {
-                if (oth.getCard(j).getColor() != oth.getCard(j).getColor()) {
-                    tmp = false;
-                } else {
-                    if (mtemp < oth.getCard(j).value()) {
-                        mtemp = oth.getCard(j).value();
-                    }
-                    if (mtemp < oth.getCard(j+1).value()) {
-                        mtemp = oth.getCard(j+1).value();
-                    }
-                }
-
-            }
-            if (tmp) {
-                max = mtemp + 7;
-                break;
-            }
-        }
+        oth.sortDeckByValue();
+        RegularDeck oth1(oth);
+        oth1.removeOtherColor(oth.getFlushType());
+        max = oth1.getCard(0).value() + 7;
     }
 
     if (isFullHouse(oth)) {
         tmp = true;
-        for (int i=0; i<oth.getAmount()-3;i++) {
-            for (int j = i; j< i +3;j++) {
+        for (int i=0; i<oth.getAmount()-2;i++) {
+            for (int j = i; j< i+2;j++) {
                 if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
                     tmp = false;
                 }
@@ -242,14 +243,16 @@ float Combo::value(RegularDeck oth){
             if (tmp) {
                 max = oth.getCard(i).value()+8.4;
                 break;
-            } 
+            } else {
+                tmp = true;
+            }
         }
     }
 
     if (isFourOfAKind(oth)) {
         tmp = true;
-        for (int i=0; i<oth.getAmount()-4;i++) {
-            for (int j = i; j< i+4;j++) {
+        for (int i=0; i<oth.getAmount()-3;i++) {
+            for (int j = i; j< i+3;j++) {
                 if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
                     tmp = false;
                 }
@@ -257,21 +260,28 @@ float Combo::value(RegularDeck oth){
             if (tmp) {
                 max = oth.getCard(i).value() + 9.8;
                 break;
+            } else {
+                tmp = true;
             }
         }
     }
 
     if (isStraightFlush(oth)) {
-        tmp = true;
-        for (int i=0;i<3;i++){
-            for (int j=i; j<i+5; j++) {
-                if ((oth.getCard(j).getColor() != oth.getCard(j).getColor())&&(oth.getCard(j).getNum() != oth.getCard(j+1).getNum()+1)){
-                    tmp = false;
+        oth.sortDeckByValue();
+        RegularDeck oth1(oth);
+        bool tmp1 = true;
+        oth1.removeOtherColor(oth.getFlushType());
+        for (int i=0; i<oth1.getAmount()-4; i++) {
+            for (int j = 0; j<4;j++) {
+                if (oth1.getCard(i+j).getNum() != oth1.getCard(i+j+1).getNum()+1) {
+                    tmp1 = false;
                 }
             }
-            if (tmp) {
-                max = oth.getCard(i).value() + 11.2;
+            if (tmp1) {
+                max = oth1.getCard(i).value() + 11.2;
                 break;
+            } else {
+                tmp1 = true;
             }
         }
     }
