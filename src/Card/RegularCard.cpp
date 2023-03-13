@@ -1,7 +1,7 @@
 #include "RegularCard.hpp"
 
 RegularCard::RegularCard(int num, int color){
-    if((num > 13 || num < 0) || (color < 0 || color > 3)){
+    if((num > 13 || num < 1) || (color < 0 || color > 3)){
         throw invalid_argument("Nomor atau warna anda salah.\n");
     }
     else{
