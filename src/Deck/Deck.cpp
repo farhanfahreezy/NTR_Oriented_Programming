@@ -33,6 +33,16 @@ void Deck<T>::shuffleDeck(){
     }
 }
 
+template<class T>
+bool Deck<T>::compareCard(T c1, T c2){
+    return (c1.value > c2.value);
+}
+
+template<class T>
+void Deck<T>::sortDeckByValue(){
+    sort(cards.begin(),cards(end), compareCard);
+}
+
 /*int main(){
     Deck deck;
     for(int i = 0; i < deck.getAmount(); i++){

@@ -24,6 +24,8 @@ class Deck{
         T getCard(int idx); 
         int getAmount();
         void shuffleDeck();
+        void sortDeckByValue();
+        bool compareCard(T, T);
 };
 
 #endif
