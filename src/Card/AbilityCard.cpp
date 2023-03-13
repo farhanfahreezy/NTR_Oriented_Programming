@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+AbilityCard ::AbilityCard(){
+    this->id = 0;
+}
+
 AbilityCard::AbilityCard(float id){
     if(id>7 || id<1){
         throw invalid_argument("Ability salah\n");

@@ -6,17 +6,12 @@ using namespace std;
 
 template<class T>
 Deck<T>::Deck() {
-    amount = 0;
+    this->amount = 0;
 }
 
 template<class T>
 Deck<T>::Deck(int amount) {
     this->amount = amount;
-}
-
-template<class T>
-void Deck<T>::shuffleDeck() {
-    std::random_shuffle(cards.begin(), cards.end());
 }
 
 template<class T>
@@ -27,6 +22,15 @@ T Deck<T>::getCard(int idx) {
 template<class T>
 int Deck<T>::getAmount() {
     return amount;
+}
+
+template<class T>
+void Deck<T>::shuffleDeck(){
+    srand(time(NULL));
+    for(int i=amount-1; i>=0; i--){
+        int j = rand() % (i+1);
+        std::swap(cards[i], cards[j]);
+    }
 }
 
 /*int main(){

@@ -9,16 +9,16 @@
 using namespace std;
 
 int main(){
-    vector<Player> players;
     RegularDeck regDeck(52);
     regDeck.shuffleDeck();
+    regDeck.getCard(0).printInfo();
     Player player(1);
     Player player2(2);
     string name;
     cout << "Enter Player Name:";
     cin >> name;
     string name2;
-    cout << "Enter Player  Name:";
+    cout << "Enter Player Name:";
     cin >> name2;
     player.setName(name);
     player2.setName(name2);
@@ -53,14 +53,15 @@ int main(){
     for(auto card : inv){
         card.printInfo();
     }*/
-}
+
     /*for(int i = 0; i < 7; i++){
         cout << players[i].getName() << endl;
-    }
-    RegularDeck regDeck(52);
+    }*/
+    /*RegularDeck regDeck(52);
     regDeck.shuffleDeck();
     for(int i = 0; i < 52; i++){
-        auto card = regDeck.getCard(i);
+        RegularCard card = regDeck.getCard(i);
         card.printInfo();
     }*/
+}
     

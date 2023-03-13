@@ -6,6 +6,7 @@ class AbilityCard: public Card{
     private:
         float id;
     public:
+        AbilityCard();
         AbilityCard(float id);
         void setId(float id);
         void printInfo() override;

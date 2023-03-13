@@ -13,6 +13,7 @@ class RegularCard: public Card{
         // kuning = 2;
         // merah = 3;
     public:
+        RegularCard();
         RegularCard(int num, int color);
         int getNum();
         int getColor();

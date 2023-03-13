@@ -77,3 +77,9 @@ test-abdeck: testb-abdeck clean-obj
 
 testb-abdeck: all
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/AbilityDeckTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/AbilityDeckTest.exe
+
+test-main: testb-main clean-obj 
+	@$(TEST_BIN_FOLDER)/main.exe
+
+testb-main: all
+	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/main.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/main.exe

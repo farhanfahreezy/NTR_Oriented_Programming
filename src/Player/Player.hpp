@@ -6,10 +6,11 @@
 
 #include <Deck/AbilityDeck.hpp>
 #include <Deck/RegularDeck.hpp>
+#include <InventoryHolder/InventoryHolder.hpp>
 
 using namespace std;
 
-class Player{
+class Player : public InventoryHolder{
     private:
         int id;
         string nama;
@@ -62,6 +63,8 @@ class Player{
          * @param newPoin poin yang akan ditambahkan
          */
         void addPoin(int newPoin);
+
+        string getName() const;
 
 
 };

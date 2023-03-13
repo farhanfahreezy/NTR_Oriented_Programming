@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Player::Player(int id): regularDeck(2), abilityDeck(2){
+Player::Player(int id): /*regularDeck(2), abilityDeck(2)*/ InventoryHolder(0, 0, 0){
     this->id = id;
     this->nama = "";
     this->poin = 0;
@@ -33,4 +33,8 @@ void Player::setName(string newName){
 
 void Player::addPoin(int newPoin){
     poin += newPoin;
+}
+
+string Player :: getName() const{
+    return this->nama;
 }

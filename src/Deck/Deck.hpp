@@ -21,9 +21,9 @@ class Deck{
         Deck();
         Deck(int amount); //ctor
         Deck& operator=(const Deck&);
-        virtual void shuffleDeck(); // shuffle deck
         T getCard(int idx); 
         int getAmount();
+        void shuffleDeck();
 };
 
 #endif

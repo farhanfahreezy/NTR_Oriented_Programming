@@ -1,31 +1,40 @@
 #ifndef INVENTORYHOLDER_HPP
 #define INVENTORYHOLDER_HPP
 
-#include <iostream>
-using namespace std;
-
-#include <Deck/RegularDeck.hpp>
-#include <Deck/AbilityDeck.hpp>
+#include <vector>
+#include "Deck/RegularDeck.hpp"
+#include "Deck/AbilityDeck.hpp"
+#include "Card/RegularCard.hpp"
+#include "Card/AbilityCard.hpp"
 
 class InventoryHolder {
-    private:
-        int point;
-        RegularDeck regularDeck;
-        AbilityDeck abilityDeck;
-    public:
-        //ctor
-        InventoryHolder(int, int, int);
+protected:
+    int point;
+    std::vector<RegularCard> regularInv;
+    std::vector<AbilityCard> abilityInv;
+public:
+    // ctor
+    InventoryHolder(int poin, int n_regulardeck, int n_abilitydeck);
 
-        //get function
-        int getPoint();
-        RegularDeck getRegularDeck();
-        AbilityDeck getAbilityDeck();
+    // dtor
 
-        //set function
-        void setPoint(int);
-        void increasePointByScale(int);
-        void increasePointByAmount(int);
+    // get functions
+    int getPoint() const;
+    const std::vector<RegularCard>& getRegularInv() const ;
+    const std::vector<AbilityCard>& getAbilityInv() const ;
+    int getRegularInvSize() const;
+    int getAbilityInvSize() const;
 
+    // set functions
+    void setPoint(int num);
+    void increasePointByScale(int num);
+    void increasePointByAmount(int num);
+
+    // inventory functions
+    void addRegularCard(const RegularCard& card, int max);
+    void addAbilityCard(const AbilityCard& card, int max);
+    RegularCard removeRegularCard(int index);
+    AbilityCard removeAbilityCard(int index);
 };
 
 #endif
