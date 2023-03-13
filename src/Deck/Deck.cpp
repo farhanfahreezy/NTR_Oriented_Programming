@@ -43,6 +43,11 @@ void Deck<T>::sortDeckByValue(){
     sort(cards.begin(),cards(end), compareCard);
 }
 
+template<class T>
+void Deck<T>::removeCard(int i) {
+    cards.erase(i);
+}
+
 /*int main(){
     Deck deck;
     for(int i = 0; i < deck.getAmount(); i++){

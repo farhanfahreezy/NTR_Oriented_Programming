@@ -40,7 +40,7 @@ bool Combo::isThreeOfAKind(RegularDeck oth){
         if (tmp) {
             return tmp;
         } else {
-            tmp = false;
+            tmp = true;
         }
     }
     return tmp;
@@ -73,7 +73,7 @@ bool Combo::isFlush(RegularDeck oth){
                 tmp = false;
             }
         }
-        if (tmp = true) {
+        if (tmp) {
             return true;
         } else {
             tmp = true;
@@ -83,7 +83,34 @@ bool Combo::isFlush(RegularDeck oth){
 }
 
 bool Combo::isFullHouse(RegularDeck oth){
+    oth.sortDeckByValue();
+    int tag;
+    bool tmp = false;
+    bool tmp1 = true;
+    for (int i=0; i<oth.getAmount()-3;i++) {
+        for (int j = i; j< i +3;j++) {
+            if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
+                tmp1 = false;
+            }
+        }
+        if (tmp1) {
+            tmp = true;
+            tag = i;
+            break;
+        } else {
+            tmp1 = true;
+        }
+    }
 
+    if (tmp) {
+        RegularDeck oth1(oth);
+        for (int k = 0; k<3; k++) {
+            oth1.removeCard(tag+k);
+        }
+        return isPair(oth1);
+    } else {
+        return tmp;
+    }
 }
 
 bool Combo::isFourOfAKind(RegularDeck oth){
@@ -98,7 +125,7 @@ bool Combo::isFourOfAKind(RegularDeck oth){
         if (tmp) {
             return tmp;
         } else {
-            tmp = false;
+            tmp = true;
         }
     }
     return tmp;
@@ -113,7 +140,7 @@ bool Combo::isStraightFlush(RegularDeck oth){
                 tmp = false;
             }
         }
-        if (tmp = true) {
+        if (tmp) {
             return true;
         } else {
             tmp = true;
@@ -205,7 +232,18 @@ float Combo::value(RegularDeck oth){
     }
 
     if (isFullHouse(oth)) {
-        // TO DO: FULLHOUSE, max = max + 8.4
+        tmp = true;
+        for (int i=0; i<oth.getAmount()-3;i++) {
+            for (int j = i; j< i +3;j++) {
+                if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
+                    tmp = false;
+                }
+            }
+            if (tmp) {
+                max = oth.getCard(i).value()+8.4;
+                break;
+            } 
+        }
     }
 
     if (isFourOfAKind(oth)) {
@@ -237,6 +275,6 @@ float Combo::value(RegularDeck oth){
             }
         }
     }
-    
+
     return max;
 }
