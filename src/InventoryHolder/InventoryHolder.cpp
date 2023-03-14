@@ -43,41 +43,38 @@ void InventoryHolder::increasePointByAmount(int num) {
 }
 
 // inventory functions
-InventoryHolder InventoryHolder::operator+(const RegularCard& card) const {
-    InventoryHolder result = *this;
-    result.regularInv.push_back(card);
-    return result;
+InventoryHolder InventoryHolder::operator+(const RegularCard& card) {
+    this->addRegularCard(card);
+    return *this;
 }
 
-InventoryHolder InventoryHolder::operator+(const AbilityCard& card) const {
-    InventoryHolder result = *this;
-    result.abilityInv.push_back(card);
-    return result;
+InventoryHolder InventoryHolder::operator+(const AbilityCard& card) {
+    this->addAbilityCard(card);
+    return *this;
 }
 
-InventoryHolder InventoryHolder::operator-(const RegularCard& card) const {
-    InventoryHolder result = *this;
-    for (auto it = result.regularInv.begin(); it != result.regularInv.end(); ++it) {
-        if (*it == card) {
-            result.regularInv.erase(it);
-            return result;
-        }
-    }
-    throw out_of_range("Card not found in regular card inventory");
+InventoryHolder InventoryHolder::operator-(const RegularCard& card) {
+    this->removeRegularCard();
+    return *this;
 }
 
-InventoryHolder InventoryHolder::operator-(const AbilityCard& card) const {
-    InventoryHolder result = *this;
-    for (auto it = result.abilityInv.begin(); it != result.abilityInv.end(); ++it) {
-        if (*it == card) {
-            result.abilityInv.erase(it);
-            return result;
-        }
-    }
-    throw out_of_range("Card not found in ability card inventory");
+InventoryHolder InventoryHolder::operator-(const AbilityCard& card) {
+    this->removeAbilityCard();
+    return *this;
 }
 
+void InventoryHolder::addRegularCard(const RegularCard& card){
+    regularInv.push_back(card);
+}
 
+void InventoryHolder::addAbilityCard(const AbilityCard& card){
+    abilityInv.push_back(card);
+}
+
+void InventoryHolder::removeRegularCard() {regularInv.erase(regularInv.begin());}
+void InventoryHolder::removeAbilityCard() {abilityInv.erase(abilityInv.begin());}
+
+// void Remove
 // std::vector<RegularCard> InventoryHolder::removeDuplicateNumbers(){
 //     std::vector<RegularCard> tempInv;
 //     for (int i = 0; i<getRegularInvSize() ; i++) {

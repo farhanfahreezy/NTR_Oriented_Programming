@@ -108,6 +108,7 @@
         "syncstream": "cpp",
         "typeindex": "cpp",
         "valarray": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "xlocale": "cpp"
     }
 }

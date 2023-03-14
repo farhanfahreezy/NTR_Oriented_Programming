@@ -31,14 +31,15 @@ public:
     void increasePointByAmount(int num);
 
     // inventory functions
-    InventoryHolder operator+(const RegularCard& card) const; 
-    InventoryHolder operator+(const AbilityCard& card) const;
-    InventoryHolder operator-(const RegularCard& card) const;
-    InventoryHolder operator-(const AbilityCard& card) const;
-    /*void addRegularCard(const RegularCard& card, int max);
-    void addAbilityCard(const AbilityCard& card, int max);
-    RegularCard removeRegularCard(int index);
-    AbilityCard removeAbilityCard(int index);*/
+    InventoryHolder operator+(const RegularCard& card); 
+    InventoryHolder operator+(const AbilityCard& card);
+    InventoryHolder operator-(const RegularCard& card);
+    InventoryHolder operator-(const AbilityCard& card);
+    void addRegularCard(const RegularCard& card);
+    void addAbilityCard(const AbilityCard& card);
+    void removeRegularCard();
+    void removeAbilityCard();
+    
 };
 
 #endif

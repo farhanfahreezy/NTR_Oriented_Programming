@@ -1,7 +1,7 @@
-#include "Player/Player.hpp"
-#include "Deck/RegularDeck.hpp"
-#include "Card/RegularCard.hpp"
-#include "Card/AbilityCard.hpp"
+#include <Player/Player.hpp>
+#include <Deck/RegularDeck.hpp>
+#include <Card/RegularCard.hpp>
+#include <Card/AbilityCard.hpp>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -13,7 +13,21 @@ int main(){
     regDeck.shuffleDeck();
     regDeck.getCard(0).printInfo();
     Player player(1);
-    Player player2(2);
+    player.setName("one");
+    cout << player.getName() << "'s Inventory:" << endl;
+    cout << player.getRegularInvSize() << endl;
+    player + regDeck.getCard(2);
+    player + regDeck.getCard(2);
+    player + regDeck.getCard(2);
+    player + regDeck.getCard(2);
+    player + regDeck.getCard(2);
+    player + regDeck.getCard(2);
+    cout << player.getName() << "'s Inventory:" << endl;
+    cout << player.getRegularInvSize() << endl;
+    player - regDeck.getCard(2);
+    cout << player.getName() << "'s Inventory:" << endl;
+    cout << player.getRegularInvSize() << endl;
+    /* Player player2(2);
     string name;
     cout << "Enter Player Name:";
     cin >> name;
@@ -33,7 +47,7 @@ int main(){
     player2.addRegularCard(regDeck.getCard(3), 2);
     for(auto card : player2.getRegularInv()){
         card.printInfo();
-    }
+    } */
     /*for(int i = 0; i < 7; i++){
         string name;
         cout << "Enter Player " << i+1 << " Name:";
