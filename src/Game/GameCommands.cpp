@@ -13,6 +13,8 @@ bool GameCommands::initialized = false;
 */
 
 void GameCommands::init(){
+    if(initialized)return;
+    
     /** TODO: Register all member commands to the parser
      *  CommandParser.reg(COMMAND_NAME);
      *  ...
