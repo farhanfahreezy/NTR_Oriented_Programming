@@ -17,12 +17,17 @@ class GameState{
         GameState(int n_players);
 
         /**
-         * Get the current active state of the game.
+         * Gets the current active state of the game.
         */
         static GameState& getCurrentState();
 
         /**
-         * Get the current active player.
+         * Sets the current active state of the game.
+        */
+        static void setCurrentState(GameState& state);
+
+        /**
+         * Gets the current active player.
         */
         const Player& getCurrentPlayer() const;
 
@@ -74,6 +79,9 @@ class GameState{
 
         // Current active state of the game
         static GameState& currentState;
+
+        // Default non-functional game state
+        static GameState defaultState;
 };
 
 #endif

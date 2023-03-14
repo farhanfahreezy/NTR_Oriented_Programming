@@ -50,8 +50,8 @@ player:
 
 # io			- Builds all source files in the folder "IO"
 io:
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/Command.cpp				-o $(OUTPUT_FOLDER)/Command.o
-	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/CommandParser.cpp		-o $(OUTPUT_FOLDER)/CommandParser.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/Command.cpp						-o $(OUTPUT_FOLDER)/Command.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/CommandParser.cpp				-o $(OUTPUT_FOLDER)/CommandParser.o
 
 ### UTILITIES ###
 # clean-obj		- Removes all object files

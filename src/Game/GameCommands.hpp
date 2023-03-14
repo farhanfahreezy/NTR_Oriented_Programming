@@ -11,7 +11,14 @@ class GameCommands{
             COMMAND_DOUBLE,
             COMMAND_NEXT,
             COMMAND_HALF,
-            COMMAND_ABILITY;
+            COMMAND_REROLL,
+            COMMAND_QUADRUPLE,
+            COMMAND_QUARTER,
+            COMMAND_REVERSE,
+            COMMAND_SWAP,
+            COMMAND_SWITCH,
+            COMMAND_ABILITYLESS;
+    
     public:
         /**
          * Initialize game commands.

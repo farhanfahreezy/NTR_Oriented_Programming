@@ -1,6 +1,9 @@
 #include "GameState.hpp"
 #include <stack>
 
+GameState GameState::defaultState = GameState(0);
+GameState& GameState::currentState = GameState::defaultState;
+
 GameState::GameState(int n_players){
     for(int i = 0; i < n_players; turn.push(i++))players.insert(pair<int,Player>(i, Player(i)));
     ronde = 1;
@@ -8,6 +11,10 @@ GameState::GameState(int n_players){
 
 GameState& GameState::getCurrentState(){
     return currentState;
+}
+
+void GameState::setCurrentState(GameState& state){
+    currentState = state;
 }
 
 const Player& GameState::getCurrentPlayer() const{
