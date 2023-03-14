@@ -9,26 +9,28 @@
 
 class InventoryHolder {
 protected:
-    int point;
+    long long int point;
+    static const long long int maxPoint = 1LL<<32;
     std::vector<RegularCard> regularInv;
     std::vector<AbilityCard> abilityInv;
 public:
     // ctor
-    InventoryHolder(int poin, int n_regulardeck, int n_abilitydeck);
+    InventoryHolder(long long int poin, int n_regulardeck, int n_abilitydeck);
 
     // dtor
 
     // get functions
-    int getPoint() const;
+    long long int getPoint() const;
     const std::vector<RegularCard>& getRegularInv() const ;
     const std::vector<AbilityCard>& getAbilityInv() const ;
     int getRegularInvSize() const;
     int getAbilityInvSize() const;
 
     // set functions
-    void setPoint(int num);
+    void setPoint(long long int num);
     void increasePointByScale(float scl);
     void increasePointByAmount(int num);
+    long long int getMaxPoint();
 
     // inventory functions
     InventoryHolder operator+(const RegularCard& card); 
