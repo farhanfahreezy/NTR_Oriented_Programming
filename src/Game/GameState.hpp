@@ -32,6 +32,13 @@ class GameState{
         const Player& getCurrentPlayer() const;
 
         /**
+         * @brief Get the Player With Id
+         * 
+         * @return const Player& 
+         */
+        const Player& getPlayerWithId(int id) const;
+
+        /**
          * Getter for the game table.
         */
         Table& getTable();

@@ -15,8 +15,6 @@ class Player : public InventoryHolder{
         int id;
         string nama;
         int poin;
-        RegularDeck regularDeck;
-        AbilityDeck abilityDeck;
     public:
         /**
          * @brief Construct a new Player object
@@ -65,6 +63,8 @@ class Player : public InventoryHolder{
         void addPoin(int newPoin);
 
         string getName() const;
+
+        int getId() const;
 
 
 };

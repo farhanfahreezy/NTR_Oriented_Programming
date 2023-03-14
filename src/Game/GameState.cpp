@@ -21,6 +21,10 @@ const Player& GameState::getCurrentPlayer() const{
     return players.at(turn.front());
 }
 
+const Player& GameState::getPlayerWithId(int id) const{
+    return players.at(id);
+}
+
 Table& GameState::getTable(){
     return table;
 }
