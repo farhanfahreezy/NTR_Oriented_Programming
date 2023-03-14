@@ -43,39 +43,40 @@ void InventoryHolder::increasePointByAmount(int num) {
 }
 
 // inventory functions
-void InventoryHolder::addRegularCard(const RegularCard& card, int max) {
-    if (regularInv.size() < max) {
-        regularInv.push_back(card);
-    } else {
-        throw out_of_range("Regular card inventory is full");
-    }
+InventoryHolder InventoryHolder::operator+(const RegularCard& card) const {
+    InventoryHolder result = *this;
+    result.regularInv.push_back(card);
+    return result;
 }
 
-void InventoryHolder::addAbilityCard(const AbilityCard& card, int max) {
-    if (abilityInv.size() < max) {
-        abilityInv.push_back(card);
-    } else {
-        throw out_of_range("Ability card inventory is full");
-    }
+InventoryHolder InventoryHolder::operator+(const AbilityCard& card) const {
+    InventoryHolder result = *this;
+    result.abilityInv.push_back(card);
+    return result;
 }
 
-RegularCard InventoryHolder::removeRegularCard(int index) {
-    if (index < 0 || index >= regularInv.size()) {
-        throw out_of_range("Invalid index for regular card inventory");
+InventoryHolder InventoryHolder::operator-(const RegularCard& card) const {
+    InventoryHolder result = *this;
+    for (auto it = result.regularInv.begin(); it != result.regularInv.end(); ++it) {
+        if (*it == card) {
+            result.regularInv.erase(it);
+            return result;
+        }
     }
-    RegularCard removedCard = regularInv[index];
-    regularInv.erase(regularInv.begin() + index);
-    return removedCard;
+    throw out_of_range("Card not found in regular card inventory");
 }
 
-AbilityCard InventoryHolder::removeAbilityCard(int index) {
-    if (index < 0 || index >= abilityInv.size()) {
-        throw out_of_range("Invalid index for ability card inventory");
+InventoryHolder InventoryHolder::operator-(const AbilityCard& card) const {
+    InventoryHolder result = *this;
+    for (auto it = result.abilityInv.begin(); it != result.abilityInv.end(); ++it) {
+        if (*it == card) {
+            result.abilityInv.erase(it);
+            return result;
+        }
     }
-    AbilityCard removedCard = abilityInv[index];
-    abilityInv.erase(abilityInv.begin() + index);
-    return removedCard;
+    throw out_of_range("Card not found in ability card inventory");
 }
+
 
 // std::vector<RegularCard> InventoryHolder::removeDuplicateNumbers(){
 //     std::vector<RegularCard> tempInv;
