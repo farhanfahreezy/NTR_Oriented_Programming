@@ -26,10 +26,7 @@ class Deck{
         void shuffleDeck();
         void sortDeckByValue();
         bool compareCard(T, T);
-        void removeCard(int);
-        void removeDuplicateNumbers();
-        int getFlushType();
-        void removeOtherColor(int);
+        
 };
 
 #endif

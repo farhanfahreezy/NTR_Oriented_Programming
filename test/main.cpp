@@ -9,7 +9,7 @@
 using namespace std;
 
 int main(){
-    RegularDeck regDeck(52);
+    RegularDeck<int> regDeck(52);
     regDeck.shuffleDeck();
     regDeck.getCard(0).printInfo();
     Player player(1);

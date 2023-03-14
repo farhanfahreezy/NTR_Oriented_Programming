@@ -5,14 +5,14 @@
 
 class Table : public InventoryHolder{
     private:
-        RegularDeck tableDeck;
+        RegularDeck<int> tableDeck;
     public:
         //ctor
         Table();
 
         //get function
 
-        RegularDeck getTableDeck();
+        RegularDeck<int> getTableDeck();
 
         //set function
         void resetPot();

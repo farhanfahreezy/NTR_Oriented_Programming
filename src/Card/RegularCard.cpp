@@ -36,6 +36,8 @@ string RegularCard::colorString(){
     }
     else if(getColor() == 3){
         return "merah";
+    } else {
+        return "unknown";
     }
 }
 

@@ -7,7 +7,7 @@ Table::Table() : InventoryHolder(64,52,7), tableDeck(5){
 
 
 //get function
-RegularDeck Table::getTableDeck(){
+RegularDeck<int> Table::getTableDeck(){
     return this->tableDeck;
 }
 

@@ -15,7 +15,7 @@ class Player : public InventoryHolder{
         int id;
         string nama;
         int poin;
-        RegularDeck regularDeck;
+        RegularDeck<int> regularDeck;
         AbilityDeck abilityDeck;
     public:
         /**
