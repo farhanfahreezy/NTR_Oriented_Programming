@@ -14,5 +14,13 @@ RegularDeck :: RegularDeck(int amount) : Deck(amount){
     }
 }
 
+RegularDeck :: RegularDeck(const RegularDeck& other){
+    this->amount = other.amount;
+    for(int i = 0; i < other.amount ; i++){
+        RegularCard* card = new RegularCard(other.cards[i].getNum(), other.cards[i].getColor());
+        this->cards.push_back(*card);
+    }
+}
+
 
 

@@ -15,8 +15,8 @@ class RegularCard: public Card{
     public:
         RegularCard();
         RegularCard(int num, int color);
-        int getNum();
-        int getColor();
+        int getNum() const;
+        int getColor() const;
         string colorString();
         void setNum(int num);
         void setColor(int color);

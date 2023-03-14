@@ -8,6 +8,7 @@ class RegularDeck : public Deck<RegularCard>{
     public:
         RegularDeck();
         RegularDeck(int amount);
+        RegularDeck(const RegularDeck& other);
         
 };
 

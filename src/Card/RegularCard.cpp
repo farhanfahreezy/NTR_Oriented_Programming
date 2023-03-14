@@ -16,11 +16,11 @@ RegularCard::RegularCard(int num, int color){
     
 }
 
-int RegularCard::getNum(){
+int RegularCard::getNum() const{
     return this->num;
 }
 
-int RegularCard::getColor(){
+int RegularCard::getColor() const{
     return this->color;
 }
 
