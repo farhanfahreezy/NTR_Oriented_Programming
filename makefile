@@ -18,11 +18,12 @@ build-all: all
 	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o									-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
 
 # all			- Compiles object files
-all: game inv-holder card deck table player
+all: game inv-holder card deck table player io
 
 # game			- Builds all source files in the folder "Game"
 game:
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameState.cpp					-o $(OUTPUT_FOLDER)/GameState.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameCommands.cpp				-o $(OUTPUT_FOLDER)/GameCommands.o
 
 # inv-holder	- Builds all source files in the folder "InventoryHolder"
 inv-holder:
@@ -46,6 +47,11 @@ table:
 # player		- Builds all source files in the folder "Player"
 player:
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Player/Player.cpp					-o $(OUTPUT_FOLDER)/Player.o
+
+# io			- Builds all source files in the folder "IO"
+io:
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/Terminal/Command.cpp				-o $(OUTPUT_FOLDER)/Command.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/Terminal/CommandParser.cpp		-o $(OUTPUT_FOLDER)/CommandParser.o
 
 ### UTILITIES ###
 # clean-obj		- Removes all object files
