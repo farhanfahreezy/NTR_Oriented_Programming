@@ -4,11 +4,14 @@
 #include <functional>
 using namespace std;
 
+typedef function<void()> Action;
+
 class Ability{
     public:
-        GameState get(GameState);
-        Ability(int, function<GameState,GameState>)
+        void get();
+        Ability(int, Action);
     private:
-   
+        Action act;
+        float id;
 };
 #endif
