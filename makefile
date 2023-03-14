@@ -14,7 +14,7 @@ CPPFLAGS		= -I$(SOURCE_FOLDER)
 build: build-all clean-obj
 
 # build-all		- Compiles object files and builds a release-executable file
-build-all: all
+build-all: clean-obj all
 	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o									-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
 
 # all			- Compiles object files

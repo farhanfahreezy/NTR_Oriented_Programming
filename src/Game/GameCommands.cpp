@@ -16,7 +16,7 @@ void GameCommands::init(){
     if(initialized)return;
     
     /** TODO: Register all member commands to the parser
-     *  CommandParser.reg(COMMAND_NAME);
+     *  CommandParser::reg(COMMAND_NAME);
      *  ...
     */
 

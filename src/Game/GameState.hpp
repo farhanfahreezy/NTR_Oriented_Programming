@@ -24,6 +24,11 @@ class GameState{
         void advance();
 
         /**
+         * Reverses the order of player turn.
+        */
+        void reverseTurn();
+
+        /**
          * Prints a string representation of this game state to an output stream.
          * 
          * @param os        The output stream to write into.

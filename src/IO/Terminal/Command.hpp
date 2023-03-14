@@ -19,8 +19,6 @@ class Command{
         /**
          * Creates a command object. Not intended for direct use; use a CommandBuilder object instead.
          * 
-         * @attention Assumes all expected arguments are non-optional.
-         * 
          * @param name Name of this command, to invoke by.
          * @param handle The function to be called.
          * @param args Name of expected arguments.

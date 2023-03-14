@@ -1,4 +1,5 @@
 #include "GameState.hpp"
+#include <stack>
 
 GameState::GameState(int n_players){
     for(int i = 0; i < n_players; turn.push(i++))players.insert(pair<int,Player>(i, Player(i)));
@@ -14,6 +15,12 @@ void GameState::advance(){
     // End of turn; rotate to next player
     turn.push(id);
     turn.pop();
+}
+
+void GameState::reverseTurn(){
+    stack<int> temp;
+    for(; !turn.empty(); turn.pop())temp.push(turn.front());
+    for(; !temp.empty(); temp.pop())turn.push(temp.top());
 }
 
 std::ostream& operator<<(std::ostream& os, GameState& state){
