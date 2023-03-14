@@ -48,6 +48,9 @@ class GameState{
 
         // The game table.
         Table table;
+
+        // Ronde Permainan
+        int ronde;
 };
 
 #endif

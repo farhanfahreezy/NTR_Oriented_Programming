@@ -3,6 +3,7 @@
 
 GameState::GameState(int n_players){
     for(int i = 0; i < n_players; turn.push(i++))players.insert(pair<int,Player>(i, Player(i)));
+    ronde = 1;
 }
 
 void GameState::advance(){
@@ -11,10 +12,19 @@ void GameState::advance(){
     Player& current = players.at(id);
 
     /** TODO: Do stuff with current player */
-
+    if (ronde == 1) {
+        /** TODO: DOUBLE,NEXT, HALF
+         *      BAGI KARTU ABILITY
+        */
+    } else {
+        /** TODO: DOUBLE, NEXT, HALF, ABILITY*/
+    }
     // End of turn; rotate to next player
     turn.push(id);
     turn.pop();
+    if (ronde == 6) {
+        /** TODO: Wrap up */
+    }
 }
 
 void GameState::reverseTurn(){
