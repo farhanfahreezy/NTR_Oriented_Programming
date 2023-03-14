@@ -35,6 +35,12 @@ public:
     void addAbilityCard(const AbilityCard& card, int max);
     RegularCard removeRegularCard(int index);
     AbilityCard removeAbilityCard(int index);
+
+    // std::vector<RegularCard> sortDeckByValue();
+    // bool compareCard(RegularCard, RegularCard);
+    // std::vector<RegularCard> removeDuplicateNumbers();
+    // int getFlushType();
+    // std::vector<RegularCard> removeOtherColor(int);
 };
 
 #endif

@@ -1,21 +1,24 @@
 #ifndef COMBO_HPP
 #define COMBO_HPP
 #include "Value/Value.hpp"
-#include "Deck/RegularDeck.hpp"
+#include "Table/Table.hpp"
+#include "Player/Player.hpp"
+#include <bits/stdc++.h>
 
 class Combo : public Value{
     protected:
         float val;
     public:
         Combo();
-        bool isPair(RegularDeck);
-        bool isTwoPair(RegularDeck);
-        bool isThreeOfAKind(RegularDeck);
-        bool isStraight(RegularDeck);
-        bool isFlush(RegularDeck);
-        bool isFullHouse(RegularDeck);
-        bool isFourOfAKind(RegularDeck);
-        bool isStraightFlush(RegularDeck);
-        float value(RegularDeck);
+        bool compareCard(RegularCard,RegularCard);
+        bool isPair(Table,Player);
+        bool isTwoPair(Table,Player);
+        bool isThreeOfAKind(Table,Player);
+        bool isStraight(Table,Player);
+        bool isFlush(Table,Player);
+        bool isFullHouse(Table,Player);
+        bool isFourOfAKind(Table,Player);
+        bool isStraightFlush(Table,Player);
+        float value(Table,Player);
 };
 #endif

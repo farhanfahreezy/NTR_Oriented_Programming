@@ -7,8 +7,12 @@ Table::Table() : InventoryHolder(64,52,7), tableDeck(5){
 
 
 //get function
-RegularDeck<int> Table::getTableDeck(){
-    return this->tableDeck;
+RegularCard Table::getTableDeck(int x){
+    return tableDeck[x];
+}
+
+int Table::getTableDeckSize(){
+    return tableDeck.size();
 }
 
 //set function
@@ -16,9 +20,3 @@ void Table::resetPot(){
     InventoryHolder::setPoint(64);
 }
 
-
-void Table::resetTableDeck(){
-    for (int i =0;i<tableDeck.getAmount();i++) {
-        tableDeck.removeCard(i);
-    }
-}
