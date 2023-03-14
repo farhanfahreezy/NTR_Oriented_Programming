@@ -12,6 +12,13 @@ AbilityCard::AbilityCard(float id){
     }
     else{
         this->id = id;
+        // id = 1 (REROLL)
+        // id = 2 (QUADRUPLE)
+        // id = 3 (QUARTER)
+        // id = 4 (REVERSE)
+        // id = 5 (SWAP)
+        // id = 6 (SWITCH)
+        // id = 7 (ABILITYLESS)
     }
     
 }
