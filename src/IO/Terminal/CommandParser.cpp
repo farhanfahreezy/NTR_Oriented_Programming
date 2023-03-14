@@ -16,7 +16,7 @@ void CommandParser::changeOut(ostream& s){
 
 bool CommandParser::getNext(){
     string inp;
-    *is >> inp;
+    getline(*is, inp);
 
     stringstream ss(inp);
     string name;

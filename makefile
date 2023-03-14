@@ -64,28 +64,36 @@ endif
 
 ### TESTS ###
 # test-state
-test-state: testb-state clean-obj 
+test-state: clean-obj testb-state
 	@$(TEST_BIN_FOLDER)/GameStateTest.exe
 
 testb-state: all
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/GameStateTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/GameStateTest.exe
 
 # test-regdeck
-test-regdeck: testb-regdeck clean-obj 
+test-regdeck: clean-obj testb-regdeck
 	@$(TEST_BIN_FOLDER)/RegularDeckTest.exe
 
 testb-regdeck: all
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/RegularDeckTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/RegularDeckTest.exe
 
-# test -abdeck
-test-abdeck: testb-abdeck clean-obj 
+# test-abdeck
+test-abdeck: clean-obj testb-abdeck
 	@$(TEST_BIN_FOLDER)/AbilityDeckTest.exe
 
 testb-abdeck: all
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/AbilityDeckTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/AbilityDeckTest.exe
 
-test-main: testb-main clean-obj 
+# test-main
+test-main: clean-obj testb-main
 	@$(TEST_BIN_FOLDER)/main.exe
 
 testb-main: all
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/main.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/main.exe
+
+# test-cmd
+test-cmd: clean-obj testb-cmd
+	@$(TEST_BIN_FOLDER)/CommandTest.exe
+
+testb-cmd: io
+	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/CommandTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/CommandTest.exe

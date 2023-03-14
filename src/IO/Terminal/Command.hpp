@@ -1,8 +1,8 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
-#include <Game/GameState.hpp>
 #include <functional>
+#include <vector>
 #include <string>
 #include <map>
 using namespace std;
