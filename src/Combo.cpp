@@ -1,14 +1,16 @@
 #include "Combo.hpp"
 // ASUMSI KARTU > 5
-Combo::Combo(){
+Combo::Combo(Table tblt, Player pt){
     this->val = 0;
+    this->tbl = tblt;
+    this->p = pt;
 }
 
 bool Combo::compareCard(RegularCard c1, RegularCard c2) {
     return c1.value() > c2.value();
 }
 
-bool Combo::isPair(Table tbl, Player p){
+bool Combo::isPair(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -30,7 +32,7 @@ bool Combo::isPair(Table tbl, Player p){
     return false;
 }
 
-bool Combo::isTwoPair(Table tbl, Player p){
+bool Combo::isTwoPair(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -56,7 +58,7 @@ bool Combo::isTwoPair(Table tbl, Player p){
     return false;
 }
 
-bool Combo::isThreeOfAKind(Table tbl, Player p){
+bool Combo::isThreeOfAKind(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -87,7 +89,7 @@ bool Combo::isThreeOfAKind(Table tbl, Player p){
     return tmp;
 }
 
-bool Combo::isStraight(Table tbl, Player p){
+bool Combo::isStraight(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -134,7 +136,7 @@ bool Combo::isStraight(Table tbl, Player p){
     }
 }
 
-bool Combo::isFlush(Table tbl, Player p){
+bool Combo::isFlush(){
     //array counter
     std::vector<int> count;
     count.assign(4,0);
@@ -162,7 +164,7 @@ bool Combo::isFlush(Table tbl, Player p){
     return false;
 }
 
-bool Combo::isFullHouse(Table tbl, Player p){
+bool Combo::isFullHouse(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -213,7 +215,7 @@ bool Combo::isFullHouse(Table tbl, Player p){
     }
 }
 
-bool Combo::isFourOfAKind(Table tbl, Player p){
+bool Combo::isFourOfAKind(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -244,8 +246,8 @@ bool Combo::isFourOfAKind(Table tbl, Player p){
     return tmp;
 }
 
-bool Combo::isStraightFlush(Table tbl, Player p){
-    if (isStraight(tbl,p)&&isFlush(tbl,p)) {
+bool Combo::isStraightFlush(){
+    if (isStraight()&&isFlush()) {
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -305,7 +307,7 @@ bool Combo::isStraightFlush(Table tbl, Player p){
     }
 }
 
-float Combo::value(Table tbl, Player p){
+float Combo::value(){
     float max = 0;
     bool tmp = false;
     std::vector<RegularCard> tempInv;
@@ -322,7 +324,7 @@ float Combo::value(Table tbl, Player p){
     sort(tempInv.begin(),tempInv.end(),compareCard);
     max = tempInv[0].value();
 
-    if (isPair(tbl,p)) {
+    if (isPair()) {
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -343,7 +345,7 @@ float Combo::value(Table tbl, Player p){
         }
     }
 
-    if (isTwoPair(tbl,p)) {
+    if (isTwoPair()) {
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -368,7 +370,7 @@ float Combo::value(Table tbl, Player p){
         }
     }
 
-    if (isThreeOfAKind(tbl,p)) {
+    if (isThreeOfAKind()) {
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -398,7 +400,7 @@ float Combo::value(Table tbl, Player p){
         }
     }
 
-    if (isStraight(tbl,p)) {
+    if (isStraight()) {
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -441,7 +443,7 @@ float Combo::value(Table tbl, Player p){
 
     }
 
-    if (isFlush(tbl,p)) {
+    if (isFlush()) {
         std::vector<int> count;
         count.assign(4,0);
         int tag = -1;
@@ -477,7 +479,7 @@ float Combo::value(Table tbl, Player p){
         }
     }
 
-    if (isFullHouse(tbl,p)) {
+    if (isFullHouse()) {
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -507,7 +509,7 @@ float Combo::value(Table tbl, Player p){
         }
     }
 
-    if (isFourOfAKind(tbl,p)) {
+    if (isFourOfAKind()) {
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
@@ -535,7 +537,7 @@ float Combo::value(Table tbl, Player p){
         }
     }
 
-    if (isStraightFlush(tbl,p)) {
+    if (isStraightFlush()) {
         std::vector<int> count;
         count.assign(4,0);
         int tag = -1;

@@ -23,6 +23,10 @@ class Player : public InventoryHolder{
          */
         Player(int id);
 
+        //cctor
+
+        Player& operator=(const Player&);
+
 
         /**
          * @brief Operator pembanding point antara 2 object Player
