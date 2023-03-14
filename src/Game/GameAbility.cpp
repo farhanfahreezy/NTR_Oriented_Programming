@@ -76,6 +76,8 @@ void AbilitySwap::get() const {
     RegularCard temp1 = pl1.getRegularInv().at(0);
     RegularCard temp2 = pl2.getRegularInv().at(0);
 
+    pl1 - temp1;
+
 }
 
 void AbilitySwitch::get() const {
