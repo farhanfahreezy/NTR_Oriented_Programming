@@ -17,6 +17,26 @@ class GameState{
         GameState(int n_players);
 
         /**
+         * Get the current active state of the game.
+        */
+        static GameState& getCurrentState();
+
+        /**
+         * Get the current active player.
+        */
+        const Player& getCurrentPlayer() const;
+
+        /**
+         * Getter for the game table.
+        */
+        Table& getTable();
+
+        /**
+         * Getter for the game round.
+        */
+        const int getRound() const;
+
+        /**
          * Advances the game to the next state.
          * 
          * TODO: Do turn actions and calls here
@@ -51,6 +71,9 @@ class GameState{
 
         // Ronde Permainan
         int ronde;
+
+        // Current active state of the game
+        static GameState& currentState;
 };
 
 #endif

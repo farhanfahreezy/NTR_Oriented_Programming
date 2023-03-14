@@ -27,7 +27,7 @@ public:
 
     // set functions
     void setPoint(int num);
-    void increasePointByScale(int num);
+    void increasePointByScale(float scl);
     void increasePointByAmount(int num);
 
     // inventory functions

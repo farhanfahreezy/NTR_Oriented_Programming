@@ -40,7 +40,7 @@ bool CommandParser::getNext(){
     return false;
 }
 
-void CommandParser::reg(Command& command){
+void CommandParser::reg(const Command& command){
     string name = command.getName();
     if(commands.find(name) != commands.end())commands.erase(name);
     commands.insert(pair<string,Command>(name, command));

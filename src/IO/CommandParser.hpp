@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <IO/Terminal/Command.hpp>
+#include <IO/Command.hpp>
 using namespace std;
 
 class CommandParser{
@@ -37,7 +37,7 @@ class CommandParser{
          * 
          * @param command The command object.
         */
-        static void reg(Command& command);
+        static void reg(const Command& command);
 };
 
 #endif

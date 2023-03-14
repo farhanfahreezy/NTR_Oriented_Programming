@@ -3,11 +3,11 @@
 Command::Command(string name, CommandHandle handle, map<string,string>& args):
     name(name), handle(handle), args(args){}
 
-string Command::getName(){
+string Command::getName() const{
     return name;
 }
 
-map<string,string> Command::getArgs(){
+map<string,string> Command::getArgs() const{
     return args;
 }
 

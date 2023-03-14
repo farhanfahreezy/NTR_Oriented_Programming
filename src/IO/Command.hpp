@@ -28,12 +28,12 @@ class Command{
         /**
          * Getter for command name.
         */
-        string getName();
+        string getName() const;
 
         /**
          * Getter for command argument list.
         */
-        map<string,string> getArgs();
+        map<string,string> getArgs() const;
 
         /**
          * Invoke this command with the given arguments. Returns whether invocation is successful.

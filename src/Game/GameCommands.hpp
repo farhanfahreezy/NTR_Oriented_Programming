@@ -1,8 +1,8 @@
 #ifndef GAME_COMMANDS_HPP
 #define GAME_COMMANDS_HPP
 
-#include <IO/Terminal/Command.hpp>
-#include <IO/Terminal/CommandParser.hpp>
+#include <IO/Command.hpp>
+#include <IO/CommandParser.hpp>
 
 class GameCommands{
     private:

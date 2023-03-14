@@ -34,8 +34,8 @@ void InventoryHolder::setPoint(int num) {
     point = num;
 }
 
-void InventoryHolder::increasePointByScale(int num) {
-    point *= num;
+void InventoryHolder::increasePointByScale(float scl) {
+    point *= scl;
 }
 
 void InventoryHolder::increasePointByAmount(int num) {

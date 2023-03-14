@@ -6,8 +6,24 @@ GameState::GameState(int n_players){
     ronde = 1;
 }
 
+GameState& GameState::getCurrentState(){
+    return currentState;
+}
+
+const Player& GameState::getCurrentPlayer() const{
+    return players.at(turn.front());
+}
+
+Table& GameState::getTable(){
+    return table;
+}
+
+const int GameState::getRound() const{
+    return ronde;
+}
+
 void GameState::advance(){
-    // Get current player
+    /** Get current player */
     int id = turn.front();
     Player& current = players.at(id);
 
@@ -19,12 +35,16 @@ void GameState::advance(){
     } else {
         /** TODO: DOUBLE, NEXT, HALF, ABILITY*/
     }
-    // End of turn; rotate to next player
-    turn.push(id);
+
+    /** End of turn; rotate to next player */
+    //turn.push(id);
     turn.pop();
+
     if (ronde == 6) {
         /** TODO: Wrap up */
     }
+
+    currentState = *this;
 }
 
 void GameState::reverseTurn(){
