@@ -4,12 +4,12 @@
 using namespace std;
 
 // ctor
-InventoryHolder::InventoryHolder(int poin, int n_regulardeck, int n_abilitydeck)
+InventoryHolder::InventoryHolder(unsigned long poin, int n_regulardeck, int n_abilitydeck)
     : point(poin), regularInv(n_regulardeck), abilityInv(n_abilitydeck)
 {}
 
 // get functions
-int InventoryHolder::getPoint() const {
+unsigned long InventoryHolder::getPoint() const {
     return point;
 }
 
@@ -30,7 +30,7 @@ int InventoryHolder::getAbilityInvSize() const {
 }
 
 // set functions
-void InventoryHolder::setPoint(int num) {
+void InventoryHolder::setPoint(unsigned long num) {
     point = num;
 }
 
