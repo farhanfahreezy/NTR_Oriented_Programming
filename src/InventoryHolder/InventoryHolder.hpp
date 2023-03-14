@@ -31,16 +31,14 @@ public:
     void increasePointByAmount(int num);
 
     // inventory functions
-    void addRegularCard(const RegularCard& card, int max);
+    InventoryHolder operator+(const RegularCard& card) const; 
+    InventoryHolder operator+(const AbilityCard& card) const;
+    InventoryHolder operator-(const RegularCard& card) const;
+    InventoryHolder operator-(const AbilityCard& card) const;
+    /*void addRegularCard(const RegularCard& card, int max);
     void addAbilityCard(const AbilityCard& card, int max);
     RegularCard removeRegularCard(int index);
-    AbilityCard removeAbilityCard(int index);
-
-    // std::vector<RegularCard> sortDeckByValue();
-    // bool compareCard(RegularCard, RegularCard);
-    // std::vector<RegularCard> removeDuplicateNumbers();
-    // int getFlushType();
-    // std::vector<RegularCard> removeOtherColor(int);
+    AbilityCard removeAbilityCard(int index);*/
 };
 
 #endif
