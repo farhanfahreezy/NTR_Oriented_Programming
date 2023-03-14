@@ -17,15 +17,21 @@ int main(){
     cout << player.getName() << "'s Inventory:" << endl;
     cout << player.getRegularInvSize() << endl;
     player + regDeck.getCard(2);
-    player + regDeck.getCard(2);
-    player + regDeck.getCard(2);
-    player + regDeck.getCard(2);
-    player + regDeck.getCard(2);
-    player + regDeck.getCard(2);
+    player + regDeck.getCard(3);
+    player + regDeck.getCard(4);
+    player + regDeck.getCard(5);
+    player + regDeck.getCard(6);
+    player + regDeck.getCard(7);
     cout << player.getName() << "'s Inventory:" << endl;
+    for(auto card : player.getRegularInv()){
+        card.printInfo();
+    }
     cout << player.getRegularInvSize() << endl;
-    player - regDeck.getCard(2);
+    player - 2;
     cout << player.getName() << "'s Inventory:" << endl;
+    for(auto card : player.getRegularInv()){
+        card.printInfo();
+    }
     cout << player.getRegularInvSize() << endl;
     /* Player player2(2);
     string name;
