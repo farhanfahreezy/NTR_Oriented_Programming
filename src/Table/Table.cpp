@@ -15,3 +15,10 @@ RegularDeck Table::getTableDeck(){
 void Table::resetPot(){
     InventoryHolder::setPoint(64);
 }
+
+
+void Table::resetTableDeck(){
+    for (int i =0;i<tableDeck.getAmount();i++) {
+        tableDeck.removeCard(i);
+    }
+}

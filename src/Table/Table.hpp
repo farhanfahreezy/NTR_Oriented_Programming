@@ -16,6 +16,7 @@ class Table : public InventoryHolder{
 
         //set function
         void resetPot();
+        void resetTableDeck();
 };
 
 #endif
