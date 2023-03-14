@@ -5,18 +5,18 @@
 
 class Table : public InventoryHolder{
     private:
-        RegularDeck<int> tableDeck;
+        std::vector<RegularCard> tableDeck;
     public:
         //ctor
         Table();
 
         //get function
 
-        RegularDeck<int> getTableDeck();
+        RegularCard getTableDeck(int);
+        int getTableDeckSize();
 
         //set function
         void resetPot();
-        void resetTableDeck();
 };
 
 #endif

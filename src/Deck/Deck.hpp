@@ -23,10 +23,7 @@ class Deck{
         Deck& operator=(const Deck&);
         T getCard(int idx); 
         int getAmount();
-        void shuffleDeck();
-        void sortDeckByValue();
-        bool compareCard(T, T);
-        
+        void shuffleDeck();        
 };
 
 #endif

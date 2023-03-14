@@ -76,3 +76,57 @@ AbilityCard InventoryHolder::removeAbilityCard(int index) {
     abilityInv.erase(abilityInv.begin() + index);
     return removedCard;
 }
+
+// std::vector<RegularCard> InventoryHolder::removeDuplicateNumbers(){
+//     std::vector<RegularCard> tempInv;
+//     for (int i = 0; i<getRegularInvSize() ; i++) {
+//         if (i!= 0) {
+//             if (regularInv[i].getNum()!=regularInv[i-1].getNum()) {
+//                 tempInv.push_back(regularInv[i]);
+//             } 
+//         } else {
+//             tempInv.push_back(regularInv[i]);
+//         }
+//     }
+//     return tempInv;
+// }
+
+
+// int InventoryHolder::getFlushType() {
+//     std::vector<int> count;
+//     count.assign(4,0);
+//     for (int i = 0; i<getRegularInvSize();i++) {
+//         count[regularInv[i].getColor()]++;
+//     }
+
+//     for (int i = 0; i<count.size();i++) {
+//         if (count[3-i]>=5) {
+//             return i;
+//         }
+//     }
+// }
+
+// std::vector<RegularCard> InventoryHolder::removeOtherColor(int x) {
+//     std::vector<RegularCard> tempInv;
+//     for (int i = 0; i < getRegularInvSize(); i++) {
+//         if (regularInv[i].getColor() == x) {
+//             tempInv.push_back(regularInv[i]);
+//         }
+//     }
+//     return tempInv;
+// }
+
+
+// bool InventoryHolder::compareCard(RegularCard c1, RegularCard c2){
+//     return (c1.value() > c2.value());
+// }
+
+
+// std::vector<RegularCard> InventoryHolder::sortDeckByValue(){
+//     std::vector<RegularCard> tempInv;
+//     for (int i = 0;i<getRegularInvSize(); i++) {
+//         tempInv.push_back(regularInv[i]);
+//     }
+//     sort(tempInv.begin(),tempInv.end(),compareCard);
+//     return tempInv;
+// }
