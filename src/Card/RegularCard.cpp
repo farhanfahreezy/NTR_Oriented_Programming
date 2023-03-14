@@ -54,7 +54,7 @@ void RegularCard::printInfo(){
     cout << "Value: " << value() << endl;
 }
 
-float RegularCard::value(){
+float RegularCard::value() const{
     float konstan = getNum() * 0.1;
     return konstan + (getColor() * 0.03);
 }

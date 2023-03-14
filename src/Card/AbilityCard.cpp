@@ -23,7 +23,7 @@ AbilityCard::AbilityCard(float id){
     
 }
 
-float AbilityCard::value(){
+float AbilityCard::value() const{
     return this->id;
 }
 

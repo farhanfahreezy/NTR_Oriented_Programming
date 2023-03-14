@@ -10,6 +10,6 @@ class AbilityCard: public Card{
         AbilityCard(float id);
         void setId(float id);
         void printInfo() override;
-        float value() override;
+        float value() const override;
 };
 #endif

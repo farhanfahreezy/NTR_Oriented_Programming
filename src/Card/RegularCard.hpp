@@ -21,6 +21,6 @@ class RegularCard: public Card{
         void setNum(int num);
         void setColor(int color);
         void printInfo() override;
-        float value() override;
+        float value() const override;
 };
 #endif
