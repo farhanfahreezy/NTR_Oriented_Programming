@@ -35,11 +35,10 @@ public:
     // inventory functions
     InventoryHolder operator+(const RegularCard& card); 
     InventoryHolder operator+(const AbilityCard& card);
-    InventoryHolder operator-(const RegularCard& card);
-    InventoryHolder operator-(const AbilityCard& card);
+    InventoryHolder operator-(int amount);
     void addRegularCard(const RegularCard& card);
     void addAbilityCard(const AbilityCard& card);
-    void removeRegularCard();
+    void removeRegularCard(int amount);
     void removeAbilityCard();
     
 };

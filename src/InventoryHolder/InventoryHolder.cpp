@@ -57,15 +57,21 @@ InventoryHolder InventoryHolder::operator+(const AbilityCard& card) {
     return *this;
 }
 
-InventoryHolder InventoryHolder::operator-(const RegularCard& card) {
-    this->removeRegularCard();
+InventoryHolder InventoryHolder::operator-(int amount) {
+    if (amount > regularInv.size()) {
+        // handle the case where the player has less than 'amount' regular cards in their inventory
+        regularInv.clear();
+    } else {
+        // remove 'amount' regular cards from the player's inventory
+        this->removeRegularCard(amount);
+        if(this->getAbilityInvSize() == 1){
+            this->removeAbilityCard();
+        }
+    }
     return *this;
 }
 
-InventoryHolder InventoryHolder::operator-(const AbilityCard& card) {
-    this->removeAbilityCard();
-    return *this;
-}
+
 
 void InventoryHolder::addRegularCard(const RegularCard& card){
     regularInv.push_back(card);
@@ -75,7 +81,15 @@ void InventoryHolder::addAbilityCard(const AbilityCard& card){
     abilityInv.push_back(card);
 }
 
-void InventoryHolder::removeRegularCard() {regularInv.erase(regularInv.begin());}
+void InventoryHolder::removeRegularCard(int amount) {
+    if(amount > regularInv.size()) {
+        amount = regularInv.size();
+    }
+    for(int i = 0; i < amount; i++){
+        regularInv.erase(regularInv.begin());
+    }
+}
+
 void InventoryHolder::removeAbilityCard() {abilityInv.erase(abilityInv.begin());}
 
 // void Remove
