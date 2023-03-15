@@ -7,6 +7,13 @@
 class GameCommands{
     private:
         static bool initialized;
+
+#ifdef DEBUG_MODE
+        static const Command
+            COMMAND_WRITEFILE,
+            COMMAND_READFILE;
+#endif
+
         static const Command
             COMMAND_DOUBLE,
             COMMAND_NEXT,

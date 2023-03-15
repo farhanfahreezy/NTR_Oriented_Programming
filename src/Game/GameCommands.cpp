@@ -6,6 +6,31 @@ using namespace std;
 
 bool GameCommands::initialized = false;
 
+#ifdef DEBUG_MODE
+const Command
+    GameCommands::COMMAND_WRITEFILE = Command::withName("write")
+        .addArg("<path>", "Path to file to write to.")
+        .handles([](vector<string>& argv)->bool{
+            if(argv.size() != 1)return false;
+            string path = argv[0];
+
+            cout << "Menulis GameState aktif ke file " << path << endl;
+            /** TODO: Write state to file */
+            return true;
+        }),
+    
+    GameCommands::COMMAND_READFILE = Command::withName("read")
+        .addArg("<path>", "Path to file to read from.")
+        .handles([](vector<string>& argv)->bool{
+            if(argv.size() != 1)return false;
+            string path = argv[0];
+
+            cout << "Membaca GameState dari file " << path << endl;
+            /** TODO: Read state from file */
+            return true;
+        });
+#endif
+
 const Command
     GameCommands::COMMAND_NEXT = Command::withName("next")
         .handles([](vector<string>& argv)->bool{
@@ -68,10 +93,14 @@ const Command
             return false;
         });
 
-
 void GameCommands::init(){
     if(initialized)return;
     
+#ifdef DEBUG_MODE
+    CommandParser::reg(COMMAND_WRITEFILE);
+    CommandParser::reg(COMMAND_READFILE);
+#endif
+
     CommandParser::reg(COMMAND_NEXT);
     CommandParser::reg(COMMAND_DOUBLE);
     CommandParser::reg(COMMAND_HALF);

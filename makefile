@@ -7,7 +7,7 @@ TEST_BIN_FOLDER	= $(OUTPUT_FOLDER)/test
 
 BIN_NAME		= ntr
 
-CPPFLAGS		= -I$(SOURCE_FOLDER)
+CPPFLAGS		= -I$(SOURCE_FOLDER) $(ARGS)
 
 ### BUILD RECIPES ###
 # build			- Builds a single executable file
@@ -17,6 +17,7 @@ build: build-all clean-obj
 build-all: clean-obj all
 	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o									-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
 
+### RELEASE COMPILE RECIPES ###
 # all			- Compiles object files
 all: game inv-holder card deck table player io
 
