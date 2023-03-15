@@ -32,6 +32,8 @@ int main(){
     t + regDeck.getCard(4);
     p + regDeck.getCard(5);
     p + regDeck.getCard(6);
+    int size = regDeck.getAmount();
+    cout << size << endl;
     cout << "Player inv:" << endl;
     for(auto card : p.getRegularInv()){
         card.printInfo();

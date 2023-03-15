@@ -47,6 +47,10 @@ const int GameState::getRound() const{
     return round;
 }
 
+const int GameState::getFirstPlayerIdx() const{
+    return (gameNum - 1) * 7 + (round - 1);
+}
+
 void GameState::advance(){
     /** TEMP: FOR TESTING PURPOSES ONLY, MOVE THIS LATER TO MAIN PROGRAM */
     GameCommands::init();
@@ -63,7 +67,7 @@ void GameState::advance(){
         /** TODO: Wrap up current round here: award points, etc. */
 
         ++round;
-        turn = turnStartFrom((gameNum - 1) * 7 + (round - 1));
+        turn = turnStartFrom(getFirstPlayerIdx());
     }
 
     if (round == 7) {
