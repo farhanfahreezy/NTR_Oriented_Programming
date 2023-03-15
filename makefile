@@ -6,7 +6,7 @@ TEST_FOLDER		= test
 TEST_BIN_FOLDER	= $(OUTPUT_FOLDER)/test
 
 BIN_NAME		= ntr
-
+# add the flag ARGS=... to supply make with additional g++ compile flags
 CPPFLAGS		= -I$(SOURCE_FOLDER) $(ARGS)
 
 ### BUILD RECIPES ###

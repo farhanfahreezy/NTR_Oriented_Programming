@@ -60,8 +60,6 @@ class GameState{
 
         /**
          * Advances the game to the next state.
-         * 
-         * TODO: Do turn actions and calls here
         */
         void advance();
 

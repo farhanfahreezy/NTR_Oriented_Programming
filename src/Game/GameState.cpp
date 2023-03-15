@@ -48,7 +48,7 @@ const int GameState::getRound() const{
 }
 
 void GameState::advance(){
-    /** TEMP: FOR TESTING PURPOSES ONLY, DELETE THIS LATER */
+    /** TEMP: FOR TESTING PURPOSES ONLY, MOVE THIS LATER TO MAIN PROGRAM */
     GameCommands::init();
 
     /** Get current player */
@@ -62,7 +62,6 @@ void GameState::advance(){
         /** End of round; initiate the next round */
         /** TODO: Wrap up current round here: award points, etc. */
 
-        /** */
         ++round;
         turn = turnStartFrom((gameNum - 1) * 7 + (round - 1));
     }
