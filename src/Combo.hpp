@@ -22,5 +22,7 @@ class Combo : public Value{
         bool isFourOfAKind();
         bool isStraightFlush();
         float value();
+        int getCombo();
+        Playet getWinner(GameState);
 };
 #endif

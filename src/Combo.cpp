@@ -593,3 +593,52 @@ float Combo::value(){
 
     return max;
 }
+
+
+int Combo::getCombo(){
+    if (val < 1.4) {
+        return 0; // HIGH CARD
+    } else if (val < 2.8) {
+        return 1; // PAIR
+    } else if (val < 4.2) {
+        return 2; // TWO PAIR
+    } else if (val < 5.6) {
+        return 3; // THREE OF A KIND
+    } else if (val < 7) {
+        return 4; // STRAIGHT
+    } else if (val < 8.4) {
+        return 5; // FLUSH
+    } else if (val < 9.8) {
+        return 6; // FULL HOUSE
+    } else if (val < 11.2) {
+        return 7; // FOUR OF A KIND
+    } else {
+        return 8; // STRAIGHT FLUSH
+    }
+}
+
+Player Combo::getWinner(GameState game){
+    std::vector<Combo> cmbs;
+    for (int i = 0; i<game.getNumberOfPlayer();i++) {
+        Combo ctemp(game.getTable(),game.getPlayerWithId(i));
+        cmbs.push_back(ctemp);
+    }
+
+    std::vector<float> vals;
+    int tmp;
+    for (int i = 0; i< cmbs.size();i++) {
+        tmp = cmbs[i].value();
+        vals.push_back(tmp);
+    }
+
+    int tag =0;
+    float max = vals[0];
+    for (int i = 1; i<vals.size();i++) {
+        if (max<vals[i]) {
+            max = vals[i];
+            tag = i;
+        }
+    }
+
+    return game.getPlayerWithId(i);
+}
