@@ -3,16 +3,13 @@
 
 int main(){
     GameState state(7);
-    std::cout << state << std::endl;
+    GameState::setCurrentState(state);
+    std::cout << GameState::getCurrentState() << std::endl;
 
-    state.advance();
-    std::cout << state << std::endl;
-
-    state.reverseTurn();
-    std::cout << state << std::endl;
-
-    state.advance();
-    std::cout << state << std::endl;
+    for(int i = 0; i < 7; ++i){
+        GameState::getCurrentState().advance();
+        std::cout << GameState::getCurrentState() << std::endl;
+    }
 
     return 0;
 }

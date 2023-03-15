@@ -5,9 +5,16 @@ Table::Table() : InventoryHolder(64,52,7), tableDeck(5){
     //this->tableDeck = RegularDeck(5);
 }
 
+Table& Table::operator=(Table& other) {
+    for (int i = 0; i<other.getTableDeckSize();i++) {
+        addToTableDeck(other.getTableDeckCard(i));
+    }
+    return *this;
+}
+
 
 //get function
-RegularCard Table::getTableDeck(int x){
+RegularCard Table::getTableDeckCard(int x){
     return tableDeck[x];
 }
 
@@ -16,7 +23,13 @@ int Table::getTableDeckSize(){
 }
 
 //set function
+
+void Table::addToTableDeck(const RegularCard& card){
+    tableDeck.push_back(card);
+}
+
 void Table::resetPot(){
     InventoryHolder::setPoint(64);
 }
+
 

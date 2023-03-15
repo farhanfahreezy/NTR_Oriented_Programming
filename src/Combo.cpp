@@ -1,25 +1,55 @@
 #include "Combo.hpp"
 // ASUMSI KARTU > 5
-Combo::Combo(){
+Combo::Combo(Table tblt, Player pt){
     this->val = 0;
+    this->tbl = tblt;
+    this->p = pt;
 }
 
-bool Combo::isPair(RegularDeck oth){
-    oth.sortDeckByValue();
-    for (int i=0; i<oth.getAmount()-1;i++) {
-        if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
+bool Combo::compareCard(RegularCard c1, RegularCard c2) {
+    return c1.value() > c2.value();
+}
+
+bool Combo::isPair(){
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
+
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+    //sorting
+    sort(tempInv.begin(),tempInv.end(),compareCard);
+
+    for (int i=0; i<tempInv.size()-1;i++) {
+        if (tempInv[i].getNum() == tempInv[i+1].getNum()) {
             return true;
         }
     }
     return false;
 }
 
-bool Combo::isTwoPair(RegularDeck oth){
-    oth.sortDeckByValue();
-    for (int i=0; i<oth.getAmount()-3;i++) {
-        if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
-            for (int j = i+2; j<oth.getAmount()-1;j++) {
-                if (oth.getCard(j).getNum() == oth.getCard(j+1).getNum()) {
+bool Combo::isTwoPair(){
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
+
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+    //sorting
+    sort(tempInv.begin(),tempInv.end(),compareCard);
+
+    for (int i=0; i<tempInv.size()-3;i++) {
+        if (tempInv[i].getNum() == tempInv[i+1].getNum()) {
+            for (int j = i+2; j<tempInv.size()-1;j++) {
+                if (tempInv[j].getNum() == tempInv[j+1].getNum()) {
                     return true;
                 }
             }
@@ -28,12 +58,24 @@ bool Combo::isTwoPair(RegularDeck oth){
     return false;
 }
 
-bool Combo::isThreeOfAKind(RegularDeck oth){
-    oth.sortDeckByValue();
+bool Combo::isThreeOfAKind(){
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
+
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+    //sorting
+    sort(tempInv.begin(),tempInv.end(),compareCard);
+
     bool tmp = false, tmp1 = true;
-    for (int i=0; i<oth.getAmount()-2;i++) {
+    for (int i=0; i<tempInv.size()-2;i++) {
         for (int j = i; j< i+2;j++) {
-            if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
+            if (tempInv[j].getNum() != tempInv[j+1].getNum()) {
                 tmp1 = false;
             }
         }
@@ -47,15 +89,37 @@ bool Combo::isThreeOfAKind(RegularDeck oth){
     return tmp;
 }
 
-bool Combo::isStraight(RegularDeck oth){
-    oth.sortDeckByValue();
-    RegularDeck oth1(oth);
-    oth1.removeDuplicateNumbers();
+bool Combo::isStraight(){
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
+
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+    //sorting
+    sort(tempInv.begin(),tempInv.end(),compareCard);
+
+    //remove duplicate number cards
+    std::vector<RegularCard> tempInv2;
+    for (int i = 0; i<tempInv.size() ; i++) {
+        if (i!= 0) {
+            if (tempInv[i].getNum()!=tempInv[i-1].getNum()) {
+                tempInv.push_back(tempInv[i]);
+            } 
+        } else {
+            tempInv.push_back(tempInv[i]);
+        }
+    }
+
     bool tmp1 = true, tmp = false;
-    if (oth1.getAmount()>=5) {
-        for (int i=0;i<oth1.getAmount()-4;i++){
+    if (tempInv2.size()>=5) {
+        for (int i=0;i<tempInv2.size()-4;i++){
             for (int j=0; j<4; j++) {
-                if (oth1.getCard(j).getNum() != oth1.getCard(j+1).getNum() + 1) {
+                if (tempInv2[j].getNum() != tempInv2[j+1].getNum() + 1) {
                     tmp1 = false;
                 }
             }
@@ -72,11 +136,24 @@ bool Combo::isStraight(RegularDeck oth){
     }
 }
 
-bool Combo::isFlush(RegularDeck oth){
+bool Combo::isFlush(){
+    //array counter
     std::vector<int> count;
     count.assign(4,0);
-    for (int i = 0; i<oth.getAmount();i++) {
-        count[oth.getCard(i).getColor()]++;
+
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
+
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+
+    for (int i = 0; i<tempInv.size();i++) {
+        count[tempInv[i].getColor()]++;
     }
 
     for (int i = 0; i<count.size();i++) {
@@ -87,14 +164,27 @@ bool Combo::isFlush(RegularDeck oth){
     return false;
 }
 
-bool Combo::isFullHouse(RegularDeck oth){
-    oth.sortDeckByValue();
+bool Combo::isFullHouse(){
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
+
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+    //sorting
+    sort(tempInv.begin(),tempInv.end(),compareCard);
+
     int tag;
     bool tmp = false;
     bool tmp1 = true;
-    for (int i=0; i<oth.getAmount()-2;i++) {
+
+    for (int i=0; i<tempInv.size()-2;i++) {
         for (int j = i; j< i+2;j++) {
-            if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
+            if (tempInv[j].getNum() != tempInv[j+1].getNum()) {
                 tmp1 = false;
             }
         }
@@ -108,22 +198,41 @@ bool Combo::isFullHouse(RegularDeck oth){
     }
 
     if (tmp) {
-        RegularDeck oth1(oth);
-        for (int k = 0; k<3; k++) {
-            oth1.removeCard(tag+k);
+        std::vector<RegularCard> tempInv2;
+        for (int i = 0; i<tempInv.size() ; i++) {
+            tempInv2.push_back(tempInv[i]);      
         }
-        return isPair(oth1);
+        tempInv2.erase(tempInv2.begin()+tag,tempInv2.begin()+tag+3);
+
+        for (int i=0; i<tempInv2.size()-1;i++) {
+            if (tempInv2[i].getNum() == tempInv2[i+1].getNum()) {
+                return true;
+            }
+        }
+        return false;
     } else {
         return tmp;
     }
 }
 
-bool Combo::isFourOfAKind(RegularDeck oth){
-    oth.sortDeckByValue();
+bool Combo::isFourOfAKind(){
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
+
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+    //sorting
+    sort(tempInv.begin(),tempInv.end(),compareCard);
+
     bool tmp1 = true, tmp = false;
-    for (int i=0; i<oth.getAmount()-3;i++) {
+    for (int i=0; i<tempInv.size()-3;i++) {
         for (int j = i; j< i+3;j++) {
-            if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
+            if (tempInv[j].getNum() != tempInv[j+1].getNum()) {
                 tmp1 = false;
             }
         }
@@ -132,20 +241,55 @@ bool Combo::isFourOfAKind(RegularDeck oth){
             break;
         } else {
             tmp1 = true;
-        } . . . . . . . 
+        }
     }
     return tmp;
 }
 
-bool Combo::isStraightFlush(RegularDeck oth){
-    if (isStraight(oth)&&isFlush(oth)) {
-        oth.sortDeckByValue();
-        RegularDeck oth1(oth);
+bool Combo::isStraightFlush(){
+    if (isStraight()&&isFlush()) {
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
         bool tmp1 = true,tmp = false;
-        oth1.removeOtherColor(oth.getFlushType());
-        for (int i=0; i<oth1.getAmount()-4; i++) {
+        //getting flush color
+        std::vector<int> count;
+        int tag = -1;
+        count.assign(4,0);
+        for (int i = 0; i<tempInv.size();i++) {
+            count[tempInv[i].getColor()]++;
+        }
+
+        for (int i = 0; i<count.size();i++) {
+            if (count[3-i]>=5) {
+                tag = 3-i;
+                break;
+            }
+        }
+
+        //removing all non flush cards
+
+        std::vector<RegularCard> tempInv2;
+        for (int i = 0; i<tempInv.size();i++) {
+            if (tempInv[i].getColor() == tag) {
+                tempInv2.push_back(tempInv[i]);
+            }
+        }
+
+        //checking straight
+        for (int i=0; i<tempInv2.size()-4; i++) {
             for (int j = 0; j<4;j++) {
-                if (oth1.getCard(i+j).getNum() != oth1.getCard(i+j+1).getNum()+1) {
+                if (tempInv2[i+j].getNum() != tempInv2[i+j+1].getNum()+1) {
                     tmp1 = false;
                 }
             }
@@ -163,122 +307,283 @@ bool Combo::isStraightFlush(RegularDeck oth){
     }
 }
 
-float Combo::value(RegularDeck oth){
+float Combo::value(){
     float max = 0;
     bool tmp = false;
-    oth.sortDeckByValue();
-    max = oth.getCard(0).value();
+    std::vector<RegularCard> tempInv;
+    //gabung
+    for (int i=0; i<tbl.getTableDeckSize();i++) {
+        tempInv.push_back(tbl.getTableDeckCard(i));
+    }
 
-    if (isPair(oth)) {
-        for (int i=0; i<oth.getAmount()-1;i++) {
-            if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
-                max = oth.getCard(i).value() + 1.4;
-                break;
+    for (int i=0; i<p.getRegularInvSize();i++) {
+        tempInv.push_back(p.getRegularInv()[i]);
+    }
+
+    //sorting
+    sort(tempInv.begin(),tempInv.end(),compareCard);
+    max = tempInv[0].value();
+
+    if (isPair()) {
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        for (int i=0; i<tempInv.size()-1;i++) {
+            if (tempInv[i].getNum() == tempInv[i+1].getNum()) {
+                max = tempInv[i].value() + 1.4;
             }
         }
     }
 
-    if (isTwoPair(oth)) {
-        for (int i=0; i<oth.getAmount()-1;i++) {
-            if (oth.getCard(i).getNum() == oth.getCard(i+1).getNum()) {
-                for (int j = i+2; j<oth.getAmount()-1;j++) {
-                    if (oth.getCard(j).getNum() == oth.getCard(j+1).getNum()) {
-                        max = oth.getCard(i).value() + 2.8;
-                        break;
+    if (isTwoPair()) {
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        for (int i=0; i<tempInv.size()-3;i++) {
+            if (tempInv[i].getNum() == tempInv[i+1].getNum()) {
+                for (int j = i+2; j<tempInv.size()-1;j++) {
+                    if (tempInv[j].getNum() == tempInv[j+1].getNum()) {
+                        max = tempInv[i].value()+2.8;
                     }
                 }
             }
         }
     }
 
-    if (isThreeOfAKind(oth)) {
-        tmp = true;
-        for (int i=0; i<oth.getAmount()-2;i++) {
+    if (isThreeOfAKind()) {
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        bool tmp1 = true;
+        for (int i=0; i<tempInv.size()-2;i++) {
             for (int j = i; j< i+2;j++) {
-                if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
-                    tmp = false;
+                if (tempInv[j].getNum() != tempInv[j+1].getNum()) {
+                    tmp1 = false;
                 }
             }
-            if (tmp) {
-                max = oth.getCard(i).value()+4.2;
+            if (tmp1) {
+                max = tempInv[i].value()+4.2;
+                break;
+            } else {
+                tmp1 = true;
+            }
+        }
+    }
+
+    if (isStraight()) {
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        //remove duplicate number cards
+        std::vector<RegularCard> tempInv2;
+        for (int i = 0; i<tempInv.size() ; i++) {
+            if (i!= 0) {
+                if (tempInv[i].getNum()!=tempInv[i-1].getNum()) {
+                    tempInv.push_back(tempInv[i]);
+                } 
+            } else {
+                tempInv.push_back(tempInv[i]);
+            }
+        }
+
+        bool tmp1 = true, tmp = false;
+        for (int i=0;i<tempInv2.size()-4;i++){
+            for (int j=0; j<4; j++) {
+                if (tempInv2[j].getNum() != tempInv2[j+1].getNum() + 1) {
+                    tmp1 = false;
+                }
+            }
+            if (tmp1) {
+                max = tempInv2[i].value() + 5.6;
+                break;
+            } else {
+                tmp1 = true;
+            }
+        }
+
+    }
+
+    if (isFlush()) {
+        std::vector<int> count;
+        count.assign(4,0);
+        int tag = -1;
+
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+
+        for (int i = 0; i<tempInv.size();i++) {
+            count[tempInv[i].getColor()]++;
+        }
+
+        for (int i = 0; i<count.size();i++) {
+            if (count[i]>=5) {
+                tag = i;
+            }
+        }
+        
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        for (int i=0; i<tempInv.size();i++) {
+            if (tempInv[i].getColor()==tag) {
+                max = tempInv[i].value() + 7;
+            }
+        }
+    }
+
+    if (isFullHouse()) {
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        bool tmp1 = true;
+        for (int i=0; i<tempInv.size()-2;i++) {
+            for (int j = i; j< i+2;j++) {
+                if (tempInv[j].getNum() != tempInv[j+1].getNum()) {
+                    tmp1 = false;
+                }
+            }
+            if (tmp1) {
+                max = tempInv[i].value()+8.4;
+                break;
+            } else {
+                tmp1 = true;
+            }
+        }
+    }
+
+    if (isFourOfAKind()) {
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        bool tmp1 = true;
+        for (int i=0; i<tempInv.size()-3;i++) {
+            for (int j = i; j< i+3;j++) {
+                if (tempInv[j].getNum() != tempInv[j+1].getNum()) {
+                    tmp1 = false;
+                }
+            }
+            if (tmp1) {
+                max = tempInv[i].value()+9.4;
                 break;
             } 
         }
     }
 
-    if (isStraight(oth)) {
-        RegularDeck oth1(oth);
-        oth1.removeDuplicateNumbers();
+    if (isStraightFlush()) {
+        std::vector<int> count;
+        count.assign(4,0);
+        int tag = -1;
+
+        std::vector<RegularCard> tempInv;
+        //gabung
+        for (int i=0; i<tbl.getTableDeckSize();i++) {
+            tempInv.push_back(tbl.getTableDeckCard(i));
+        }
+
+        for (int i=0; i<p.getRegularInvSize();i++) {
+            tempInv.push_back(p.getRegularInv()[i]);
+        }
+
+
+        for (int i = 0; i<tempInv.size();i++) {
+            count[tempInv[i].getColor()]++;
+        }
+
+        for (int i = 0; i<count.size();i++) {
+            if (count[i]>=5) {
+                tag = i;
+            }
+        }
+        
+        //sorting
+        sort(tempInv.begin(),tempInv.end(),compareCard);
+
+        //removing other colors
+        std::vector<RegularCard> tempInv2;
+        for (int i = 0; i< tempInv.size();i++) {
+            if (tempInv[i].getColor() == tag) {
+                tempInv2.push_back(tempInv[i]);
+            }
+        }
+
         bool tmp1 = true;
-        for (int i=0;i<oth1.getAmount()-4;i++){
-            for (int j=0; j<5; j--) {
-                if (oth1.getCard(j).getNum() != oth1.getCard(j+1).getNum() + 1) {
-                    tmp1 = false;
-                }
-            }
-            if (tmp1) {
-                max = oth1.getCard(i).getNum() + 5.6;
-                break;
-            } else {
-                tmp1 = true;
-            }
-        }
-    }
 
-    if (isFlush(oth)) {
-        oth.sortDeckByValue();
-        RegularDeck oth1(oth);
-        oth1.removeOtherColor(oth.getFlushType());
-        max = oth1.getCard(0).value() + 7;
-    }
-
-    if (isFullHouse(oth)) {
-        tmp = true;
-        for (int i=0; i<oth.getAmount()-2;i++) {
-            for (int j = i; j< i+2;j++) {
-                if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
-                    tmp = false;
-                }
-            }
-            if (tmp) {
-                max = oth.getCard(i).value()+8.4;
-                break;
-            } else {
-                tmp = true;
-            }
-        }
-    }
-
-    if (isFourOfAKind(oth)) {
-        tmp = true;
-        for (int i=0; i<oth.getAmount()-3;i++) {
-            for (int j = i; j< i+3;j++) {
-                if (oth.getCard(j).getNum() != oth.getCard(j+1).getNum()) {
-                    tmp = false;
-                }
-            }
-            if (tmp) {
-                max = oth.getCard(i).value() + 9.8;
-                break;
-            } else {
-                tmp = true;
-            }
-        }
-    }
-
-    if (isStraightFlush(oth)) {
-        oth.sortDeckByValue();
-        RegularDeck oth1(oth);
-        bool tmp1 = true;
-        oth1.removeOtherColor(oth.getFlushType());
-        for (int i=0; i<oth1.getAmount()-4; i++) {
+        for (int i=0; i<tempInv2.size()-4; i++) {
             for (int j = 0; j<4;j++) {
-                if (oth1.getCard(i+j).getNum() != oth1.getCard(i+j+1).getNum()+1) {
+                if (tempInv2[i+j].getNum() != tempInv2[i+j+1].getNum()+1) {
                     tmp1 = false;
                 }
             }
             if (tmp1) {
-                max = oth1.getCard(i).value() + 11.2;
+                max = tempInv2[i].value() + 11.2;
                 break;
             } else {
                 tmp1 = true;
@@ -286,5 +591,137 @@ float Combo::value(RegularDeck oth){
         }
     }
 
+    val = max;
     return max;
+}
+
+
+int Combo::getCombo(){
+    if (val < 1.4) {
+        return 0; // HIGH CARD
+    } else if (val < 2.8) {
+        return 1; // PAIR
+    } else if (val < 4.2) {
+        return 2; // TWO PAIR
+    } else if (val < 5.6) {
+        return 3; // THREE OF A KIND
+    } else if (val < 7) {
+        return 4; // STRAIGHT
+    } else if (val < 8.4) {
+        return 5; // FLUSH
+    } else if (val < 9.8) {
+        return 6; // FULL HOUSE
+    } else if (val < 11.2) {
+        return 7; // FOUR OF A KIND
+    } else {
+        return 8; // STRAIGHT FLUSH
+    }
+}
+
+Player Combo::getWinner(GameState game){
+    std::vector<Combo> cmbs;
+    Combo ctemp(game.getTable(),game.getPlayerWithId(0));
+    cmbs.push_back(ctemp);
+    for (int i = 1; i<game.getNumberOfPlayer();i++) {
+        ctemp.setPlayer(game.getPlayerWithId(i));
+        cmbs.push_back(ctemp);
+    }
+
+    std::vector<float> vals;
+    int tmp;
+    for (int i = 0; i< cmbs.size();i++) {
+        tmp = cmbs[i].value();
+        vals.push_back(tmp);
+    }
+
+    int tag =0;
+    bool multp=false;
+    float max = vals[0];
+    for (int i = 1; i<vals.size();i++) {
+        if (max<vals[i]) {
+            max = vals[i];
+            tag = i;
+        }
+    }
+
+    for (int i = 0; i<vals.size();i++) {
+        if (max==vals[i]) {
+            multp=true;
+        }
+    }
+
+    if (multp) {
+        int type = cmbs[tag].getCombo();
+        if (type == 5 || type == 8) {
+            //KASUS FLUSH + STRAIGHT FLUSH
+            std::vector<int> count;
+            count.assign(4,0);
+            int tag2 = -1;
+
+            std::vector<RegularCard> tempInv;
+            //gabung
+            for (int i=0; i<tbl.getTableDeckSize();i++) {
+                tempInv.push_back(cmbs[tag].tbl.getTableDeckCard(i));
+            }
+
+            for (int i=0; i<p.getRegularInvSize();i++) {
+                tempInv.push_back(cmbs[tag].p.getRegularInv()[i]);
+            }
+
+
+            for (int i = 0; i<tempInv.size();i++) {
+                count[tempInv[i].getColor()]++;
+            }
+
+            for (int i = 0; i<count.size();i++) {
+                if (count[i]>=5) {
+                    tag2 = i;
+                }
+            }
+
+            std::vector<RegularCard> cardsT;
+            std::vector<int> cardsOwner;
+            for (int i = 0; i<cmbs.size();i++) {
+                if (cmbs[i].value()==max) {
+                    for (int j = 0; j<game.getPlayerWithId(i).getRegularInvSize();j++) {
+                        if (game.getPlayerWithId(i).getRegularInv()[i].getColor()==tag2) {
+                            cardsT.push_back(game.getPlayerWithId(i).getRegularInv()[i]);
+                            cardsOwner.push_back(i);
+                        }
+                    }
+
+                    
+                }
+            }
+            max = cardsT[0].value();
+            tag = 0;
+            for (int i = 1;i<cardsT.size();i++) {
+                if (cardsT[i].value()>max) {
+                    max = cardsT[i].value();
+                    tag = i;
+                }
+            }
+        } else {
+            std::vector<RegularCard> cardsT;
+            std::vector<int> cardsOwner;
+            for (int i = 0; i<cmbs.size();i++) {
+                if (cmbs[i].value()==max) {
+                    for (int j = 0; j<game.getPlayerWithId(i).getRegularInvSize();j++) {
+                        cardsT.push_back(game.getPlayerWithId(i).getRegularInv()[i]);
+                        cardsOwner.push_back(i);
+                    }
+                }
+            }
+            max = cardsT[0].value();
+            tag = 0;
+            for (int i = 1;i<cardsT.size();i++) {
+                if (cardsT[i].value()>max) {
+                    max = cardsT[i].value();
+                    tag = i;
+                }
+            }
+        }
+    }
+    
+    return game.getPlayerWithId(tag);
 }

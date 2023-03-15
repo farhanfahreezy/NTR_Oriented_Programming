@@ -13,6 +13,14 @@ Player::Player(int id): /*regularDeck(2), abilityDeck(2)*/ InventoryHolder(0, 0,
     this->poin = 0;
 }
 
+Player& Player::operator=(const Player& other){
+    id = other.id;
+    nama = other.nama;
+    point = other.poin;
+
+    return *this;
+}
+
 bool Player::operator<(const Player& other) const{
     return poin < other.poin;
 }

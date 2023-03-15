@@ -6,8 +6,8 @@ TEST_FOLDER		= test
 TEST_BIN_FOLDER	= $(OUTPUT_FOLDER)/test
 
 BIN_NAME		= ntr
-
-CPPFLAGS		= -I$(SOURCE_FOLDER)
+# add the flag ARGS=... to supply make with additional g++ compile flags
+CPPFLAGS		= -I$(SOURCE_FOLDER) $(ARGS)
 
 ### BUILD RECIPES ###
 # build			- Builds a single executable file
@@ -17,6 +17,7 @@ build: build-all clean-obj
 build-all: clean-obj all
 	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o									-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
 
+### RELEASE COMPILE RECIPES ###
 # all			- Compiles object files
 all: game inv-holder card deck table player io
 
@@ -24,6 +25,7 @@ all: game inv-holder card deck table player io
 game:
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameState.cpp					-o $(OUTPUT_FOLDER)/GameState.o
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameCommands.cpp				-o $(OUTPUT_FOLDER)/GameCommands.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameAbility.cpp				-o $(OUTPUT_FOLDER)/GameAbility.o
 
 # inv-holder	- Builds all source files in the folder "InventoryHolder"
 inv-holder:

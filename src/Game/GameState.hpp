@@ -32,16 +32,26 @@ class GameState{
         const Player& getCurrentPlayer() const;
 
         /**
-         * @brief Get the Player With Id
+         * @brief Get the player with the given id.
          * 
          * @return const Player& 
          */
         const Player& getPlayerWithId(int id) const;
 
         /**
+         * Gets a copy of the player turn queue for this round.
+        */
+        std::queue<int> getCurrentTurnQueue() const;
+
+        /**
          * Getter for the game table.
         */
         Table& getTable();
+
+        /**
+         * Getter for the game number.
+        */
+        const int getGameNum() const;
 
         /**
          * Getter for the game round.
@@ -50,8 +60,6 @@ class GameState{
 
         /**
          * Advances the game to the next state.
-         * 
-         * TODO: Do turn actions and calls here
         */
         void advance();
 
@@ -61,6 +69,13 @@ class GameState{
         void reverseTurn();
 
         /**
+         * Gets the new turn order starting with the given player.
+         * 
+         * @param start Index of the first player to play.
+        */
+        std::queue<int> turnStartFrom(int start) const;
+
+        /**
          * Prints a string representation of this game state to an output stream.
          * 
          * @param os        The output stream to write into.
@@ -68,14 +83,22 @@ class GameState{
         */
         friend std::ostream& operator<<(std::ostream& os, GameState& state);
 
+<<<<<<< HEAD
         map<int,Player>& getPlayerList();
+=======
+        /**
+         * Return the number of players active in the game
+         * 
+        */
+        int getNumberOfPlayer();
+>>>>>>> 66d2935c15497345826899912aec17d052862a1a
 
     private:
         // Queue containing player IDs. The player with their ID at the queue head goes first.
         std::queue<int> turn;
 
         // List of all players in the game.
-        std::map<int,Player> players;
+        std::vector<Player> players;
 
         // Whether the game is finished or not.
         bool finished;
@@ -83,13 +106,22 @@ class GameState{
         // The game table.
         Table table;
 
-        // Ronde Permainan
-        int ronde;
+        // Game number.
+        int gameNum;
 
-        // Current active state of the game
+        // Game round in the current game.
+        int round;
+
+        // Index of the current player to go.
+        int currentPlayerIdx;
+
+        // Whether turn is reversed.
+        bool reversed;
+
+        // Current active state of the game.
         static GameState& currentState;
 
-        // Default non-functional game state
+        // Default non-functional game state.
         static GameState defaultState;
 };
 

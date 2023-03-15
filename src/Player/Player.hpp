@@ -22,6 +22,10 @@ class Player : public InventoryHolder{
          * @param id id unik yang dimiliki player
          */
         Player(int id);
+        Player();
+        //cctor
+
+        Player& operator=(const Player&);
 
 
         /**
