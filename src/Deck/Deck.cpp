@@ -18,6 +18,7 @@ template<class T>
 T Deck<T>::getCard(int idx) {
     T tempCard = cards[idx];
     cards.erase(cards.begin()+idx);
+    this->amount--;
     return tempCard;
 }
 

@@ -18,13 +18,13 @@ int main(){
     Player p(1);
     RegularDeck regDeck(52);
     regDeck.shuffleDeck();
-    RegularCard card0(1,0);
-    RegularCard card1(5,0);
-    RegularCard card2(7,0);
-    RegularCard card3(10,0);
-    RegularCard card4(12,0);
-    RegularCard card5(13,2);
-    RegularCard card6(13,0);
+    RegularCard card0(8,3);
+    RegularCard card1(3,1);
+    RegularCard card2(2,0);
+    RegularCard card3(6,0);
+    RegularCard card4(5,0);
+    RegularCard card5(3,0);
+    RegularCard card6(4,0);
     t + regDeck.getCard(0);
     t + regDeck.getCard(1);
     t + regDeck.getCard(2);
@@ -32,6 +32,8 @@ int main(){
     t + regDeck.getCard(4);
     p + regDeck.getCard(5);
     p + regDeck.getCard(6);
+    int size = regDeck.getAmount();
+    cout << size << endl;
     cout << "Player inv:" << endl;
     for(auto card : p.getRegularInv()){
         card.printInfo();
@@ -46,11 +48,13 @@ int main(){
         card.printInfo();
     }
     float result = c1.value(vec1, t.getRegularInv(), p.getRegularInv()); //c.combineAndSortRegularCard(t.getRegularInv(), p.getRegularInv());
-    cout << "vec2" << endl;
-    vector<RegularCard> vec2 = c2.Flush(vec1);
+    cout << result << endl;
+    /*cout << "vec2" << endl;
+    vector<RegularCard> vec2 = c2.Pair(vec1);
+    /*vec2 = c2.sortByValue(vec2);
     for(auto card : vec2){
         card.printInfo();
-    }
+    }*/
     /*for(auto card : result){
         card.printInfo();
     }*/
