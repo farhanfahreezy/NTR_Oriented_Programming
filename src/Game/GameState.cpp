@@ -23,7 +23,6 @@ void GameState::setCurrentState(GameState& state){
 }
 
 const Player& GameState::getCurrentPlayer() const{
-    cout << turn.front() << " yang lagi main sekarang njir" << endl;
     return players.at(turn.front());
 }
 
@@ -59,7 +58,7 @@ void GameState::advance(){
     /** Wait for and call next command */
     cout << "> ";
     bool succ = CommandParser::getNext();
-    cout << (succ ? "Lemao gan" : "Ish nub") << endl;
+    /** TODO: Handle command invocation success/failure */
 
     /** End of turn; rotate to next player */
     turn.pop();
