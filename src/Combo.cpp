@@ -14,7 +14,7 @@ bool Combo::isPair(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -36,7 +36,7 @@ bool Combo::isTwoPair(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -62,7 +62,7 @@ bool Combo::isThreeOfAKind(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -93,7 +93,7 @@ bool Combo::isStraight(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -144,7 +144,7 @@ bool Combo::isFlush(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -168,7 +168,7 @@ bool Combo::isFullHouse(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -219,7 +219,7 @@ bool Combo::isFourOfAKind(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -251,7 +251,7 @@ bool Combo::isStraightFlush(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -313,7 +313,7 @@ float Combo::value(){
     std::vector<RegularCard> tempInv;
     //gabung
     for (int i=0; i<tbl.getTableDeckSize();i++) {
-        tempInv.push_back(tbl.getTableDeck(i));
+        tempInv.push_back(tbl.getTableDeckCard(i));
     }
 
     for (int i=0; i<p.getRegularInvSize();i++) {
@@ -328,7 +328,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -349,7 +349,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -374,7 +374,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -404,7 +404,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -451,7 +451,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -483,7 +483,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -513,7 +513,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
@@ -545,7 +545,7 @@ float Combo::value(){
         std::vector<RegularCard> tempInv;
         //gabung
         for (int i=0; i<tbl.getTableDeckSize();i++) {
-            tempInv.push_back(tbl.getTableDeck(i));
+            tempInv.push_back(tbl.getTableDeckCard(i));
         }
 
         for (int i=0; i<p.getRegularInvSize();i++) {
