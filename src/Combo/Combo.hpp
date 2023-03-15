@@ -8,13 +8,15 @@
 class Combo{
     private:
         float val;
+        vector<RegularCard> combined;
     public:
         Combo();
         vector<RegularCard> combineAndSortRegularCard(vector<RegularCard>, vector<RegularCard>);
         vector<RegularCard> sortByColor(vector<RegularCard>);
+        vector<RegularCard> sortByValue(vector<RegularCard>);
         vector<RegularCard> HighCard(vector<RegularCard>); //oke
-        vector<RegularCard> Pair(vector<RegularCard>, vector<RegularCard>); //oke
-        vector<RegularCard> TwoPair(vector<RegularCard>,  vector<RegularCard>); //oke
+        vector<RegularCard> Pair(vector<RegularCard>); //oke
+        vector<RegularCard> TwoPair(vector<RegularCard>); //oke
         vector<RegularCard> ThreeOfAKind(vector<RegularCard>); //oke
         vector<RegularCard> FourOfAKind(vector<RegularCard>); //oke
         vector<RegularCard> Straight(vector<RegularCard>); //oke
