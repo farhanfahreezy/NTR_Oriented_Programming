@@ -12,25 +12,31 @@ const Command
     GameCommands::COMMAND_WRITEFILE = Command::withName("write")
         .addArg("<path>", "Path to file to write to.")
         .handles([](vector<string>& argv)->bool{
-            if(argv.size() != 1)return false;
+            if(argv.size() != 1){
+                cout << "Tidak ada path yang diberikan!" << endl;
+                return false;
+            }
             string path = argv[0];
 
             cout << "Menulis GameState aktif ke file " << path << endl;
             File::Write fs(path);
             GameState::getCurrentState().toFile(fs);
-            return true;
+            return false;
         }),
     
     GameCommands::COMMAND_READFILE = Command::withName("read")
         .addArg("<path>", "Path to file to read from.")
         .handles([](vector<string>& argv)->bool{
-            if(argv.size() != 1)return false;
+            if(argv.size() != 1){
+                cout << "Tidak ada path yang diberikan!" << endl;
+                return false;
+            }
             string path = argv[0];
 
             cout << "Membaca GameState dari file " << path << endl;
             File::Read fs(path);
             GameState::getCurrentState().fromFile(fs);
-            return true;
+            return false;
         });
 #endif
 
