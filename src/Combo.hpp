@@ -3,6 +3,7 @@
 #include "Value/Value.hpp"
 #include "Table/Table.hpp"
 #include "Player/Player.hpp"
+#include "Game/GameState.hpp"
 #include <bits/stdc++.h>
 
 class Combo : public Value{
@@ -12,6 +13,7 @@ class Combo : public Value{
         Player p;
     public:
         Combo(Table, Player);
+        void setPlayer(Player);
         bool compareCard(RegularCard,RegularCard);
         bool isPair();
         bool isTwoPair();
@@ -22,5 +24,7 @@ class Combo : public Value{
         bool isFourOfAKind();
         bool isStraightFlush();
         float value();
+        int getCombo();
+        Player getWinner(GameState);
 };
 #endif

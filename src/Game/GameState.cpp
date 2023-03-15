@@ -111,3 +111,7 @@ std::ostream& operator<<(std::ostream& os, GameState& state){
 
     return os;
 }
+
+int GameState::getNumberOfPlayer(){
+    return players.size();
+}
