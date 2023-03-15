@@ -64,6 +64,10 @@ void GameState::reverseTurn(){
     for(; !temp.empty(); temp.pop())turn.push(temp.top());
 }
 
+map<int,Player>& GameState::getPlayerList(){
+    return this->players;
+}
+
 std::ostream& operator<<(std::ostream& os, GameState& state){
     auto& turn = state.turn;
     

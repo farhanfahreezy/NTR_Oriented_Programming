@@ -68,6 +68,8 @@ class GameState{
         */
         friend std::ostream& operator<<(std::ostream& os, GameState& state);
 
+        map<int,Player>& getPlayerList();
+
     private:
         // Queue containing player IDs. The player with their ID at the queue head goes first.
         std::queue<int> turn;

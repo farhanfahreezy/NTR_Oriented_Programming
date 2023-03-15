@@ -82,12 +82,13 @@ void InventoryHolder::addAbilityCard(const AbilityCard& card){
 }
 
 void InventoryHolder::removeRegularCard(int amount) {
-    if(amount > regularInv.size()) {
-        amount = regularInv.size();
-    }
-    for(int i = 0; i < amount; i++){
-        regularInv.erase(regularInv.begin());
-    }
+    // if(amount > regularInv.size()) {
+    //     amount = regularInv.size();
+    // }
+    // for(int i = 0; i < amount; i++){
+    //     regularInv.erase(regularInv.begin());
+    // }
+    regularInv.erase(regularInv.begin()+amount);
 }
 
 void InventoryHolder::removeAbilityCard() {abilityInv.erase(abilityInv.begin());}
