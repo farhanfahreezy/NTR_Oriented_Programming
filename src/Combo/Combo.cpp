@@ -362,58 +362,80 @@ vector<RegularCard> Combo::StraightFlush() const{
     return StraightFlush;
 }
 
+int Combo::getCombo(){
+    if (this->value() < 1.4) {
+        //cout << "High Card!" << endl;
+        return 0; // HIGH CARD
+    } else if (this->value() < 2.8) {
+        //cout << "Pair!" << endl;
+        return 1; // PAIR
+    } else if (this->value() < 4.2) {
+        //cout << "Two Pair!" << endl;
+        return 2; // TWO PAIR
+    } else if (this->value() < 5.6) {
+        //cout << "Threes!" << endl;
+        return 3; // THREE OF A KIND
+    } else if (this->value() < 7) {
+        //cout << "Straight!" << endl;
+        return 4; // STRAIGHT
+    } else if (this->value() < 8.4) {
+        //cout << "Flush!" << endl;
+        return 5; // FLUSH
+    } else if (this->value() < 9.8) {
+        //cout << "Full House!" << endl;
+        return 6; // FULL HOUSE
+    } else if (this->value() < 11.2) {
+        //cout << "Fours!" << endl;
+        return 7; // FOUR OF A KIND
+    } else {
+        //cout << "Straight Flush!" << endl;
+        return 8; // STRAIGHT FLUSH
+    }
+}
+
 
 float Combo :: value() const{
     if(this->StraightFlush().size() == 5){
-        cout << "Straight Flush!" << endl;
         vector<RegularCard> result = this->StraightFlush();
         result = this->sortByValue();
         return result[0].value() + 11.2;
     }
     if(this->FourOfAKind().size() == 4){
-        cout << "Fours!" << endl;
         vector<RegularCard> result = this->FourOfAKind();
         result = this->sortByValue();
         return result[0].value() + 9.8;
     }
     if(this->FullHouse().size() == 5){
-        cout << "Full House!" << endl;
         vector<RegularCard> result = this->ThreeOfAKind();
         result = this->sortByValue();
         return result[0].value() + 8.4;
     }
     if(this->Flush().size() == 5){
-        cout << "Flush!" << endl;
         vector<RegularCard> result = this->Flush();
         result = this->sortByValue();
         return result[0].value() + 7.0;
     }
     if(this->Straight().size() == 5){
-        cout << "Straight!" << endl;
         vector<RegularCard> result = this->Straight();
         result = this->sortByValue();
         return result[0].value() + 5.6;
     }
     if(this->ThreeOfAKind().size() == 3){
-        cout << "Threes!" << endl;
         vector<RegularCard> result = this->ThreeOfAKind();
         result = this->sortByValue();
         return result[0].value() + 4.2;
     }
     if(this->TwoPair().size() == 4){
-        cout << "Two Pair!" << endl;
         vector<RegularCard> result = this->TwoPair();
         result = this->sortByValue();
         return result[0].value() + 2.8;
     }
     if(this->Pair().size() == 2){
-        cout << "Pair!" << endl;
          vector<RegularCard> result = this->Pair();
         result = this->sortByValue();
         return result[0].value() + 1.4;
     }
     if(this->HighCard().size() == 1){
-        cout << "High Card!" << endl;
         return this->HighCard()[0].value();
     }
     return 0.0;

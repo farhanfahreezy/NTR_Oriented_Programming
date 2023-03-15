@@ -24,6 +24,7 @@ class Combo: public Value{
         vector<RegularCard> Flush() const; //oke
         vector<RegularCard> FullHouse() const; //oke
         vector<RegularCard> StraightFlush() const; //oke
+        int getCombo();
         float value() const override;
         //yang menjerumus kalo ada kasus dimana ada lebih dari 1 pemain yang punya nilai tertinggi adalah flush dan straight flush
         //flush bisa ke straight

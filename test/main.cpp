@@ -56,7 +56,10 @@ int main(){
     }
     float result = c.value(); //c.combineAndSortRegularCard(, p.getRegularInv());
     float result2 = c1.value();
+    int idCom1 = c.getCombo();
+    int idCom2 = c1.getCombo();
     cout << result << " " << result2 << endl;
+    cout << idCom1 << " " << idCom2 << endl;
     /*cout << "vec2" << endl;
     vector<RegularCard> vec2 = c2.Pair(vec1);
     /*vec2 = c2.sortByValue(vec2);
