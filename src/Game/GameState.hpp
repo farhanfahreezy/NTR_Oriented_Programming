@@ -83,15 +83,11 @@ class GameState{
         */
         friend std::ostream& operator<<(std::ostream& os, GameState& state);
 
-<<<<<<< HEAD
-        map<int,Player>& getPlayerList();
-=======
         /**
          * Return the number of players active in the game
          * 
         */
         int getNumberOfPlayer();
->>>>>>> 66d2935c15497345826899912aec17d052862a1a
 
     private:
         // Queue containing player IDs. The player with their ID at the queue head goes first.
