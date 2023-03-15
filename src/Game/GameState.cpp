@@ -7,11 +7,12 @@ GameState GameState::defaultState = GameState(0);
 GameState& GameState::currentState = GameState::defaultState;
 
 GameState::GameState(int n_players){
-    for(int i = 0; i < n_players; turn.push(i++))players.insert(pair<int,Player>(i, Player(i)));
+    for(int i = 0; i < n_players; turn.push(i++))players.push_back(Player(i));
     gameNum = 1;
     round = 1;
     finished = false;
     reversed = false;
+    currentPlayerIdx = turn.front();
 }
 
 GameState& GameState::getCurrentState(){
@@ -23,15 +24,23 @@ void GameState::setCurrentState(GameState& state){
 }
 
 const Player& GameState::getCurrentPlayer() const{
-    return players.at(turn.front());
+    return players.at(currentPlayerIdx);
 }
 
 const Player& GameState::getPlayerWithId(int id) const{
     return players.at(id);
 }
 
+std::queue<int> GameState::getCurrentTurnQueue() const{
+    return turn;
+}
+
 Table& GameState::getTable(){
     return table;
+}
+
+const int GameState::getGameNum() const{
+    return gameNum;
 }
 
 const int GameState::getRound() const{
@@ -43,61 +52,54 @@ void GameState::advance(){
     GameCommands::init();
 
     /** Get current player */
-    int id = turn.front();
-    Player& current = players.at(id);
-
-    /** TODO: Do stuff with current player */
-    //if (round == 1) {
-    //    /** TODO: DOUBLE,NEXT, HALF
-    //     *      BAGI KARTU ABILITY
-    //    */
-    //} else {
-    //    /** TODO: DOUBLE, NEXT, HALF, ABILITY*/
-    //}
+    currentPlayerIdx = turn.front();
+    turn.pop();
 
     /** Wait for and call next command */
-    cout << "> ";
-    bool succ = CommandParser::getNext();
-    /** TODO: Handle command invocation success/failure */
-
-    /** End of turn; rotate to next player */
-    turn.pop();
+    do cout << "|| Player " << currentPlayerIdx << " >> "; while(!CommandParser::getNext());
 
     if(turn.empty()){
         /** End of round; initiate the next round */
-        /** TODO: Wrap up current round: award points, etc. */
+        /** TODO: Wrap up current round here: award points, etc. */
+
+        /** */
         ++round;
-        int
-            first = (gameNum - 1) * 7 + (round - 1),
-            i = first;
-        do{
-            turn.push(i);
-            i = (!reversed ? i + 1 : i - 1) % players.size();
-        }while(i != first);
+        turn = turnStartFrom((gameNum - 1) * 7 + (round - 1));
     }
 
     if (round == 7) {
         ++gameNum;
         round = 1;
 
-        /** TODO: Wrap up current game: determine the winner or advance to the next game */
+        /** TODO: Wrap up current game here: determine the winner or advance to the next game */
     }
-
-    currentState = *this;
 }
 
 void GameState::reverseTurn(){
     reversed = !reversed;
 
-    stack<int> temp;
-    for(; !turn.empty(); turn.pop())temp.push(turn.front());
-    for(; !temp.empty(); temp.pop())turn.push(temp.top());
+    if(turn.size() > 1){
+        stack<int> temp;
+        for(; !turn.empty(); turn.pop())temp.push(turn.front());
+        for(; !temp.empty(); temp.pop())turn.push(temp.top());
+    }
+}
+
+std::queue<int> GameState::turnStartFrom(int start) const{
+    std::queue<int> turnQueue;
+    int i = start;
+    do{
+        turnQueue.push(i);
+        i = (!reversed ? i + 1 : i - 1);
+        i = (i < 0 ? i + players.size() : i) % players.size();
+    }while(i != start);
+    return turnQueue;
 }
 
 std::ostream& operator<<(std::ostream& os, GameState& state){
-    os << "game: " << state.gameNum << ", round: " << state.round << endl;
+    os << "game: " << state.gameNum << ", round: " << state.round << ", reversed: " << state.reversed;
 
-    os << "turn: [";
+    os << ", turn: [";
     auto& turn = state.turn;
     for(int i = 0; i < turn.size(); ++i){
         int id = turn.front();

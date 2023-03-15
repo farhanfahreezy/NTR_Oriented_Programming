@@ -24,6 +24,7 @@ all: game inv-holder card deck table player io
 game:
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameState.cpp					-o $(OUTPUT_FOLDER)/GameState.o
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameCommands.cpp				-o $(OUTPUT_FOLDER)/GameCommands.o
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Game/GameAbility.cpp				-o $(OUTPUT_FOLDER)/GameAbility.o
 
 # inv-holder	- Builds all source files in the folder "InventoryHolder"
 inv-holder:

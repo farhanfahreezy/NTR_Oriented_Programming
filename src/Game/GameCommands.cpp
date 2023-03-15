@@ -11,7 +11,7 @@ const Command
         .handles([&](vector<string>& argv)->bool{
             if(argv.size() != 0)return false;
 
-            cout << "Melewati giliran pemain " << GameState::getCurrentState().getCurrentPlayer().getName() << endl;
+            cout << "Giliran dilanjut ke permainan selanjutnya." << endl;
             return true;
         }),
     
@@ -23,14 +23,9 @@ const Command
             string name = state.getCurrentPlayer().getName();
             Table& table = state.getTable();
 
-            if(table.getPoint() < 1 << 30){
-                table.increasePointByScale(2);
-                cout << "Pemain " << name << " menggandakan poin hadiah untuk ronde ini!" << endl;
-                cout << "Poin hadiah sekarang adalah senilai " << table.getPoint() << endl;
-            }else{
-                cout << "Poin hadiah (" << table.getPoint() << ") sudah maksimal!" << endl;
-                cout << "Melewati giliran pemain " << name << endl;
-            }
+            long long oldPoint = table.getPoint();
+            table.increasePointByScale(2.F);
+            cout << name << " melakukan DOUBLE! Poin hadiah naik dari " << oldPoint << " menjadi " << table.getPoint() << "!" << endl;
 
             return true;
         }),
@@ -43,26 +38,35 @@ const Command
             string name = state.getCurrentPlayer().getName();
             Table& table = state.getTable();
 
-            if(table.getPoint() > 1){
-                table.increasePointByScale(.5f);
-                cout << "Pemain " << name << " memperduakan poin hadiah untuk ronde ini!" << endl;
-                cout << "Poin hadiah sekarang adalah senilai " << table.getPoint() << endl;
+            long long oldPoint = table.getPoint();
+            if(oldPoint > 1LL){
+                table.increasePointByScale(.5F);
+                cout << name << " melakukan HALF! Poin hadiah turun dari " << oldPoint << " menjadi " << table.getPoint() << "!" << endl;
             }else{
-                cout << "Poin hadiah (" << table.getPoint() << ") sudah minimal!" << endl;
-                cout << "Melewati giliran pemain " << name << endl;
+                cout << name << " melakukan HALF! Sayangnya poin hadiah sudah bernilai 1. Poin hadiah tidak berubah.. Giliran dilanjut!" << endl;
             }
 
             return true;
-        });
+        }),
     
     /*GameCommands::COMMAND_REROLL = Command::withName("reroll")
         .handles([&](vector<string>& argv)->bool{
             if(argv.size() != 0)return false;
 
-            
-
             return true;
-        });*/
+        }),*/
+    
+    GameCommands::COMMAND_REVERSE = Command::withName("reverse")
+        .handles([](vector<string>& argv)->bool{
+            if(argv.size() != 0)return false;
+
+            /** TODO: Check if current player has a REVERSE ability card */
+            AbilityReverse a;
+            a.get();
+
+            // The player keeps their turn after REVERSE-ing
+            return false;
+        });
 
 
 void GameCommands::init(){
@@ -71,6 +75,7 @@ void GameCommands::init(){
     CommandParser::reg(COMMAND_NEXT);
     CommandParser::reg(COMMAND_DOUBLE);
     CommandParser::reg(COMMAND_HALF);
+    CommandParser::reg(COMMAND_REVERSE);
 
     initialized = true;
 }

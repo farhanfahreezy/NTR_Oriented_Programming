@@ -49,7 +49,27 @@ void AbilityQuarter::get() const {
 }
 
 void AbilityReverse::get() const {
-    GameState::getCurrentState().reverseTurn();
+    GameState& state = GameState::getCurrentState();
+    string name = state.getCurrentPlayer().getName();
+    Table& table = state.getTable();
+
+    state.reverseTurn();
+    auto
+        newTurn = state.getCurrentTurnQueue(),
+        nextRoundTurn = state.turnStartFrom((state.getGameNum() - 1) * 7 + state.getRound());
+    
+    cout << name << " melakukan reverse!" << endl;
+    cout << "Sisa urutan eksekusi ronde ini : ";
+    while(!newTurn.empty()){
+        cout << newTurn.front() << " ";
+        newTurn.pop();
+    }
+    cout << endl << "Urutan eksekusi ronde selanjutnya : ";
+    while(!nextRoundTurn.empty()){
+        cout << nextRoundTurn.front() << " ";
+        nextRoundTurn.pop();
+    }
+    cout << endl;
 }
 
 void AbilitySwap::get() const {
@@ -76,7 +96,7 @@ void AbilitySwap::get() const {
     RegularCard temp1 = pl1.getRegularInv().at(0);
     RegularCard temp2 = pl2.getRegularInv().at(0);
 
-    pl1 - temp1;
+    //pl1 - temp1;
 
 }
 

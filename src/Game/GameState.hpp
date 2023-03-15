@@ -39,9 +39,19 @@ class GameState{
         const Player& getPlayerWithId(int id) const;
 
         /**
+         * Gets a copy of the player turn queue for this round.
+        */
+        std::queue<int> getCurrentTurnQueue() const;
+
+        /**
          * Getter for the game table.
         */
         Table& getTable();
+
+        /**
+         * Getter for the game number.
+        */
+        const int getGameNum() const;
 
         /**
          * Getter for the game round.
@@ -59,6 +69,13 @@ class GameState{
          * Reverses the order of player turn.
         */
         void reverseTurn();
+
+        /**
+         * Gets the new turn order starting with the given player.
+         * 
+         * @param start Index of the first player to play.
+        */
+        std::queue<int> turnStartFrom(int start) const;
 
         /**
          * Prints a string representation of this game state to an output stream.
@@ -79,7 +96,7 @@ class GameState{
         std::queue<int> turn;
 
         // List of all players in the game.
-        std::map<int,Player> players;
+        std::vector<Player> players;
 
         // Whether the game is finished or not.
         bool finished;
@@ -92,6 +109,9 @@ class GameState{
 
         // Game round in the current game.
         int round;
+
+        // Index of the current player to go.
+        int currentPlayerIdx;
 
         // Whether turn is reversed.
         bool reversed;
