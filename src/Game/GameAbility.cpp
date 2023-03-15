@@ -75,7 +75,7 @@ void AbilityReverse::get() const {
     state.reverseTurn();
     auto
         newTurn = state.getCurrentTurnQueue(),
-        nextRoundTurn = state.turnStartFrom((state.getGameNum() - 1) * 7 + state.getRound());
+        nextRoundTurn = state.turnStartFrom((state.getFirstPlayerIdx() + 1) % state.getNumberOfPlayer());
     
     cout << name << " melakukan reverse!" << endl;
     cout << "Sisa urutan eksekusi ronde ini : ";

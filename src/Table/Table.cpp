@@ -32,4 +32,25 @@ void Table::resetPot(){
     InventoryHolder::setPoint(64);
 }
 
+void Table::toFile(File::Write& writer) const{
+    InventoryHolder::toFile(writer);
+    writer << tableDeck.size() << '\n';
+    for(int i = 0; i < tableDeck.size(); ++i)
+        tableDeck.at(i).toFile(writer);
+}
+
+void Table::fromFile(File::Read& reader){
+    InventoryHolder::fromFile(reader);
+    string s;
+    reader >> s;
+    int tblSize = stoi(s);
+
+    tableDeck.clear();
+    for(int i = 0; i < tblSize; ++i){
+        RegularCard c;
+        c.fromFile(reader);
+        tableDeck.push_back(c);
+    }
+}
+
 

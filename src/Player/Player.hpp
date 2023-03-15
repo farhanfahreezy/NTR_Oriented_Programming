@@ -15,6 +15,7 @@ class Player : public InventoryHolder{
         int id;
         string nama;
         int poin;
+        bool abilityMati;
     public:
         /**
          * @brief Construct a new Player object
@@ -66,10 +67,19 @@ class Player : public InventoryHolder{
          */
         void addPoin(int newPoin);
 
+        /**
+         * Mengembalikan @c true jika pemain ini memiliki kartu ability dengan  id yang diberikan.
+         * 
+         * @param id Id kartu ability yang diperiksa.
+        */
+        bool hasAbilityCard(float id) const;
+
         string getName() const;
 
         int getId() const;
 
+        bool getAbilityMati() const;
+        void setAbilityMati(bool b);
         /**
          * @brief Print isi player
          * 
@@ -77,5 +87,7 @@ class Player : public InventoryHolder{
         void printPlayerInfo();
 
 
+        void toFile(File::Write& writer) const;
+        void fromFile(File::Read& reader);
 };
 #endif

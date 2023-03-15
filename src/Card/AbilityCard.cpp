@@ -2,6 +2,15 @@
 #include <iostream>
 using namespace std;
 
+const float
+    AbilityCard::ABILITY_REROLL_ID = 1.F,
+    AbilityCard::ABILITY_QUADRUPLE_ID = 2.F,
+    AbilityCard::ABILITY_QUARTER_ID = 3.F,
+    AbilityCard::ABILITY_REVERSE_ID = 4.F,
+    AbilityCard::ABILITY_SWAP_ID = 5.F,
+    AbilityCard::ABILITY_SWITCH_ID = 6.F,
+    AbilityCard::ABILITY_ABILITYLESS_ID = 7.F;
+
 AbilityCard ::AbilityCard(){
     this->id = 0;
 }
@@ -33,30 +42,39 @@ void AbilityCard::setId(float id){
 
 void AbilityCard::printInfo(){
     cout << "Id kartu ini adalah: ";
-    if(value() == 1){
+    if(value() == ABILITY_REROLL_ID){
         cout << "Re-Roll" << endl;
     }
-    else if(value() == 2){
+    else if(value() == ABILITY_QUADRUPLE_ID){
         cout << "Quadruple" << endl;
     }
-    else if(value() == 3){
+    else if(value() == ABILITY_QUARTER_ID){
         cout << "Quarter" << endl;
     }
-    else if(value() == 4){
+    else if(value() == ABILITY_REVERSE_ID){
         cout << "Reverse Direction" << endl;
     }
-    else if(value() == 5){
+    else if(value() == ABILITY_SWAP_ID){
         cout << "Swap Card" << endl;
     }
-    else if(value() == 6){
+    else if(value() == ABILITY_SWITCH_ID){
         cout << "Switch" << endl;
     }
-    else if(value() == 7){
+    else if(value() == ABILITY_ABILITYLESS_ID){
         cout << "Abilityless" << endl;
     }
     else{
         cout << "Id invalid" << endl;
     }
+}
+
+void AbilityCard::toFile(File::Write& writer) const{
+    writer << value() << '\n';
+}
+void AbilityCard::fromFile(File::Read& reader){
+    string s;
+    reader >> s;
+    id = stof(s);
 }
 
 // driver

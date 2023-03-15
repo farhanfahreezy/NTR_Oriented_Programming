@@ -1,5 +1,10 @@
 #include "RegularCard.hpp"
 
+const float
+    RegularCard::REGULAR_GREEN_COL = 0.F,
+    RegularCard::REGULAR_BLUE_COL = 1.F,
+    RegularCard::REGULAR_YELLOW_COL = 2.F,
+    RegularCard::REGULAR_RED_COL = 3.F;
 
 RegularCard::RegularCard() {
     this->num = 0;
@@ -25,16 +30,16 @@ int RegularCard::getColor() const{
 }
 
 string RegularCard::colorString(){
-    if(getColor() == 0){
+    if(getColor() == REGULAR_GREEN_COL){
         return "hijau";
     }
-    else if(getColor() == 1){
+    else if(getColor() == REGULAR_BLUE_COL){
         return "biru";
     }
-    else if(getColor() == 2){
+    else if(getColor() == REGULAR_YELLOW_COL){
         return "kuning";
     }
-    else if(getColor() == 3){
+    else if(getColor() == REGULAR_RED_COL){
         return "merah";
     } else {
         return "unknown";
@@ -57,6 +62,17 @@ void RegularCard::printInfo(){
 float RegularCard::value() const{
     float konstan = getNum() * 0.1;
     return konstan + (getColor() * 0.03);
+}
+
+void RegularCard::toFile(File::Write& writer) const{
+    writer << value() << '\n';
+}
+void RegularCard::fromFile(File::Read& reader){
+    string s;
+    reader >> s;
+    float f = stof(s);
+    setNum(f * 10);
+    setColor((f - getNum() * 0.1) / 0.03);
 }
 // driver
 /* int main(){

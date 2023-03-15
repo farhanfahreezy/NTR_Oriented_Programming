@@ -1,14 +1,16 @@
 #include "Combo.hpp"
+
 #include <typeinfo>
 using namespace std;
 
-Combo :: Combo(){
-    this->val = 0;
+Combo :: Combo(vector<RegularCard> player, vector<RegularCard> table) : Value(){
+    this->player = player;
+    this->table = table;
 }
 
-vector<RegularCard> Combo :: combineAndSortRegularCard(vector<RegularCard> vec1, vector<RegularCard> vec2){
-    vector<RegularCard> resultVec(vec1);
-    resultVec.insert(resultVec.end(), vec2.begin(), vec2.end());
+vector<RegularCard> Combo :: combineAndSortRegularCard() {
+    vector<RegularCard> resultVec(table);
+    resultVec.insert(resultVec.end(), player.begin(), player.end());
     int n = resultVec.size();
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -19,10 +21,12 @@ vector<RegularCard> Combo :: combineAndSortRegularCard(vector<RegularCard> vec1,
             }
         }
     }
+    this->com = resultVec;
     return resultVec;
 }
 
-vector<RegularCard> Combo::sortByColor(vector<RegularCard> combined){
+vector<RegularCard> Combo::sortByColor() const{
+    vector<RegularCard> combined = this->com;
     int n = combined.size();
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -37,27 +41,42 @@ vector<RegularCard> Combo::sortByColor(vector<RegularCard> combined){
 
 }
 
-vector<RegularCard> Combo :: HighCard(vector<RegularCard> hand){
+vector<RegularCard> Combo :: sortByValue() const{
+    vector<RegularCard> combined = this->com;
+    int n = combined.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (combined[j].value() > combined[i].value()) {
+                RegularCard temp = combined[i];
+                combined[i] = combined[j];
+                combined[j] = temp;
+            }
+        }
+    }
+    return combined;
+}
+
+vector<RegularCard> Combo :: HighCard() const{
     //Kalo udah ngga ada combo samsek
     vector<RegularCard> HighCard;
-    int n = hand.size();
+    int n = player.size();
     for(int i = 0; i < n; i++){
-        if(hand[0].getNum() > hand[1].getNum()){
-            HighCard.push_back(hand[0]);
+        if(player[0].getNum() > player[1].getNum()){
+            HighCard.push_back(player[0]);
             return HighCard;
         }
-        if(hand[0].getNum() == hand[1].getNum()){
-            if(hand[0].getColor() > hand[1].getColor()){
-                HighCard.push_back(hand[0]);
+        if(player[0].getNum() == player[1].getNum()){
+            if(player[0].getColor() > player[1].getColor()){
+                HighCard.push_back(player[0]);
                 return HighCard;
             }
             else{
-                HighCard.push_back(hand[1]);
+                HighCard.push_back(player[1]);
                 return HighCard;
             }
         }
         else{
-            HighCard.push_back(hand[1]);
+            HighCard.push_back(player[1]);
             return HighCard;
         }
         
@@ -65,48 +84,46 @@ vector<RegularCard> Combo :: HighCard(vector<RegularCard> hand){
     return HighCard;
 }
 
-vector<RegularCard> Combo :: Pair(vector<RegularCard> table, vector<RegularCard> player){
-    int n = table.size();
-    int m = player.size();
+vector<RegularCard> Combo::Pair() const{
     vector<RegularCard> Pair;
-    //int count = 0;
-    if(player[0].getNum() == player[1].getNum()){
-        Pair.push_back(player[0]);
-        Pair.push_back(player[1]);
-        return Pair;
-    }
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            if(table[i].getNum() == player[j].getNum()){
-                Pair.push_back(table[i]);
-                Pair.push_back(player[j]);
-                return Pair;
-            }
+    vector<RegularCard> combined = this->com;
+    int n = combined.size();
+
+    for (int i = n - 1; i >= 1; i--) {
+        if (combined[i].getNum() == combined[i-1].getNum()) {
+            Pair.push_back(combined[i]);
+            Pair.push_back(combined[i-1]);
+            return Pair;
         }
     }
+
     return Pair;
 }
 
-vector<RegularCard> Combo :: TwoPair(vector<RegularCard> table, vector<RegularCard> player){
-    int n = table.size();
-    int m = player.size();
+vector<RegularCard> Combo::TwoPair() const{
+    vector<RegularCard> combined = this->com;
+    int n = combined.size();
     int count = 0;
     vector<RegularCard> TwoPair;
-    for(int i = 0; i < m; i++){
-        for(int j = 0; j < n; j++){
-            if(player[i].getNum() == table[j].getNum()){
-                TwoPair.push_back(table[j]);
-                TwoPair.push_back(player[i]);
-                if(count == 2){
+    for(int i = 0; i < n; i++) {
+        for(int j = i+1; j < n; j++) {
+            if(combined[i].getNum() == combined[j].getNum()) {
+                TwoPair.push_back(combined[i]);
+                TwoPair.push_back(combined[j]);
+                count++;
+                if(count == 2) {
                     return TwoPair;
                 }
             }
         }
     }
+    TwoPair.clear(); // if no two pairs found, return an empty vector
     return TwoPair;
 }
 
-vector<RegularCard> Combo::ThreeOfAKind(vector<RegularCard> combined){
+
+vector<RegularCard> Combo::ThreeOfAKind() const{
+    vector<RegularCard> combined = this->com;
     int n = combined.size();
     int count = 0;
     vector<RegularCard> Threes;
@@ -127,7 +144,8 @@ vector<RegularCard> Combo::ThreeOfAKind(vector<RegularCard> combined){
     return Threes;
 }
 
-vector<RegularCard> Combo::Straight(vector<RegularCard> combined/*, vector<RegularCard> table, vector<RegularCard> player*/) {
+vector<RegularCard> Combo::Straight() const {
+    vector<RegularCard> combined = this->com;
     vector<RegularCard> straight;
     int n = combined.size();
     int count = 0;
@@ -169,9 +187,10 @@ vector<RegularCard> Combo::Straight(vector<RegularCard> combined/*, vector<Regul
 }
 
 
-vector<RegularCard> Combo::Flush(vector<RegularCard> combined){
+vector<RegularCard> Combo::Flush() const{
+    vector<RegularCard> combined = this->com;
     vector<RegularCard> Flush;
-    vector<RegularCard> newCombined = this->sortByColor(combined);
+    vector<RegularCard> newCombined = this->sortByColor();
     int n = newCombined.size();
     int count = 0;
     /*for (int i = n - 1; i >= 1; i--) {
@@ -194,7 +213,7 @@ vector<RegularCard> Combo::Flush(vector<RegularCard> combined){
             int tes3 = combined[i].getColor();
             int tes4 = combined[j].getColor();*/
             //cout << tes << " " << tes3 << " " << tes2 << " " << tes4 << endl;
-            if (combined[i].getNum() == combined[j].getNum()) {
+            if (combined[i].getNum() == combined[j].getNum() && combined[i].getColor() != combined[j].getColor()) {
                 continue; // skip if same number
             }
             if (combined[i].getColor() == combined[j].getColor()) {
@@ -203,18 +222,18 @@ vector<RegularCard> Combo::Flush(vector<RegularCard> combined){
                  if (count == 4) {
                     return Flush; // return StraightFlush if found
                 }
-                } else {
-                    break; // break out of loop if not consecutive
-                }
+        
+            }
             }
         }
     
-    Flush.clear(); // clear StraightFlush vector if not found
+    // clear StraightFlush vector if not found
     // No flush found
     return Flush;
 }
 
-vector<RegularCard> Combo::FullHouse(vector<RegularCard> combined){
+vector<RegularCard> Combo::FullHouse() const{
+    vector<RegularCard> combined = this->com;
     vector<RegularCard> fullHouse;
     int count = 0;
     int currentNum = -1;
@@ -245,7 +264,8 @@ vector<RegularCard> Combo::FullHouse(vector<RegularCard> combined){
     return fullHouse;
 }
 
-vector<RegularCard> Combo::FourOfAKind(vector<RegularCard> combined){
+vector<RegularCard> Combo::FourOfAKind() const{
+    vector<RegularCard> combined = this->com;
     vector<RegularCard> Fours;
     int n = combined.size();
     int count = 0;
@@ -267,7 +287,8 @@ vector<RegularCard> Combo::FourOfAKind(vector<RegularCard> combined){
 
 }
 
-vector<RegularCard> Combo::StraightFlush(vector<RegularCard> combined){
+vector<RegularCard> Combo::StraightFlush() const{
+    vector<RegularCard> combined = this->com;
     vector<RegularCard> StraightFlush;
     int n = combined.size();
     int count = 0;
@@ -276,6 +297,7 @@ vector<RegularCard> Combo::StraightFlush(vector<RegularCard> combined){
         StraightFlush.clear(); // clear StraightFlush vector for each new iteration
         StraightFlush.push_back(combined[i]); // add current card to StraightFlush vector
         count = 0; // reset count for each new iteration
+        amount = 0;
         for (int j = i-1; j >= 0; j--) { // iterate backwards
             /*int tes = combined[i].getNum();
             int tes2 = combined[j].getNum();
@@ -299,7 +321,7 @@ vector<RegularCard> Combo::StraightFlush(vector<RegularCard> combined){
             }
         }
     }
-    StraightFlush.clear(); // clear StraightFlush vector if not found
+    //StraightFlush.clear(); // clear StraightFlush vector if not found
     return StraightFlush;
 
     /*for (int i = n-1; i >= 1; i--) {
@@ -340,51 +362,81 @@ vector<RegularCard> Combo::StraightFlush(vector<RegularCard> combined){
     return StraightFlush;
 }
 
-
-
-
-
-
-
-
-
-
-float Combo :: value(vector<RegularCard> combined, vector<RegularCard> table, vector<RegularCard> player){
-    if(this->StraightFlush(combined).size() == 5){
-        cout << "Straight Flush!" << endl;
-        return 9.0;
+int Combo::getCombo(){
+    if (this->value() < 1.4) {
+        //cout << "High Card!" << endl;
+        return 0; // HIGH CARD
+    } else if (this->value() < 2.8) {
+        //cout << "Pair!" << endl;
+        return 1; // PAIR
+    } else if (this->value() < 4.2) {
+        //cout << "Two Pair!" << endl;
+        return 2; // TWO PAIR
+    } else if (this->value() < 5.6) {
+        //cout << "Threes!" << endl;
+        return 3; // THREE OF A KIND
+    } else if (this->value() < 7) {
+        //cout << "Straight!" << endl;
+        return 4; // STRAIGHT
+    } else if (this->value() < 8.4) {
+        //cout << "Flush!" << endl;
+        return 5; // FLUSH
+    } else if (this->value() < 9.8) {
+        //cout << "Full House!" << endl;
+        return 6; // FULL HOUSE
+    } else if (this->value() < 11.2) {
+        //cout << "Fours!" << endl;
+        return 7; // FOUR OF A KIND
+    } else {
+        //cout << "Straight Flush!" << endl;
+        return 8; // STRAIGHT FLUSH
     }
-    if(this->FourOfAKind(combined).size() == 4){
-        cout << "Fours!" << endl;
-        return 8.0;
+}
+
+
+float Combo :: value() const{
+    if(this->StraightFlush().size() == 5){
+        vector<RegularCard> result = this->StraightFlush();
+        result = this->sortByValue();
+        return result[0].value() + 11.2;
     }
-    if(this->FullHouse(combined).size() == 5){
-        cout << "Full House!" << endl;
-        return 7.0;
+    if(this->FourOfAKind().size() == 4){
+        vector<RegularCard> result = this->FourOfAKind();
+        result = this->sortByValue();
+        return result[0].value() + 9.8;
     }
-    if(this->Flush(combined).size() == 5){
-        cout << "Flush!" << endl;
-        return 6.0;
+    if(this->FullHouse().size() == 5){
+        vector<RegularCard> result = this->ThreeOfAKind();
+        result = this->sortByValue();
+        return result[0].value() + 8.4;
     }
-    if(this->Straight(combined).size() == 5){
-        cout << "Straight!" << endl;
-        return 5.0;
+    if(this->Flush().size() == 5){
+        vector<RegularCard> result = this->Flush();
+        result = this->sortByValue();
+        return result[0].value() + 7.0;
     }
-    if(this->ThreeOfAKind(combined).size() == 3){
-        cout << "Threes!" << endl;
-        return 4.0;
+    if(this->Straight().size() == 5){
+        vector<RegularCard> result = this->Straight();
+        result = this->sortByValue();
+        return result[0].value() + 5.6;
     }
-    if(this->TwoPair(table, player).size() == 4){
-        cout << "Two Pair!" << endl;
-        return 3.0;
+    if(this->ThreeOfAKind().size() == 3){
+        vector<RegularCard> result = this->ThreeOfAKind();
+        result = this->sortByValue();
+        return result[0].value() + 4.2;
     }
-    if(this->Pair(table, player).size() == 2){
-        cout << "Pair!" << endl;
-        return 2.0;
+    if(this->TwoPair().size() == 4){
+        vector<RegularCard> result = this->TwoPair();
+        result = this->sortByValue();
+        return result[0].value() + 2.8;
     }
-    if(this->HighCard(player).size() == 1){
-        cout << "High Card!" << endl;
-        return 1.0;
+    if(this->Pair().size() == 2){
+         vector<RegularCard> result = this->Pair();
+        result = this->sortByValue();
+        return result[0].value() + 1.4;
+    }
+    if(this->HighCard().size() == 1){
+        return this->HighCard()[0].value();
     }
     return 0.0;
 }

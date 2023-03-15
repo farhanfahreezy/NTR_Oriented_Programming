@@ -6,6 +6,7 @@
 #include <iostream>
 #include <Player/Player.hpp>
 #include <Table/Table.hpp>
+#include <IO/File.hpp>
 
 class GameState{
     public:
@@ -59,6 +60,11 @@ class GameState{
         const int getRound() const;
 
         /**
+         * Returns the index of the player that should play first this round.
+        */
+        const int getFirstPlayerIdx() const;
+
+        /**
          * Advances the game to the next state.
         */
         void advance();
@@ -106,6 +112,16 @@ class GameState{
          * 
          */
         void printAllPlayers();
+
+        /**
+         * Writes this object's attributes into a file.
+        */
+        void toFile(File::Write& writer) const;
+
+        /**
+         * Reads values for this object's attributes from a file.
+        */
+        void fromFile(File::Read& reader);
 
     private:
         // Queue containing player IDs. The player with their ID at the queue head goes first.

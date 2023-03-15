@@ -47,6 +47,10 @@ const int GameState::getRound() const{
     return round;
 }
 
+const int GameState::getFirstPlayerIdx() const{
+    return (gameNum - 1) * 7 + (round - 1);
+}
+
 void GameState::advance(){
     /** TEMP: FOR TESTING PURPOSES ONLY, MOVE THIS LATER TO MAIN PROGRAM */
     GameCommands::init();
@@ -63,7 +67,7 @@ void GameState::advance(){
         /** TODO: Wrap up current round here: award points, etc. */
 
         ++round;
-        turn = turnStartFrom((gameNum - 1) * 7 + (round - 1));
+        turn = turnStartFrom(getFirstPlayerIdx());
     }
 
     if (round == 7) {
@@ -119,6 +123,64 @@ std::ostream& operator<<(std::ostream& os, GameState& state){
 int GameState::getNumberOfPlayer(){
     return players.size();
 }
+
+void GameState::toFile(File::Write& writer) const{
+    auto q = turn;
+    writer << gameNum << ' ' << round << ' ' << currentPlayerIdx
+        << ' ' << reversed << ' ' << finished
+        << ' ' << players.size() << ' ' << q.size() << '\n';
+    
+    for(int i = 0; i < players.size(); ++i)
+        players.at(i).toFile(writer);
+    int size = q.size();
+    for(int i = 0; i < size; ++i){
+        writer << q.front();
+        if(i < size - 1)writer << ' ';
+        q.pop();
+    }
+    writer << '\n';
+    table.toFile(writer);
+}
+
+void GameState::fromFile(File::Read& reader){
+    string s;
+
+    reader >> s;
+    stringstream ss1(s);
+
+    getline(ss1, s, ' ');
+    gameNum = stoi(s);
+    getline(ss1, s, ' ');
+    round = stoi(s);
+    getline(ss1, s, ' ');
+    currentPlayerIdx = stoi(s);
+    getline(ss1, s, ' ');
+    reversed = stoi(s);
+    getline(ss1, s, ' ');
+    finished = stoi(s);
+    getline(ss1, s, ' ');
+    int pSize = stoi(s);
+    getline(ss1, s, ' ');
+    int qSize = stoi(s);
+
+    players.clear();
+    for(; !turn.empty(); turn.pop());
+
+    for(int i = 0; i < pSize; ++i){
+        Player p;
+        p.fromFile(reader);
+        players.push_back(p);
+    }
+    
+    reader >> s;
+    stringstream ss2(s);
+    for(int i = 0; i < qSize; ++i){
+        getline(ss2, s, ' ');
+        turn.push(stoi(s));
+    }
+    table.fromFile(reader);
+}
+
 
 void GameState::setPlayersName(){
     for(int i = 0; i<getNumberOfPlayer();i++){

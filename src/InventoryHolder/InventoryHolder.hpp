@@ -6,6 +6,7 @@
 #include "Deck/AbilityDeck.hpp"
 #include "Card/RegularCard.hpp"
 #include "Card/AbilityCard.hpp"
+#include <IO/File.hpp>
 
 class InventoryHolder {
 protected:
@@ -44,6 +45,9 @@ public:
     void removeRegularCard(int amount);
     void removeAbilityCard();
     
+    // IO functions
+    void toFile(File::Write& writer) const;
+    void fromFile(File::Read& reader);
 };
 
 #endif
