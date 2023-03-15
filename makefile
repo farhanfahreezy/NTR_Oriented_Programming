@@ -18,7 +18,7 @@ build-all: clean-obj all
 	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o									-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
 
 # all			- Compiles object files
-all: game inv-holder card deck table player io
+all: game inv-holder card deck table player io combo
 
 # game			- Builds all source files in the folder "Game"
 game:
@@ -52,6 +52,9 @@ player:
 io:
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/Command.cpp						-o $(OUTPUT_FOLDER)/Command.o
 	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/IO/CommandParser.cpp				-o $(OUTPUT_FOLDER)/CommandParser.o
+
+combo:
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/Combo/Combo.cpp						-o $(OUTPUT_FOLDER)/Combo.o
 
 ### UTILITIES ###
 # clean-obj		- Removes all object files

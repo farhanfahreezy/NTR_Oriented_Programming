@@ -2,6 +2,8 @@
 #include <Deck/RegularDeck.hpp>
 #include <Card/RegularCard.hpp>
 #include <Card/AbilityCard.hpp>
+#include <Table/Table.hpp>
+#include <Combo/Combo.hpp>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -9,7 +11,52 @@
 using namespace std;
 
 int main(){
+    Combo c;
+    Combo c1;
+    Combo c2;
+    Table t;
+    Player p(1);
     RegularDeck regDeck(52);
+    regDeck.shuffleDeck();
+    RegularCard card0(1,0);
+    RegularCard card1(5,0);
+    RegularCard card2(7,0);
+    RegularCard card3(10,0);
+    RegularCard card4(12,0);
+    RegularCard card5(13,2);
+    RegularCard card6(13,0);
+    t + regDeck.getCard(0);
+    t + regDeck.getCard(1);
+    t + regDeck.getCard(2);
+    t + regDeck.getCard(3);
+    t + regDeck.getCard(4);
+    p + regDeck.getCard(5);
+    p + regDeck.getCard(6);
+    cout << "Player inv:" << endl;
+    for(auto card : p.getRegularInv()){
+        card.printInfo();
+    }
+    cout << "Table inv:" << endl;
+    for(auto card : t.getRegularInv()){
+        card.printInfo();
+    }
+    vector<RegularCard> vec1 = c.combineAndSortRegularCard(p.getRegularInv(), t.getRegularInv());
+    cout << "Combined inv:" << endl;
+    for(auto card : vec1){
+        card.printInfo();
+    }
+    float result = c1.value(vec1, t.getRegularInv(), p.getRegularInv()); //c.combineAndSortRegularCard(t.getRegularInv(), p.getRegularInv());
+    cout << "vec2" << endl;
+    vector<RegularCard> vec2 = c2.Flush(vec1);
+    for(auto card : vec2){
+        card.printInfo();
+    }
+    /*for(auto card : result){
+        card.printInfo();
+    }*/
+
+    //result.sortVector()
+    /*RegularDeck regDeck(52);
     regDeck.shuffleDeck();
     regDeck.getCard(0).printInfo();
     Player player(1);
@@ -32,7 +79,7 @@ int main(){
     for(auto card : player.getRegularInv()){
         card.printInfo();
     }
-    cout << player.getRegularInvSize() << endl;
+    cout << player.getRegularInvSize() << endl;*/
     /* Player player2(2);
     string name;
     cout << "Enter Player Name:";
