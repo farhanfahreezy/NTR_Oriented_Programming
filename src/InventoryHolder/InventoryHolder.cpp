@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "InventoryHolder.hpp"
 
 using namespace std;
@@ -105,6 +106,40 @@ void InventoryHolder::removeRegularCard(int amount) {
 }
 
 void InventoryHolder::removeAbilityCard() {abilityInv.erase(abilityInv.begin());}
+
+void InventoryHolder::toFile(File::Write& writer) const{
+    writer << point << ' ' << regularInv.size() << ' ' << abilityInv.size() << '\n';
+    for(int i = 0; i < regularInv.size(); ++i)
+        regularInv.at(i).toFile(writer);
+    for(int i = 0; i < abilityInv.size(); ++i)
+        abilityInv.at(i).toFile(writer);
+}
+
+void InventoryHolder::fromFile(File::Read& reader){
+    string s;
+
+    reader >> s;
+    stringstream ss(s);
+    getline(ss, s, ' ');
+    point = stoll(s);
+    getline(ss, s, ' ');
+    int regSize = stoi(s);
+    getline(ss, s, ' ');
+    int ablSize = stoi(s);
+
+    regularInv.clear();
+    abilityInv.clear();
+    for(int i = 0; i < regSize; ++i){
+        RegularCard c;
+        c.fromFile(reader);
+        regularInv.push_back(c);
+    }
+    for(int i = 0; i < ablSize; ++i){
+        AbilityCard c;
+        c.fromFile(reader);
+        abilityInv.push_back(c);
+    }
+}
 
 // void Remove
 // std::vector<RegularCard> InventoryHolder::removeDuplicateNumbers(){

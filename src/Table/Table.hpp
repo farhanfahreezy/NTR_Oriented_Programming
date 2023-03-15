@@ -20,6 +20,9 @@ class Table : public InventoryHolder{
         //set function
         void addToTableDeck(const RegularCard&);
         void resetPot();
+
+        void toFile(File::Write& writer) const;
+        void fromFile(File::Read& reader);
 };
 
 #endif

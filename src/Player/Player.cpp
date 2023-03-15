@@ -13,6 +13,12 @@ Player::Player(int id): /*regularDeck(2), abilityDeck(2)*/ InventoryHolder(0, 0,
     this->poin = 0;
 }
 
+Player::Player(): /*regularDeck(2), abilityDeck(2)*/ InventoryHolder(0, 0, 0){
+    this->id = -1;
+    this->nama = "";
+    this->poin = 0;
+}
+
 Player& Player::operator=(const Player& other){
     id = other.id;
     nama = other.nama;
@@ -47,4 +53,23 @@ string Player::getName() const{
 
 int Player::getId() const{
     return this->id;
+}
+
+void Player::toFile(File::Write& writer) const{
+    InventoryHolder::toFile(writer);
+    writer << nama << '\n';
+    writer << id << ' ' << poin << '\n';
+}
+
+void Player::fromFile(File::Read& reader){
+    InventoryHolder::fromFile(reader);
+    string s;
+    reader >> nama;
+    
+    reader >> s;
+    stringstream ss(s);
+    getline(ss, s, ' ');
+    id = stoi(s);
+    getline(ss, s, ' ');
+    poin = stoi(s);
 }

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <Game/GameState.hpp>
 #include <Game/GameAbility.hpp>
+#include <IO/File.hpp>
 using namespace std;
 
 bool GameCommands::initialized = false;
@@ -15,7 +16,8 @@ const Command
             string path = argv[0];
 
             cout << "Menulis GameState aktif ke file " << path << endl;
-            /** TODO: Write state to file */
+            File::Write fs(path);
+            GameState::getCurrentState().toFile(fs);
             return true;
         }),
     
@@ -26,7 +28,8 @@ const Command
             string path = argv[0];
 
             cout << "Membaca GameState dari file " << path << endl;
-            /** TODO: Read state from file */
+            File::Read fs(path);
+            GameState::getCurrentState().fromFile(fs);
             return true;
         });
 #endif

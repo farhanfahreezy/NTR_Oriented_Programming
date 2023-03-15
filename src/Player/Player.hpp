@@ -70,6 +70,7 @@ class Player : public InventoryHolder{
 
         int getId() const;
 
-
+        void toFile(File::Write& writer) const;
+        void fromFile(File::Read& reader);
 };
 #endif

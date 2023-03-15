@@ -2,6 +2,7 @@
 #define REGULARCARD_HPP 
 #include <Card/Card.hpp>
 #include <iostream>
+#include <IO/File.hpp>
 using namespace std;
 
 class RegularCard: public Card{
@@ -22,5 +23,8 @@ class RegularCard: public Card{
         void setColor(int color);
         void printInfo() override;
         float value() const override;
+
+        void toFile(File::Write& writer) const;
+        void fromFile(File::Read& reader);
 };
 #endif

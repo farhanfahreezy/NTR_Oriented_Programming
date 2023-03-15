@@ -58,6 +58,17 @@ float RegularCard::value() const{
     float konstan = getNum() * 0.1;
     return konstan + (getColor() * 0.03);
 }
+
+void RegularCard::toFile(File::Write& writer) const{
+    writer << value() << '\n';
+}
+void RegularCard::fromFile(File::Read& reader){
+    string s;
+    reader >> s;
+    float f = stof(s);
+    setNum(f * 10);
+    setColor((f - getNum() * 0.1) / 0.03);
+}
 // driver
 /* int main(){
     RegularCard rc(9,1);

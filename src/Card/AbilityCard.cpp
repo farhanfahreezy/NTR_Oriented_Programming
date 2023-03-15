@@ -59,6 +59,15 @@ void AbilityCard::printInfo(){
     }
 }
 
+void AbilityCard::toFile(File::Write& writer) const{
+    writer << value() << '\n';
+}
+void AbilityCard::fromFile(File::Read& reader){
+    string s;
+    reader >> s;
+    id = stof(s);
+}
+
 // driver
 /* int main(){
     AbilityCard ac("Reverse");

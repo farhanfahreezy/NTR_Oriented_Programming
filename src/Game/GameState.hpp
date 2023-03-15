@@ -6,6 +6,7 @@
 #include <iostream>
 #include <Player/Player.hpp>
 #include <Table/Table.hpp>
+#include <IO/File.hpp>
 
 class GameState{
     public:
@@ -93,6 +94,16 @@ class GameState{
          * 
         */
         int getNumberOfPlayer();
+
+        /**
+         * Writes this object's attributes into a file.
+        */
+        void toFile(File::Write& writer) const;
+
+        /**
+         * Reads values for this object's attributes from a file.
+        */
+        void fromFile(File::Read& reader);
 
     private:
         // Queue containing player IDs. The player with their ID at the queue head goes first.
