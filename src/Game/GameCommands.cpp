@@ -8,8 +8,8 @@ bool GameCommands::initialized = false;
 
 const Command
     GameCommands::COMMAND_NEXT = Command::withName("next")
-        .handles([](vector<string>& argv)->bool{
-            if(argv.size() == 0)return false;
+        .handles([&](vector<string>& argv)->bool{
+            if(argv.size() != 0)return false;
 
             cout << "Melewati giliran pemain " << GameState::getCurrentState().getCurrentPlayer().getName() << endl;
             return true;
@@ -17,7 +17,7 @@ const Command
     
     GameCommands::COMMAND_DOUBLE = Command::withName("double")
         .handles([](vector<string>& argv)->bool{
-            if(argv.size() == 0)return false;
+            if(argv.size() != 0)return false;
             
             GameState& state = GameState::getCurrentState();
             string name = state.getCurrentPlayer().getName();
@@ -37,7 +37,7 @@ const Command
     
     GameCommands::COMMAND_HALF = Command::withName("half")
         .handles([](vector<string>& argv)->bool{
-            if(argv.size() == 0)return false;
+            if(argv.size() != 0)return false;
 
             GameState& state = GameState::getCurrentState();
             string name = state.getCurrentPlayer().getName();
@@ -57,7 +57,7 @@ const Command
     
     /*GameCommands::COMMAND_REROLL = Command::withName("reroll")
         .handles([&](vector<string>& argv)->bool{
-            if(argv.size() == 0)return false;
+            if(argv.size() != 0)return false;
 
             
 

@@ -32,7 +32,7 @@ class GameState{
         const Player& getCurrentPlayer() const;
 
         /**
-         * @brief Get the Player With Id
+         * @brief Get the player with the given id.
          * 
          * @return const Player& 
          */
@@ -81,13 +81,19 @@ class GameState{
         // The game table.
         Table table;
 
-        // Ronde Permainan
-        int ronde;
+        // Game number.
+        int gameNum;
 
-        // Current active state of the game
+        // Game round in the current game.
+        int round;
+
+        // Whether turn is reversed.
+        bool reversed;
+
+        // Current active state of the game.
         static GameState& currentState;
 
-        // Default non-functional game state
+        // Default non-functional game state.
         static GameState defaultState;
 };
 

@@ -1,6 +1,6 @@
 #include <iostream>
-#include <IO/Terminal/Command.hpp>
-#include <IO/Terminal/CommandParser.hpp>
+#include <IO/Command.hpp>
+#include <IO/CommandParser.hpp>
 using namespace std;
 
 int main(){
