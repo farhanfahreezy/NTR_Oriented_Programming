@@ -8,7 +8,7 @@ bool GameCommands::initialized = false;
 
 const Command
     GameCommands::COMMAND_NEXT = Command::withName("next")
-        .handles([&](vector<string>& argv)->bool{
+        .handles([](vector<string>& argv)->bool{
             if(argv.size() != 0)return false;
 
             cout << "Giliran dilanjut ke permainan selanjutnya." << endl;
