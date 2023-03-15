@@ -28,9 +28,9 @@ class RegularCard: public Card{
         void fromFile(File::Read& reader);
 
         static const float
-            REGULAR_GREEN_COL = 0,
-            REGULAR_BLUE_COL = 1,
-            REGULAR_YELLOW_COL = 2,
-            REGULAR_RED_COL = 3;
+            REGULAR_GREEN_COL,
+            REGULAR_BLUE_COL,
+            REGULAR_YELLOW_COL,
+            REGULAR_RED_COL;
 };
 #endif

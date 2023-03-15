@@ -2,6 +2,15 @@
 #include <iostream>
 using namespace std;
 
+const float
+    AbilityCard::ABILITY_REROLL_ID = 1.F,
+    AbilityCard::ABILITY_QUADRUPLE_ID = 2.F,
+    AbilityCard::ABILITY_QUARTER_ID = 3.F,
+    AbilityCard::ABILITY_REVERSE_ID = 4.F,
+    AbilityCard::ABILITY_SWAP_ID = 5.F,
+    AbilityCard::ABILITY_SWITCH_ID = 6.F,
+    AbilityCard::ABILITY_ABILITYLESS_ID = 7.F;
+
 AbilityCard ::AbilityCard(){
     this->id = 0;
 }

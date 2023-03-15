@@ -17,12 +17,12 @@ class AbilityCard: public Card{
         void fromFile(File::Read& reader);
 
         static const float
-            ABILITY_REROLL_ID = 1,
-            ABILITY_QUADRUPLE_ID = 2,
-            ABILITY_QUARTER_ID = 3,
-            ABILITY_REVERSE_ID = 4,
-            ABILITY_SWAP_ID = 5,
-            ABILITY_SWITCH_ID = 6,
-            ABILITY_ABILITYLESS_ID = 7;
+            ABILITY_REROLL_ID,
+            ABILITY_QUADRUPLE_ID,
+            ABILITY_QUARTER_ID,
+            ABILITY_REVERSE_ID,
+            ABILITY_SWAP_ID,
+            ABILITY_SWITCH_ID,
+            ABILITY_ABILITYLESS_ID;
 };
 #endif

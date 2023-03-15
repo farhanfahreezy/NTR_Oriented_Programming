@@ -139,6 +139,7 @@ void GameState::toFile(File::Write& writer) const{
         q.pop();
     }
     writer << '\n';
+    table.toFile(writer);
 }
 
 void GameState::fromFile(File::Read& reader){
@@ -177,4 +178,5 @@ void GameState::fromFile(File::Read& reader){
         getline(ss2, s, ' ');
         turn.push(stoi(s));
     }
+    table.fromFile(reader);
 }

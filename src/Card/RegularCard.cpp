@@ -1,5 +1,10 @@
 #include "RegularCard.hpp"
 
+const float
+    RegularCard::REGULAR_GREEN_COL = 0.F,
+    RegularCard::REGULAR_BLUE_COL = 1.F,
+    RegularCard::REGULAR_YELLOW_COL = 2.F,
+    RegularCard::REGULAR_RED_COL = 3.F;
 
 RegularCard::RegularCard() {
     this->num = 0;
