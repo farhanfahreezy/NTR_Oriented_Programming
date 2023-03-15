@@ -17,6 +17,9 @@ public:
     // ctor
     InventoryHolder(long long int poin, int n_regulardeck, int n_abilitydeck);
 
+    //cctor
+    InventoryHolder& operator=(const InventoryHolder&);
+
     // dtor
 
     // get functions

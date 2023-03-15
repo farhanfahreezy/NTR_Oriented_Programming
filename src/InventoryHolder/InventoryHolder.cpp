@@ -8,6 +8,19 @@ InventoryHolder::InventoryHolder(long long int poin, int n_regulardeck, int n_ab
     : point(poin), regularInv(n_regulardeck), abilityInv(n_abilitydeck)
 {}
 
+//cctor
+InventoryHolder& InventoryHolder::operator=(const InventoryHolder& other) {
+    for (int i = 0; i<other.getRegularInvSize();i++) {
+        addRegularCard(other.getRegularInv()[i]);
+    }
+
+    for (int i = 0; i<other.getAbilityInvSize();i++) {
+        addAbilityCard(other.getAbilityInv()[i]);
+    }
+
+    return *this;
+}
+
 // get functions
 long long int InventoryHolder::getPoint() const {
     return point;
@@ -82,12 +95,13 @@ void InventoryHolder::addAbilityCard(const AbilityCard& card){
 }
 
 void InventoryHolder::removeRegularCard(int amount) {
-    if(amount > regularInv.size()) {
-        amount = regularInv.size();
-    }
-    for(int i = 0; i < amount; i++){
-        regularInv.erase(regularInv.begin());
-    }
+    // if(amount > regularInv.size()) {
+    //     amount = regularInv.size();
+    // }
+    // for(int i = 0; i < amount; i++){
+    //     regularInv.erase(regularInv.begin());
+    // }
+    regularInv.erase(regularInv.begin()+amount);
 }
 
 void InventoryHolder::removeAbilityCard() {abilityInv.erase(abilityInv.begin());}

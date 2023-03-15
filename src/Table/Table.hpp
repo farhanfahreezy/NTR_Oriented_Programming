@@ -10,12 +10,15 @@ class Table : public InventoryHolder{
         //ctor
         Table();
 
-        //get function
+        //cctor
+        Table& operator=(Table&);
 
-        RegularCard getTableDeck(int);
+        //get function
+        RegularCard getTableDeckCard(int);
         int getTableDeckSize();
 
         //set function
+        void addToTableDeck(const RegularCard&);
         void resetPot();
 };
 

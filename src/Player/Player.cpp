@@ -11,8 +11,14 @@ Player::Player(int id): /*regularDeck(2), abilityDeck(2)*/ InventoryHolder(0, 0,
     this->id = id;
     this->nama = "";
     this->poin = 0;
-    //this->regularDeck = RegularDeck(2);
-    //this->abilityDeck = AbilityDeck(2);
+}
+
+Player& Player::operator=(const Player& other){
+    id = other.id;
+    nama = other.nama;
+    point = other.poin;
+
+    return *this;
 }
 
 bool Player::operator<(const Player& other) const{
@@ -35,6 +41,10 @@ void Player::addPoin(int newPoin){
     poin += newPoin;
 }
 
-string Player :: getName() const{
+string Player::getName() const{
     return this->nama;
+}
+
+int Player::getId() const{
+    return this->id;
 }
