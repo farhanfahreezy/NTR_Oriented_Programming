@@ -6,10 +6,10 @@ Table::Table() : InventoryHolder(64,52,7), tableDeck(5){
 }
 
 Table& Table::operator=(Table& other) {
-    Table temp;
     for (int i = 0; i<other.getTableDeckSize();i++) {
-        temp.addToTableDeck(other.getTableDeckCard(i));
+        addToTableDeck(other.getTableDeckCard(i));
     }
+    return *this;
 }
 
 

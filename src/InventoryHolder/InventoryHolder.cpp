@@ -10,17 +10,15 @@ InventoryHolder::InventoryHolder(long long int poin, int n_regulardeck, int n_ab
 
 //cctor
 InventoryHolder& InventoryHolder::operator=(const InventoryHolder& other) {
-    InventoryHolder temp(other.getPoint(),other.getRegularInvSize(),other.getAbilityInvSize());
-
     for (int i = 0; i<other.getRegularInvSize();i++) {
-        temp.addRegularCard(other.getRegularInv()[i]);
+        addRegularCard(other.getRegularInv()[i]);
     }
 
-    for (int i = 0; i<other.getRegularInvSize();i++) {
-        temp.addRegularCard(other.getRegularInv()[i]);
+    for (int i = 0; i<other.getAbilityInvSize();i++) {
+        addAbilityCard(other.getAbilityInv()[i]);
     }
 
-    return temp;
+    return *this;
 }
 
 // get functions
