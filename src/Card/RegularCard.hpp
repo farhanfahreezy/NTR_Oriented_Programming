@@ -26,5 +26,11 @@ class RegularCard: public Card{
 
         void toFile(File::Write& writer) const;
         void fromFile(File::Read& reader);
+
+        static const float
+            REGULAR_GREEN_COL = 0,
+            REGULAR_BLUE_COL = 1,
+            REGULAR_YELLOW_COL = 2,
+            REGULAR_RED_COL = 3;
 };
 #endif

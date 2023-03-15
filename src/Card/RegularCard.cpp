@@ -25,16 +25,16 @@ int RegularCard::getColor() const{
 }
 
 string RegularCard::colorString(){
-    if(getColor() == 0){
+    if(getColor() == REGULAR_GREEN_COL){
         return "hijau";
     }
-    else if(getColor() == 1){
+    else if(getColor() == REGULAR_BLUE_COL){
         return "biru";
     }
-    else if(getColor() == 2){
+    else if(getColor() == REGULAR_YELLOW_COL){
         return "kuning";
     }
-    else if(getColor() == 3){
+    else if(getColor() == REGULAR_RED_COL){
         return "merah";
     } else {
         return "unknown";
