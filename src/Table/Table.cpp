@@ -1,7 +1,7 @@
 #include "Table.hpp"
 
 //ctor
-Table::Table() : InventoryHolder(64,52,7), tableDeck(5){
+Table::Table() : InventoryHolder(64,0,0), tableDeck(5){
     //this->tableDeck = RegularDeck(5);
 }
 
