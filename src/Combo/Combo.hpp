@@ -5,24 +5,29 @@
 #include "Player/Player.hpp"
 #include "Card/RegularCard.hpp"
 
-class Combo{
+class Combo: public Value{
     private:
-        float val;
-        vector<RegularCard> combined;
+        vector<RegularCard> com;
+        vector<RegularCard> player;
+        vector<RegularCard> table;
     public:
-        Combo();
-        vector<RegularCard> combineAndSortRegularCard(vector<RegularCard>, vector<RegularCard>);
-        vector<RegularCard> sortByColor(vector<RegularCard>);
-        vector<RegularCard> sortByValue(vector<RegularCard>);
-        vector<RegularCard> HighCard(vector<RegularCard>); //oke
-        vector<RegularCard> Pair(vector<RegularCard>); //oke
-        vector<RegularCard> TwoPair(vector<RegularCard>); //oke
-        vector<RegularCard> ThreeOfAKind(vector<RegularCard>); //oke
-        vector<RegularCard> FourOfAKind(vector<RegularCard>); //oke
-        vector<RegularCard> Straight(vector<RegularCard>); //oke
-        vector<RegularCard> Flush(vector<RegularCard>); //oke
-        vector<RegularCard> FullHouse(vector<RegularCard>); //oke
-        vector<RegularCard> StraightFlush(vector<RegularCard>); //oke
-        float value(vector<RegularCard>, vector<RegularCard>, vector<RegularCard>);
+        Combo(vector<RegularCard>, vector<RegularCard>);
+        vector<RegularCard> combineAndSortRegularCard();
+        vector<RegularCard> sortByColor() const;
+        vector<RegularCard> sortByValue() const;
+        vector<RegularCard> HighCard() const; //oke
+        vector<RegularCard> Pair() const; //oke
+        vector<RegularCard> TwoPair() const; //oke
+        vector<RegularCard> ThreeOfAKind() const; //oke
+        vector<RegularCard> FourOfAKind() const; //oke
+        vector<RegularCard> Straight() const; //oke
+        vector<RegularCard> Flush() const; //oke
+        vector<RegularCard> FullHouse() const; //oke
+        vector<RegularCard> StraightFlush() const; //oke
+        float value() const override;
+        //yang menjerumus kalo ada kasus dimana ada lebih dari 1 pemain yang punya nilai tertinggi adalah flush dan straight flush
+        //flush bisa ke straight
+        //straight flush bisa ke threes, two pair, sm pair
+        //sisanya tinggal bandingin high card
 };
 #endif

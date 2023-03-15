@@ -11,11 +11,9 @@
 using namespace std;
 
 int main(){
-    Combo c;
-    Combo c1;
-    Combo c2;
     Table t;
     Player p(1);
+    Player p2(2);
     RegularDeck regDeck(52);
     regDeck.shuffleDeck();
     RegularCard card0(8,3);
@@ -32,23 +30,33 @@ int main(){
     t + regDeck.getCard(4);
     p + regDeck.getCard(5);
     p + regDeck.getCard(6);
+    p2 + regDeck.getCard(7);
+    p2 + regDeck.getCard(8);
     int size = regDeck.getAmount();
     cout << size << endl;
-    cout << "Player inv:" << endl;
+    Combo c(p.getRegularInv(), t.getRegularInv());
+    Combo c1(p2.getRegularInv(), t.getRegularInv());
+    /*cout << "Player inv:" << endl;
     for(auto card : p.getRegularInv()){
         card.printInfo();
     }
     cout << "Table inv:" << endl;
     for(auto card : t.getRegularInv()){
         card.printInfo();
-    }
-    vector<RegularCard> vec1 = c.combineAndSortRegularCard(p.getRegularInv(), t.getRegularInv());
+    }*/
+    vector<RegularCard> vec1 = c.combineAndSortRegularCard();
     cout << "Combined inv:" << endl;
     for(auto card : vec1){
         card.printInfo();
     }
-    float result = c1.value(vec1, t.getRegularInv(), p.getRegularInv()); //c.combineAndSortRegularCard(t.getRegularInv(), p.getRegularInv());
-    cout << result << endl;
+    vector<RegularCard> vec2 = c1.combineAndSortRegularCard();
+    cout << "Combined inv:" << endl;
+    for(auto card : vec2){
+        card.printInfo();
+    }
+    float result = c.value(); //c.combineAndSortRegularCard(, p.getRegularInv());
+    float result2 = c1.value();
+    cout << result << " " << result2 << endl;
     /*cout << "vec2" << endl;
     vector<RegularCard> vec2 = c2.Pair(vec1);
     /*vec2 = c2.sortByValue(vec2);
