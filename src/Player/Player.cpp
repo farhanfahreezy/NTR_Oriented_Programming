@@ -48,3 +48,14 @@ string Player::getName() const{
 int Player::getId() const{
     return this->id;
 }
+
+void Player::printPlayerInfo(){
+    cout << getName() << "'s Inventory:" << endl;
+    for(auto card : getRegularInv()){
+        card.printInfo();
+    }
+    for(auto card : getAbilityInv()){
+        card.printInfo();
+    }
+
+}

@@ -6,7 +6,7 @@
 GameState GameState::defaultState = GameState(0);
 GameState& GameState::currentState = GameState::defaultState;
 
-GameState::GameState(int n_players){
+GameState::GameState(int n_players) : table() {
     for(int i = 0; i < n_players; turn.push(i++))players.push_back(Player(i));
     gameNum = 1;
     round = 1;
@@ -27,7 +27,7 @@ const Player& GameState::getCurrentPlayer() const{
     return players.at(currentPlayerIdx);
 }
 
-const Player& GameState::getPlayerWithId(int id) const{
+Player& GameState::getPlayerWithId(int id){
     return players.at(id);
 }
 
@@ -118,4 +118,39 @@ std::ostream& operator<<(std::ostream& os, GameState& state){
 
 int GameState::getNumberOfPlayer(){
     return players.size();
+}
+
+void GameState::setPlayersName(){
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        cout << "Masukkan nama Player ke-" << i+1 << ":" << endl;
+        cout << "  > ";
+        string name;
+        cin >> name;
+        Player &player = this->getPlayerWithId(i);
+        player.setName(name);
+    }
+    cout << endl;
+
+}
+
+void GameState::shareRegularCardToPlayers(){
+    RegularDeck regDeck(52);
+    regDeck.shuffleDeck();
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        Player &player = this->getPlayerWithId(i);
+        player + regDeck.getCard(0);player + regDeck.getCard(0);
+    }
+    while(regDeck.getAmount()!=0){
+        RegularCard temp = regDeck.getCard(0);
+        table.addRegularCard(temp);
+    }
+}
+
+void GameState::printAllPlayers(){
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        cout << "Player " << i+1 <<": "<< getPlayerWithId(i).getName() << endl;
+        getPlayerWithId(i).printPlayerInfo();
+        cout << endl;
+    }
+    cout << endl;
 }

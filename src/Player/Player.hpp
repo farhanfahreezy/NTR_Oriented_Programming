@@ -70,6 +70,12 @@ class Player : public InventoryHolder{
 
         int getId() const;
 
+        /**
+         * @brief Print isi player
+         * 
+         */
+        void printPlayerInfo();
+
 
 };
 #endif

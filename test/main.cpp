@@ -4,6 +4,9 @@
 #include <Card/AbilityCard.hpp>
 #include <Table/Table.hpp>
 #include <Combo/Combo.hpp>
+#include <Game/GameAbility.hpp>
+#include <Game/GameCommands.hpp>
+#include <Game/GameState.hpp>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -11,46 +14,93 @@
 using namespace std;
 
 int main(){
-    Combo c;
-    Combo c1;
-    Combo c2;
-    Table t;
-    Player p(1);
-    RegularDeck regDeck(52);
-    regDeck.shuffleDeck();
-    RegularCard card0(1,0);
-    RegularCard card1(5,0);
-    RegularCard card2(7,0);
-    RegularCard card3(10,0);
-    RegularCard card4(12,0);
-    RegularCard card5(13,2);
-    RegularCard card6(13,0);
-    t + regDeck.getCard(0);
-    t + regDeck.getCard(1);
-    t + regDeck.getCard(2);
-    t + regDeck.getCard(3);
-    t + regDeck.getCard(4);
-    p + regDeck.getCard(5);
-    p + regDeck.getCard(6);
-    cout << "Player inv:" << endl;
-    for(auto card : p.getRegularInv()){
-        card.printInfo();
-    }
-    cout << "Table inv:" << endl;
-    for(auto card : t.getRegularInv()){
-        card.printInfo();
-    }
-    vector<RegularCard> vec1 = c.combineAndSortRegularCard(p.getRegularInv(), t.getRegularInv());
-    cout << "Combined inv:" << endl;
-    for(auto card : vec1){
-        card.printInfo();
-    }
-    float result = c1.value(vec1, t.getRegularInv(), p.getRegularInv()); //c.combineAndSortRegularCard(t.getRegularInv(), p.getRegularInv());
-    cout << "vec2" << endl;
-    vector<RegularCard> vec2 = c2.Flush(vec1);
-    for(auto card : vec2){
-        card.printInfo();
-    }
+    GameState initialState(7);
+    initialState.setPlayersName();
+    initialState.shareRegularCardToPlayers();
+
+    AbilityReroll abilityReroll;
+    AbilityQuadruple abilityQuadruple;
+    AbilityQuarter abilityQuarter;
+    AbilityReverse abilityReverse;
+    AbilitySwap abilitySwap;
+    AbilitySwitch abilitySwitch;
+    AbilityAbilityless abilityAbilityles;
+
+    initialState.printAllPlayers();
+
+    cout << "Isi Cangkul: " << initialState.getTable().getRegularInvSize() << endl;
+    cout << endl;
+
+    GameState::setCurrentState(initialState);
+
+    GameState &gameState = GameState::getCurrentState();
+
+    // PROGRAMNYA MULAI DARI SINI
+    abilityReroll.get();
+    gameState.printAllPlayers();
+
+    cout << "Poin sebelum Quadruple: " << gameState.getTable().getPoint() << endl;
+    abilityQuadruple.get();
+    cout << "Poin sesudah Quadruple: " << gameState.getTable().getPoint() << endl;
+
+    cout << "Poin sebelum Quarter: " << gameState.getTable().getPoint() << endl;
+    abilityQuarter.get();
+    cout << "Poin sesudah Quarter: " << gameState.getTable().getPoint() << endl;
+
+    // abilityReverse.get();
+    // gatau maudicek apa
+
+    abilitySwap.get();
+    gameState.printAllPlayers();
+
+    abilitySwitch.get();
+    gameState.printAllPlayers();
+
+    abilityAbilityles.get();
+    // gatau mau dicek apaan cok
+
+
+
+    // Combo c;
+    // Combo c1;
+    // Combo c2;
+    // Table t;
+    // Player p(1);
+    // RegularDeck regDeck(52);
+    // regDeck.shuffleDeck();
+    // RegularCard card0(1,0);
+    // RegularCard card1(5,0);
+    // RegularCard card2(7,0);
+    // RegularCard card3(10,0);
+    // RegularCard card4(12,0);
+    // RegularCard card5(13,2);
+    // RegularCard card6(13,0);
+    // t + regDeck.getCard(0);
+    // t + regDeck.getCard(1);
+    // t + regDeck.getCard(2);
+    // t + regDeck.getCard(3);
+    // t + regDeck.getCard(4);
+    // p + regDeck.getCard(5);
+    // p + regDeck.getCard(6);
+    // cout << "Player inv:" << endl;
+    // for(auto card : p.getRegularInv()){
+    //     card.printInfo();
+    // }
+    // cout << "Table inv:" << endl;
+    // for(auto card : t.getRegularInv()){
+    //     card.printInfo();
+    // }
+    // vector<RegularCard> vec1 = c.combineAndSortRegularCard(p.getRegularInv(), t.getRegularInv());
+    // cout << "Combined inv:" << endl;
+    // for(auto card : vec1){
+    //     card.printInfo();
+    // }
+    // float result = c1.value(vec1, t.getRegularInv(), p.getRegularInv()); //c.combineAndSortRegularCard(t.getRegularInv(), p.getRegularInv());
+    // cout << "vec2" << endl;
+    // vector<RegularCard> vec2 = c2.Flush(vec1);
+    // for(auto card : vec2){
+    //     card.printInfo();
+    // }
     /*for(auto card : result){
         card.printInfo();
     }*/

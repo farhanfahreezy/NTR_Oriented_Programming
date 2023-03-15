@@ -4,6 +4,20 @@ using namespace std;
 
 void AbilityReroll::get() const {
     //// kerjain (removeRegularCard, addRegularCard)
+    GameState& state = GameState::getCurrentState();
+    Player currentPlayer = state.getCurrentPlayer();
+    Table& table = state.getTable();
+    cout << currentPlayer.getName() << " melakukan Re-Roll!" << endl;
+
+    Player &player = state.getPlayerWithId(currentPlayer.getId());
+    
+    table + player.getRegularInv().at(0);
+    table + player.getRegularInv().at(0);
+
+    player + table.getRegularInv().at(0);
+    player + table.getRegularInv().at(0);
+
+
 }
 
 void AbilityQuadruple::get() const {
@@ -12,6 +26,8 @@ void AbilityQuadruple::get() const {
     string name = state.getCurrentPlayer().getName();
     Table& table = state.getTable();
     int tmp = table.getPoint();
+    Player currentPlayer = state.getCurrentPlayer();
+    cout << currentPlayer.getName() << " melakukan Quadruple!" << endl;
 
     if(tmp>=table.getMaxPoint()){
         cout << "Poin hadiah (" << table.getPoint() << ") sudah maksimal!" << endl;
@@ -31,13 +47,14 @@ void AbilityQuarter::get() const {
      //// kerjain (increaseByScale(0.25))
     GameState& state = GameState::getCurrentState();
     string name = state.getCurrentPlayer().getName();
+    cout << "Pemain " << name << " melakukan Quarter!" << endl;
     Table& table = state.getTable();
     int tmp = table.getPoint();
 
     if(tmp > 2){
         if(table.getPoint() < table.getMaxPoint()){
             table.increasePointByScale(0.25);
-            cout << "Pemain " << name << " melakukan QUARTER! Poin hadiah turun dari " << tmp << " menjadi " << table.getPoint() << "!" << endl;
+            cout << "Poin hadiah turun dari " << tmp << " menjadi " << table.getPoint() << "!" << endl;
         }else{
             cout << "Poin hadiah (" << table.getPoint() << ") sudah maksimal!" << endl;
             cout << "Melewati giliran pemain " << name << endl;
@@ -52,6 +69,8 @@ void AbilityReverse::get() const {
     GameState& state = GameState::getCurrentState();
     string name = state.getCurrentPlayer().getName();
     Table& table = state.getTable();
+    Player currentPlayer = state.getCurrentPlayer();
+    cout << currentPlayer.getName() << " melakukan Reverse!" << endl;
 
     state.reverseTurn();
     auto
@@ -74,42 +93,40 @@ void AbilityReverse::get() const {
 
 void AbilitySwap::get() const {
      //// kerjain (bikin fungsi tambahan)
-    GameState& state = GameState::getCurrentState();
+    GameState &state = GameState::getCurrentState();
     Player currentPlayer = state.getCurrentPlayer();
-    Table& table = state.getTable();
-
-    cout << currentPlayer.getName() << "melakukan SWAPCARD" << endl;
+    cout << currentPlayer.getName() << " melakukan Swapcard!" << endl;
 
     int p1 = -1;
     int p2 = -1;
+
     cout << "Silahkan pilih pemain yang kartunya ingin anda tukar:" << endl;
-    map<int, Player>::iterator it;
-    int idx = 1;
-    for(int i = 1;i<8;i++){
+    for(int i = 0;i<state.getNumberOfPlayer();i++){
         if(i!=currentPlayer.getId()){
-            cout << "  " << idx << ". " << state.getPlayerWithId(i).getName() << endl;
-            idx++;
+            cout << "  " << i+1 << ". " << state.getPlayerWithId(i).getName() << endl;
         }
     }
-    while(p1 <= 0 || p1 > 7 || p1 == currentPlayer.getId()){
+    while(p1 < 0 || p1 > state.getNumberOfPlayer()-1 || p1 == currentPlayer.getId()){
         cout << "> ";
         cin >> p1;
-    }
-    cout << "Silahkan pilih pemain yang kartunya ingin anda tukar:" << endl;
-    idx = 1;
-    for(int i = 1;i<8;i++){
-        if(i!=currentPlayer.getId()){
-            cout << "  " << idx << ". " << state.getPlayerWithId(i).getName() << endl;
-            idx++;
-        }
-    }
-    while(p2 <= 0 || p2 > 7 || p2 == currentPlayer.getId() || p2 == p1){
-        cout << "> ";
-        cin >> p2;
+        p1--;
     }
 
-    Player pl1 = state.getPlayerWithId(p1);
-    Player pl2 = state.getPlayerWithId(p2);
+    cout << "Silahkan pilih pemain yang kartunya ingin anda tukar:" << endl;
+    for(int i = 0;i<state.getNumberOfPlayer();i++){
+        if(i!=currentPlayer.getId() && i!=p1){
+            cout << "  " << i+1 << ". " << state.getPlayerWithId(i).getName() << endl;
+        }
+    }
+
+    while(p2 < 0 || p2 > state.getNumberOfPlayer()-1 || p2 == currentPlayer.getId() || p2 == p1){
+        cout << "> ";
+        cin >> p2;
+        p2--;
+    }
+    
+    Player &pl1 = state.getPlayerWithId(p1);
+    Player &pl2 = state.getPlayerWithId(p2);
     int pil1 = 0;
     int pil2 = 0;
 
@@ -131,8 +148,8 @@ void AbilitySwap::get() const {
     RegularCard temp1 = pl1.getRegularInv().at(pil1-1);
     RegularCard temp2 = pl2.getRegularInv().at(pil2-1);
 
-    pl1 - 1;
-    pl2 - 1;
+    pl1 - (pil1-1);
+    pl2 - (pil2-1);
 
     pl1 + temp2;
     pl2 + temp1;
@@ -140,8 +157,59 @@ void AbilitySwap::get() const {
 
 void AbilitySwitch::get() const {
      //// kerjain (bikin fungsi tambahan)
+    GameState &state = GameState::getCurrentState();
+    Player currentPlayer = state.getCurrentPlayer();
+    cout << currentPlayer.getName() << " melakukan Switch!" << endl;
+
+    int p1 = -1;
+
+    cout << "Silahkan pilih pemain yang kartunya ingin anda tukar:" << endl;
+    for(int i = 0;i<state.getNumberOfPlayer();i++){
+        if(i!=currentPlayer.getId()){
+            cout << "  " << i+1 << ". " << state.getPlayerWithId(i).getName() << endl;
+        }
+    }
+    while(p1 < 0 || p1 > state.getNumberOfPlayer()-1 || p1 == currentPlayer.getId()){
+        cout << "> ";
+        cin >> p1;
+        p1--;
+    }
+
+    Player &pl1 = state.getPlayerWithId(currentPlayer.getId());
+    Player &pl2 = state.getPlayerWithId(p1);
+
+    RegularCard tempP11 = pl1.getRegularInv().at(0);
+    RegularCard tempP12 = pl1.getRegularInv().at(1);
+    RegularCard tempP21 = pl2.getRegularInv().at(0);
+    RegularCard tempP22 = pl2.getRegularInv().at(1);
+
+    pl1 - 0;pl1 - 0;pl2 - 0;pl2 - 0;
+    pl1 + tempP21;
+    pl1 + tempP22;
+    pl2 + tempP11;
+    pl2 + tempP12;
 }
 
 void AbilityAbilityless::get() const {
      //// kerjain (removeAbilityCard)
+    GameState &state = GameState::getCurrentState();
+    Player currentPlayer = state.getCurrentPlayer();
+    cout << currentPlayer.getName() << " melakukan AbilityLess!" << endl;
+
+    int p1 = -1;
+
+    cout << "Silahkan pilih pemain yang kartu abilitynya ingin dimatikan:" << endl;
+    for(int i = 0;i<state.getNumberOfPlayer();i++){
+        if(i!=currentPlayer.getId()){
+            cout << "  " << i+1 << ". " << state.getPlayerWithId(i).getName() << endl;
+        }
+    }
+    while(p1 < 0 || p1 > state.getNumberOfPlayer()-1 || p1 == currentPlayer.getId()){
+        cout << "> ";
+        cin >> p1;
+        p1--;
+    }
+
+    Player &player = state.getPlayerWithId(p1);
+    player.removeAbilityCard();
 }

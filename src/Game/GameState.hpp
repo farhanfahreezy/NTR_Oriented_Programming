@@ -36,7 +36,7 @@ class GameState{
          * 
          * @return const Player& 
          */
-        const Player& getPlayerWithId(int id) const;
+        Player& getPlayerWithId(int id);
 
         /**
          * Gets a copy of the player turn queue for this round.
@@ -88,6 +88,24 @@ class GameState{
          * 
         */
         int getNumberOfPlayer();
+
+        /**
+         * @brief Set the Name Player object
+         * 
+         */
+        void setPlayersName();
+
+        /**
+         * @brief Bagiin kartu regular ke player
+         * 
+         */
+        void shareRegularCardToPlayers();
+
+        /**
+         * @brief Print all players with their cards
+         * 
+         */
+        void printAllPlayers();
 
     private:
         // Queue containing player IDs. The player with their ID at the queue head goes first.
