@@ -23,7 +23,7 @@ void GameState::setCurrentState(GameState& state){
     currentState = state;
 }
 
-const Player& GameState::getCurrentPlayer() const{
+Player& GameState::getCurrentPlayer(){
     return players.at(currentPlayerIdx);
 }
 
