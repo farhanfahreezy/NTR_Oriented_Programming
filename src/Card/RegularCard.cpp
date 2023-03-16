@@ -55,8 +55,7 @@ void RegularCard::setColor(int color){
 }
 
 void RegularCard::printInfo(){
-    cout << "Kartu ini adalah " << getNum() << " " << colorString() <<endl;
-    cout << "Value: " << value() << endl;
+    cout << getNum() << " " << colorString() <<endl;
 }
 
 float RegularCard::value() const{

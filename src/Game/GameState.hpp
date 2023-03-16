@@ -8,6 +8,7 @@
 #include <Table/Table.hpp>
 #include <IO/File.hpp>
 #include <InventoryHolder/InventoryHolder.hpp>
+#include <Util/Vectors.hpp>
 
 class GameState{
     public:

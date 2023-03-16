@@ -41,7 +41,7 @@ void AbilityCard::setId(float id){
 }
 
 void AbilityCard::printInfo(){
-    cout << "Id kartu ini adalah: ";
+    cout << "Ability Card: " << endl << "  ";
     if(value() == ABILITY_REROLL_ID){
         cout << "Re-Roll" << endl;
     }

@@ -1,14 +1,20 @@
 #ifndef VECTORS_HPP
 #define VECTORS_HPP
 
+#include <iostream>
 #include <vector>
+#include <algorithm>
+#include <random>
 using namespace std;
 
 class Vectors{
     public:
         template<class T>
-        static void shuffle(vector<T>& vec){
-            /** TODO: Implement shuffle here */
+        static void shuffle_vec(vector<T>& vec){
+            random_device rd;
+            mt19937 gen(rd());
+            shuffle(vec.begin(), vec.end(), gen);
+
         }
 
         template<class T>
