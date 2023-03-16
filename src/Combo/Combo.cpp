@@ -6,6 +6,7 @@ using namespace std;
 Combo :: Combo(vector<RegularCard> player, vector<RegularCard> table) : Value(){
     this->player = player;
     this->table = table;
+    this->com = this->combineAndSortRegularCard();
 }
 
 vector<RegularCard> Combo :: combineAndSortRegularCard() {

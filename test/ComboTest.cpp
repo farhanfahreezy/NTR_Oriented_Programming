@@ -38,7 +38,7 @@ int main(){
     Combo c(p.getRegularInv(), t.getRegularInv());
     Combo c1(p2.getRegularInv(), t.getRegularInv());
     cout << "Combined Inv: " << endl;
-    vector<RegularCard> comboP1 = c.combineAndSortRegularCard();
+   /* vector<RegularCard> comboP1 = c.combineAndSortRegularCard();
     for(auto card : comboP1){
         card.printInfo();
     }
@@ -46,7 +46,7 @@ int main(){
     vector<RegularCard> comboP2 = c1.combineAndSortRegularCard();
     for(auto card : comboP2){
         card.printInfo();
-    }
+    }*/
     float result = c.value();
     float result2 = c1.value();
     int combo1 = c.getCombo();
