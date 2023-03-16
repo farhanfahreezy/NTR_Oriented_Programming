@@ -10,43 +10,36 @@ using namespace std;
 Player::Player(int id): /*regularDeck(2), abilityDeck(2)*/ InventoryHolder(0, 0, 0){
     this->id = id;
     this->nama = "";
-    this->poin = 0;
     this->abilityMati = false;
 }
 
 Player::Player(): /*regularDeck(2), abilityDeck(2)*/ InventoryHolder(0, 0, 0){
     this->id = -1;
     this->nama = "";
-    this->poin = 0;
     this->abilityMati = false;
 }
 
 Player& Player::operator=(const Player& other){
     id = other.id;
     nama = other.nama;
-    point = other.poin;
 
     return *this;
 }
 
 bool Player::operator<(const Player& other) const{
-    return poin < other.poin;
+    return point < other.point;
 }
 
 bool Player::operator>(const Player& other) const{
-    return poin > other.poin;
+    return point > other.point;
 }
 
 bool Player::operator==(const Player& other) const{
-    return poin == other.poin;
+    return point == other.point;
 }
 
 void Player::setName(string newName){
     nama = newName;
-}
-
-void Player::addPoin(int newPoin){
-    poin += newPoin;
 }
 
 bool Player::hasAbilityCard(float id) const{
@@ -72,7 +65,7 @@ void Player::setAbilityMati(bool b){
 void Player::toFile(File::Write& writer) const{
     InventoryHolder::toFile(writer);
     writer << nama << '\n';
-    writer << id << ' ' << poin << ' ' << abilityMati << '\n';
+    writer << id << ' ' << point << ' ' << abilityMati << '\n';
 }
 
 void Player::fromFile(File::Read& reader){
@@ -85,7 +78,7 @@ void Player::fromFile(File::Read& reader){
     getline(ss, s, ' ');
     id = stoi(s);
     getline(ss, s, ' ');
-    poin = stoi(s);
+    point = stoi(s);
     getline(ss, s, ' ');
     abilityMati = stoi(s);
 }

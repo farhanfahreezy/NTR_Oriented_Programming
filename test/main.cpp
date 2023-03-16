@@ -40,7 +40,6 @@ int main(){
         // INPUT DARI FILE AKU KURANG NGERTI
     }
     
-
     AbilityReroll abilityReroll;
     AbilityQuadruple abilityQuadruple;
     AbilityQuarter abilityQuarter;
@@ -51,15 +50,44 @@ int main(){
 
     initialState.printAllPlayers();
 
+    // Set initialState as CurrentState so it can be used in another algorithm
     GameState::setCurrentState(initialState);
-
+    
+    // Declare new GameState gameState as reference to CurrentState
     GameState &gameState = GameState::getCurrentState();
 
-    // PROGRAMNYA MULAI DARI SINI
 
     // MASIH ERROR, ISI CANGKUL PAS DIKIRIM KOSONG
+    abilityQuadruple.get();
+    cout << "isi cangkul: " << initialState.getTable().getRegularInvSize() << endl;
+    
     abilityReroll.get();
+    cout << "isi cangkul: " << gameState.getTable().getRegularInvSize() << endl;
     gameState.printAllPlayers();
+
+    // Main loop
+    while(!gameState.isComplete()){
+        // MAIN DISINI
+
+    }
+
+    std::cout << " ____   ______  ____                  ____   ___   __  _    ___  ____  \n";
+    std::cout << "|    \\ |      ||    \\                |    \\ /   \\ |  |/ ]  /  _]|    \\ \n";
+    std::cout << "|  _  ||      ||  D  )     _____     |  o  )     ||  ' /  /  [_ |  D  )\n";
+    std::cout << "|  |  ||_|  |_||    /     |     |    |   _/|  O  ||    \\ |    _]|    / \n";
+    std::cout << "|  |  |  |  |  |    \\     |_____|    |  |  |     ||     ||   [_ |    \\ \n";
+    std::cout << "|  |  |  |  |  |  .  \\               |  |  |     ||  .  ||     ||  .  \\\n";
+    std::cout << "|__|__|  |__|  |__|\\_|               |__|   \\___/ |__|\\_||_____||__|\\_|\n";
+
+    std::cout << " ______    ___  ____   ____  ___ ___   ____  __  _   ____  _____ ____  __ __ \n"
+                 "|      |  /  _]|    \\ |    ||   |   | /    ||  |/ ] /    |/ ___/|    ||  |  |\n"
+                 "|      | /  [_ |  D  ) |  | | _   _ ||  o  ||  ' / |  o  (   \\_  |  | |  |  |\n"
+                 "|_|  |_||    _]|    /  |  | |  \\_/  ||     ||    \\ |     |\\__  | |  | |  _  |\n"
+                 "  |  |  |   [_ |    \\  |  | |   |   ||  _  ||     ||  _  |/  \\ | |  | |  |  |\n"
+                 "  |  |  |     ||  .  \\ |  | |   |   ||  |  ||  .  ||  |  |\\    | |  | |  |  |\n"
+                 "  |__|  |_____||__|\\_||____||___|___||__|__||__|__||__|__| \\___||____||__|__|\n";
+
+
 
     
 }

@@ -14,7 +14,6 @@ class Player : public InventoryHolder{
     private:
         int id;
         string nama;
-        int poin;
         bool abilityMati;
     public:
         /**
@@ -59,13 +58,6 @@ class Player : public InventoryHolder{
          * @param newName nama untuk object Player
          */
         void setName(string newName);
-
-        /**
-         * @brief Menambah point pada atribut point Player
-         * 
-         * @param newPoin poin yang akan ditambahkan
-         */
-        void addPoin(int newPoin);
 
         /**
          * Mengembalikan @c true jika pemain ini memiliki kartu ability dengan  id yang diberikan.

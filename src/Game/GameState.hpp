@@ -123,6 +123,12 @@ class GameState{
         */
         void fromFile(File::Read& reader);
 
+        /**
+         * Check if any player have point greater than MAXPOINT
+         * 
+         */
+        bool isComplete();
+
     private:
         // Queue containing player IDs. The player with their ID at the queue head goes first.
         std::queue<int> turn;

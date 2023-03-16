@@ -21,6 +21,12 @@ GameState& GameState::getCurrentState(){
 
 void GameState::setCurrentState(GameState& state){
     currentState = state;
+    Table &tables = currentState.getTable();
+    int i = 0;
+    while(state.getTable().getRegularInvSize()!=i){
+        tables + state.getTable().getRegularInv().at(i);
+        i++;
+    }
 }
 
 Player& GameState::getCurrentPlayer(){
@@ -203,8 +209,8 @@ void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
         player + regDeck.getCard(0);player + regDeck.getCard(0);
     }
     while(regDeck.getAmount()!=0){
-        RegularCard temp = regDeck.getCard(0);
-        table.addRegularCard(temp);
+        Table &tables = this->getTable();
+        tables + regDeck.getCard(0);
     }
 }
 
@@ -215,4 +221,8 @@ void GameState::printAllPlayers(){
         cout << endl;
     }
     cout << endl;
+}
+
+bool GameState::isComplete(){
+    return finished;
 }
