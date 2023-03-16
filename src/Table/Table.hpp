@@ -23,6 +23,9 @@ class Table : public InventoryHolder{
 
         void toFile(File::Write& writer) const;
         void fromFile(File::Read& reader);
+
+        //methods
+        void printTableInfo();
 };
 
 #endif
