@@ -171,13 +171,10 @@ void GameState::fromFile(File::Read& reader){
     getline(ss1, s, ' ');
     int qSize = stoi(s);
 
-    players.clear();
     for(; !turn.empty(); turn.pop());
 
     for(int i = 0; i < pSize; ++i){
-        Player p;
-        p.fromFile(reader);
-        players.push_back(p);
+        players.at(i).fromFile(reader);
     }
     
     reader >> s;
