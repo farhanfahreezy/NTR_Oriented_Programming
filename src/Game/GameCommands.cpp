@@ -35,6 +35,7 @@ const Command
 
             cout << "Membaca GameState dari file " << path << endl;
             File::Read fs(path);
+            fs.ignore('#');
             GameState::getCurrentState().fromFile(fs);
             return false;
         });
@@ -235,6 +236,8 @@ void GameCommands::init(){
     CommandParser::reg(COMMAND_SWAP);
     CommandParser::reg(COMMAND_SWITCH);
     CommandParser::reg(COMMAND_ABILITYLESS);
+
+    CommandParser::setErrMsg("Oops, perintah tidak ditemukan!\nSilakan lakukan perintah lain.");
 
     initialized = true;
 }

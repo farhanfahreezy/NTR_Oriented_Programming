@@ -68,7 +68,7 @@ int main(){
     // Main loop
     while(!gameState.isComplete()){
         // MAIN DISINI
-
+        gameState.advance();
     }
 
     std::cout << " ____   ______  ____                  ____   ___   __  _    ___  ____  \n";

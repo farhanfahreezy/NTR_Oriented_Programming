@@ -63,15 +63,15 @@ void Player::setAbilityMati(bool b){
 }
 
 void Player::toFile(File::Write& writer) const{
+    writer << "# Informasi player: " << nama << '\n';
     InventoryHolder::toFile(writer);
-    writer << nama << '\n';
+    writer << "## PLAYER\n";
     writer << id << ' ' << point << ' ' << abilityMati << '\n';
 }
 
 void Player::fromFile(File::Read& reader){
     InventoryHolder::fromFile(reader);
     string s;
-    reader >> nama;
     
     reader >> s;
     stringstream ss(s);
