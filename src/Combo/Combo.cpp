@@ -528,3 +528,13 @@ bool Combo::operator>(const Combo& c) const{
     }
     return false;
 }
+
+bool Combo::operator<(const Combo& c) const{
+    if(this->value() < c.value()){
+        return true;
+    }
+    if(this->value() == c.value()){
+        return this->TieBreaker() < c.TieBreaker();
+    }
+    return false;
+}

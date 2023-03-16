@@ -28,6 +28,7 @@ class Combo: public Value{
         float value() const override;
         float TieBreaker() const;
         bool operator>(const Combo&) const;
+        bool operator<(const Combo&) const;
         //yang menjerumus kalo ada kasus dimana ada lebih dari 1 pemain yang punya nilai tertinggi adalah flush dan straight flush
         //flush bisa ke straight, two pair, pair
         //straight flush bisa ke threes, two pair, sm pair
