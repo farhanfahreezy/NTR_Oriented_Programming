@@ -7,6 +7,7 @@
 #include <Player/Player.hpp>
 #include <Table/Table.hpp>
 #include <IO/File.hpp>
+#include <InventoryHolder/InventoryHolder.hpp>
 
 class GameState{
     public:
@@ -102,10 +103,28 @@ class GameState{
         void setPlayersName();
 
         /**
-         * @brief Bagiin kartu regular ke player
+         * @brief Bagiin kartu regular ke player, kartu dari RegularDeck
          * 
          */
         void shareRegularCardToPlayers(RegularDeck regDeck);
+
+        /**
+         * @brief Bagiin kartu regular ke player, kartu dari table
+         * 
+         */
+        void shareRegularCardToPlayers();
+
+        /**
+         * @brief Bagiin kartu Ability ke player, kartu dari table
+         * 
+         */
+        void shareAbilityCardToPlayers();
+
+        /**
+         * @brief Ambil semua kartu yang dimiliki player
+         * 
+         */
+        void retractPlayersCard();
 
         /**
          * @brief Print all players with their cards

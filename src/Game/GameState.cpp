@@ -54,33 +54,32 @@ const int GameState::getRound() const{
 }
 
 const int GameState::getFirstPlayerIdx() const{
-    return (gameNum - 1) * 7 + (round - 1);
+    return ((gameNum - 1) * 7 + (round - 1)) % players.size();
 }
 
 void GameState::advance(){
-    /** TEMP: FOR TESTING PURPOSES ONLY, MOVE THIS LATER TO MAIN PROGRAM */
-    GameCommands::init();
-
+    
     /** Get current player */
     currentPlayerIdx = turn.front();
     turn.pop();
 
     /** Wait for and call next command */
-    do cout << "|| Player " << currentPlayerIdx << " >> "; while(!CommandParser::getNext());
+    do cout << ":: " << getCurrentPlayer().getName() << "'s turn > "; while(!CommandParser::getNext());
 
     if(turn.empty()){
         /** End of round; initiate the next round */
-        /** TODO: Wrap up current round here: award points, etc. */
+        cout << "Akhir dari ronde ke-" << round << "!" << endl;
 
         ++round;
         turn = turnStartFrom(getFirstPlayerIdx());
     }
 
     if (round == 7) {
+        /** TODO: Wrap up current game here: determine the winner or advance to the next game */
+        cout << "Akhir dari permainan ke-" << gameNum << "!" << endl;
+
         ++gameNum;
         round = 1;
-
-        /** TODO: Wrap up current game here: determine the winner or advance to the next game */
     }
 }
 
@@ -132,6 +131,7 @@ int GameState::getNumberOfPlayer(){
 
 void GameState::toFile(File::Write& writer) const{
     auto q = turn;
+    writer << "# Informasi state permainan\n";
     writer << gameNum << ' ' << round << ' ' << currentPlayerIdx
         << ' ' << reversed << ' ' << finished
         << ' ' << players.size() << ' ' << q.size() << '\n';
@@ -169,13 +169,10 @@ void GameState::fromFile(File::Read& reader){
     getline(ss1, s, ' ');
     int qSize = stoi(s);
 
-    players.clear();
     for(; !turn.empty(); turn.pop());
 
     for(int i = 0; i < pSize; ++i){
-        Player p;
-        p.fromFile(reader);
-        players.push_back(p);
+        players.at(i).fromFile(reader);
     }
     
     reader >> s;
@@ -202,8 +199,6 @@ void GameState::setPlayersName(){
 }
 
 void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
-    
-    regDeck.shuffleDeck();
     for(int i = 0; i<getNumberOfPlayer();i++){
         Player &player = this->getPlayerWithId(i);
         player + regDeck.getCard(0);player + regDeck.getCard(0);
@@ -211,6 +206,44 @@ void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
     while(regDeck.getAmount()!=0){
         Table &tables = this->getTable();
         tables + regDeck.getCard(0);
+    }
+}
+
+void GameState::shareRegularCardToPlayers(){
+    Table &tables = this->getTable();
+    // vector<RegularCard> &RegCard = tables.getRegularInvMod();
+    // tables.shuffle(RegCard);
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        Player &player = this->getPlayerWithId(i);
+        player + tables.getRegularInv().at(0);
+        tables.removeRegularCard(0);
+        player + tables.getRegularInv().at(0);
+        tables.removeRegularCard(0);
+    }
+}
+
+void GameState::shareAbilityCardToPlayers(){
+    Table &tables = this->getTable();
+    // vector<AbilityCard> &AbCard = tables.getAbilityInvMod();
+    // tables.shuffle(AbCard);
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        Player &player = this->getPlayerWithId(i);
+        player + tables.getAbilityInv().at(i);
+    }
+}
+
+void GameState::retractPlayersCard(){
+    Table &tables = this->getTable();
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        Player &player = this->getPlayerWithId(i);
+        tables + player.getRegularInv().at(0);
+        player.removeRegularCard(0);
+        tables + player.getRegularInv().at(0);
+        player.removeRegularCard(0);
+
+        if(player.getAbilityInvSize()!=0){
+            player.removeAbilityCard();
+        }
     }
 }
 

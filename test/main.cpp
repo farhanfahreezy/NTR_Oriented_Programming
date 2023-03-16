@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <IO/File.hpp>
 
 using namespace std;
 
@@ -35,20 +36,21 @@ int main(){
     }
     if(pilihan == 1){
         RegularDeck regDeck(52);
+        regDeck.shuffleDeck();
         initialState.shareRegularCardToPlayers(regDeck);
     } else {
-        // INPUT DARI FILE AKU KURANG NGERTI
+        cout << "Masukkan path file: " << endl;
+        cout << "  > ";
+        string input;
+        cin >> input;
+        File::Read file(input);
+        initialState.fromFile(file);
+
     }
-    
-    AbilityReroll abilityReroll;
-    AbilityQuadruple abilityQuadruple;
-    AbilityQuarter abilityQuarter;
-    AbilityReverse abilityReverse;
-    AbilitySwap abilitySwap;
-    AbilitySwitch abilitySwitch;
-    AbilityAbilityless abilityAbilityles;
 
     initialState.printAllPlayers();
+    GameCommands::init();
+
 
     // Set initialState as CurrentState so it can be used in another algorithm
     GameState::setCurrentState(initialState);
@@ -56,20 +58,23 @@ int main(){
     // Declare new GameState gameState as reference to CurrentState
     GameState &gameState = GameState::getCurrentState();
 
-
-    // MASIH ERROR, ISI CANGKUL PAS DIKIRIM KOSONG
-    abilityQuadruple.get();
-    cout << "isi cangkul: " << initialState.getTable().getRegularInvSize() << endl;
-    
-    abilityReroll.get();
-    cout << "isi cangkul: " << gameState.getTable().getRegularInvSize() << endl;
+    // Main loop
+    // while(!gameState.isComplete()){
+    //     gameState.advance();
+    // }
+    cout << "Tarik kartu" << endl;
+    gameState.retractPlayersCard();
     gameState.printAllPlayers();
 
-    // Main loop
-    while(!gameState.isComplete()){
-        // MAIN DISINI
-
-    }
+    cout << "Tes 1 kartu" << endl;
+    gameState.shareRegularCardToPlayers();
+    gameState.printAllPlayers();
+    gameState.retractPlayersCard();
+        gameState.advance();
+    cout << "Tes 2 kartu" << endl;
+    gameState.shareRegularCardToPlayers();
+    gameState.printAllPlayers();
+    gameState.retractPlayersCard();
 
     std::cout << " ____   ______  ____                  ____   ___   __  _    ___  ____  \n";
     std::cout << "|    \\ |      ||    \\                |    \\ /   \\ |  |/ ]  /  _]|    \\ \n";

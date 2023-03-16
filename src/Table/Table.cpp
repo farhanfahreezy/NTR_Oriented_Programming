@@ -1,8 +1,12 @@
 #include "Table.hpp"
 
 //ctor
-Table::Table() : InventoryHolder(64,0,0), tableDeck(5){
-    //this->tableDeck = RegularDeck(5);
+Table::Table() : InventoryHolder(64,0,7), tableDeck(5){
+    for(int i = 1; i<8; i++){
+        AbilityCard ac(i);
+        addAbilityCard(ac);
+    }
+    
 }
 
 Table& Table::operator=(Table& other) {
@@ -33,7 +37,9 @@ void Table::resetPot(){
 }
 
 void Table::toFile(File::Write& writer) const{
+    writer << "# Informasi table\n";
     InventoryHolder::toFile(writer);
+    writer << "## TABLE\n";
     writer << tableDeck.size() << '\n';
     for(int i = 0; i < tableDeck.size(); ++i)
         tableDeck.at(i).toFile(writer);

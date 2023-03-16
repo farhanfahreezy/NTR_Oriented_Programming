@@ -108,6 +108,7 @@ void InventoryHolder::removeRegularCard(int amount) {
 void InventoryHolder::removeAbilityCard() {abilityInv.erase(abilityInv.begin());}
 
 void InventoryHolder::toFile(File::Write& writer) const{
+    writer << "## INV-HOLDER\n";
     writer << point << ' ' << regularInv.size() << ' ' << abilityInv.size() << '\n';
     for(int i = 0; i < regularInv.size(); ++i)
         regularInv.at(i).toFile(writer);
