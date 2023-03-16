@@ -60,29 +60,29 @@ const int GameState::getFirstPlayerIdx() const{
 void GameState::advance(){
     
     /** Get current player */
-    if(turn.size()==6){
-        cout << "Membagikan AbilityCard ke Player" << endl;
-        shareAbilityCardToPlayers();
-    }
     currentPlayerIdx = turn.front();
     turn.pop();
 
     /** Wait for and call next command */
+    getTable().printTableInfo();
     getPlayerWithId(currentPlayerIdx).printPlayerInfo();
     do cout << ":: " << getCurrentPlayer().getName() << "'s turn > "; while(!CommandParser::getNext());
     cout << endl;
-
+    Table &tables = getTable();
+    
     if(turn.empty()){
         /** End of round; initiate the next round */
         cout << "Akhir dari ronde ke-" << round << "!" << endl;
 
         ++round;
         turn = turnStartFrom(getFirstPlayerIdx());
+        
+        tables.pullCardToDisplay();
+        if(round!=1){
+            cout << "Membagikan AbilityCard ke Player" << endl;
+            shareAbilityCardToPlayers();
+        }
 
-        cout << "Mengambil kartu Player" << endl;
-        retractPlayersCard();
-        cout << "Membagikan RegularCard ke Player" << endl;
-        shareRegularCardToPlayers();
         
     }
 
@@ -92,6 +92,12 @@ void GameState::advance(){
 
         ++gameNum;
         round = 1;
+        cout << "Mengambil kartu Player" << endl;
+        retractPlayersCard();
+        cout << "Membagikan RegularCard ke Player" << endl;
+        shareRegularCardToPlayers();
+        tables.retractCardFromDisplay();
+
     }
 }
 

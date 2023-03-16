@@ -1,7 +1,7 @@
 #include "Table.hpp"
 
 //ctor
-Table::Table() : InventoryHolder(64,0,7), tableDeck(5){
+Table::Table() : InventoryHolder(64,0,7), tableDeck(0){
     for(int i = 1; i<8; i++){
         AbilityCard ac(i);
         addAbilityCard(ac);
@@ -61,8 +61,29 @@ void Table::fromFile(File::Read& reader){
 
 void Table::printTableInfo() {
     cout << "Total Points on the Table : " << this->getPoint() << endl;
-    for (int i=0;i<tableDeck.size();i++) {
-        cout << i << ". ";
-        tableDeck[i].printInfo();
+    if (tableDeck.size() != 0) {
+        cout << "Regular Card: " <<  endl;
+        int i = 1;
+        for(auto table : tableDeck){
+            cout << "  " << i << ". ";
+            table.printInfo();
+            i++;
+
+        }
+    } else {
+        cout << "Tidak ada kartu di meja!" << endl;
     }
+}
+
+void Table::pullCardToDisplay(){
+    addToTableDeck(getRegularInv().at(0));
+    removeRegularCard(0);
+}
+void Table::retractCardFromDisplay(){
+    while (tableDeck.size()!=0)
+    {
+        addRegularCard(tableDeck.at(0));
+        tableDeck.erase(tableDeck.begin());
+    }
+    
 }

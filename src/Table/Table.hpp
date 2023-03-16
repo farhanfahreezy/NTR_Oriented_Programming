@@ -26,6 +26,9 @@ class Table : public InventoryHolder{
 
         //methods
         void printTableInfo();
+
+        void pullCardToDisplay();
+        void retractCardFromDisplay();
 };
 
 #endif
