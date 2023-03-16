@@ -1,105 +1,102 @@
 # Informasi state permainan
 1 1 0 0 0 7 6
-# Informasi player: abe
+# Informasi player: a
 ## INV-HOLDER
 0 2 0
-0.89
-0.39
+0.4
+0.46
 ## PLAYER
 0 0 0
-# Informasi player: bece
+# Informasi player: b
 ## INV-HOLDER
 0 2 0
-0.5
-0.83
+0.19
+0.93
 ## PLAYER
 1 0 0
-# Informasi player: cede
+# Informasi player: c
 ## INV-HOLDER
 0 2 0
-0.73
-0.53
+1.33
+0.33
 ## PLAYER
 2 0 0
-# Informasi player: dee
+# Informasi player: d
 ## INV-HOLDER
 0 2 0
-0.66
-1.1
+1.2
+0.73
 ## PLAYER
 3 0 0
-# Informasi player: eef
+# Informasi player: e
 ## INV-HOLDER
 0 2 0
-0.3
-1
+0.69
+1.06
 ## PLAYER
 4 0 0
-# Informasi player: efge
+# Informasi player: f
 ## INV-HOLDER
 0 2 0
-0.29
-1.33
+1.19
+0.83
 ## PLAYER
 5 0 0
-# Informasi player: geha
+# Informasi player: g
 ## INV-HOLDER
 0 2 0
-1.39
-1.09
+0.1
+0.49
 ## PLAYER
 6 0 0
 1 2 3 4 5 6
 # Informasi table
 ## INV-HOLDER
-256 38 0
-1.19
-0.2
-1.06
-0.4
-0.99
-0.7
-0.96
-0.6
-0.46
-1.23
-0.86
-1.03
-0.9
-1.26
-0.59
-0.16
-0.1
-0.43
-1.29
-0.49
-0.63
-0.79
-0.19
-0.33
-0.8
-0.69
-0.93
-1.36
-0.36
-1.2
-0.13
-1.3
-0.26
-1.13
-1.16
-0.23
+64 38 7
 0.76
+0.7
+0.23
+0.59
+0.89
+0.39
+0.3
+0.16
+0.53
+0.2
+0.36
+1.13
+1.26
+1.39
+1
+0.79
+1.1
+1.03
+1.29
+0.99
+0.13
+0.96
+1.3
+1.16
+0.8
+0.43
+1.36
+0.86
+0.26
+0.5
 0.56
+0.29
+0.6
+0.9
+1.23
+0.63
+1.09
+0.66
+1
+2
+3
+4
+5
+6
+7
 ## TABLE
-10
-0
-0
-0
-0
-0
-0
-0
-0
-0
 0
