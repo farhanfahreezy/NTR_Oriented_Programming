@@ -14,7 +14,7 @@ class Combo: public Value{
         Combo(vector<RegularCard>, vector<RegularCard>);
         vector<RegularCard> combineAndSortRegularCard();
         vector<RegularCard> sortByColor() const;
-        vector<RegularCard> sortByValue() const;
+        vector<RegularCard> sortByValue(vector<RegularCard>) const;
         vector<RegularCard> HighCard() const; //oke
         vector<RegularCard> Pair() const; //oke
         vector<RegularCard> TwoPair() const; //oke
@@ -24,10 +24,12 @@ class Combo: public Value{
         vector<RegularCard> Flush() const; //oke
         vector<RegularCard> FullHouse() const; //oke
         vector<RegularCard> StraightFlush() const; //oke
-        int getCombo();
+        int getCombo() const;
         float value() const override;
+        float TieBreaker() const;
+        bool operator>(const Combo&) const;
         //yang menjerumus kalo ada kasus dimana ada lebih dari 1 pemain yang punya nilai tertinggi adalah flush dan straight flush
-        //flush bisa ke straight
+        //flush bisa ke straight, two pair, pair
         //straight flush bisa ke threes, two pair, sm pair
         //sisanya tinggal bandingin high card
 };

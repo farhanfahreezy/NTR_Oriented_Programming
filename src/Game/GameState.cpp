@@ -58,9 +58,7 @@ const int GameState::getFirstPlayerIdx() const{
 }
 
 void GameState::advance(){
-    /** TEMP: FOR TESTING PURPOSES ONLY, MOVE THIS LATER TO MAIN PROGRAM */
-    GameCommands::init();
-
+    
     /** Get current player */
     currentPlayerIdx = turn.front();
     turn.pop();
@@ -201,8 +199,6 @@ void GameState::setPlayersName(){
 }
 
 void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
-    
-    regDeck.shuffleDeck();
     for(int i = 0; i<getNumberOfPlayer();i++){
         Player &player = this->getPlayerWithId(i);
         player + regDeck.getCard(0);player + regDeck.getCard(0);
@@ -210,6 +206,44 @@ void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
     while(regDeck.getAmount()!=0){
         Table &tables = this->getTable();
         tables + regDeck.getCard(0);
+    }
+}
+
+void GameState::shareRegularCardToPlayers(){
+    Table &tables = this->getTable();
+    // vector<RegularCard> &RegCard = tables.getRegularInvMod();
+    // tables.shuffle(RegCard);
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        Player &player = this->getPlayerWithId(i);
+        player + tables.getRegularInv().at(0);
+        tables.removeRegularCard(0);
+        player + tables.getRegularInv().at(0);
+        tables.removeRegularCard(0);
+    }
+}
+
+void GameState::shareAbilityCardToPlayers(){
+    Table &tables = this->getTable();
+    // vector<AbilityCard> &AbCard = tables.getAbilityInvMod();
+    // tables.shuffle(AbCard);
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        Player &player = this->getPlayerWithId(i);
+        player + tables.getAbilityInv().at(i);
+    }
+}
+
+void GameState::retractPlayersCard(){
+    Table &tables = this->getTable();
+    for(int i = 0; i<getNumberOfPlayer();i++){
+        Player &player = this->getPlayerWithId(i);
+        tables + player.getRegularInv().at(0);
+        player.removeRegularCard(0);
+        tables + player.getRegularInv().at(0);
+        player.removeRegularCard(0);
+
+        if(player.getAbilityInvSize()!=0){
+            player.removeAbilityCard();
+        }
     }
 }
 

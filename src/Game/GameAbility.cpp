@@ -217,5 +217,5 @@ void AbilityAbilityless::get() const {
     }
 
     Player &player = state.getPlayerWithId(p1);
-    player.setAbilityMati(false);
+    player.setAbilityMati(true);
 }
