@@ -45,6 +45,7 @@ int main(){
         string input;
         cin >> input;
         File::Read file(input);
+        file.ignore('#');
         initialState.fromFile(file);
 
     }
