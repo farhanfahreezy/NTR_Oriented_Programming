@@ -15,8 +15,31 @@ using namespace std;
 
 int main(){
     GameState initialState(7);
+    std::cout << " ____   ______  ____                  ____   ___   __  _    ___  ____  \n";
+    std::cout << "|    \\ |      ||    \\                |    \\ /   \\ |  |/ ]  /  _]|    \\ \n";
+    std::cout << "|  _  ||      ||  D  )     _____     |  o  )     ||  ' /  /  [_ |  D  )\n";
+    std::cout << "|  |  ||_|  |_||    /     |     |    |   _/|  O  ||    \\ |    _]|    / \n";
+    std::cout << "|  |  |  |  |  |    \\     |_____|    |  |  |     ||     ||   [_ |    \\ \n";
+    std::cout << "|  |  |  |  |  |  .  \\               |  |  |     ||  .  ||     ||  .  \\\n";
+    std::cout << "|__|__|  |__|  |__|\\_|               |__|   \\___/ |__|\\_||_____||__|\\_|\n";
+
     initialState.setPlayersName();
-    initialState.shareRegularCardToPlayers();
+
+    int pilihan = 0;
+    cout << "Silahkan pilih opsi input kartu yang akan dimainkan: " << endl;
+    cout << "1. Generate Random" << endl << "2. Input dari File" << endl;
+    while (pilihan < 1 || pilihan > 2)
+    {
+        cout << "  > ";
+        cin >> pilihan;
+    }
+    if(pilihan == 1){
+        RegularDeck regDeck(52);
+        initialState.shareRegularCardToPlayers(regDeck);
+    } else {
+        // INPUT DARI FILE AKU KURANG NGERTI
+    }
+    
 
     AbilityReroll abilityReroll;
     AbilityQuadruple abilityQuadruple;
@@ -28,157 +51,16 @@ int main(){
 
     initialState.printAllPlayers();
 
-    cout << "Isi Cangkul: " << initialState.getTable().getRegularInvSize() << endl;
-    cout << endl;
-
     GameState::setCurrentState(initialState);
 
     GameState &gameState = GameState::getCurrentState();
 
     // PROGRAMNYA MULAI DARI SINI
+
+    // MASIH ERROR, ISI CANGKUL PAS DIKIRIM KOSONG
     abilityReroll.get();
     gameState.printAllPlayers();
 
-    cout << "Poin sebelum Quadruple: " << gameState.getTable().getPoint() << endl;
-    abilityQuadruple.get();
-    cout << "Poin sesudah Quadruple: " << gameState.getTable().getPoint() << endl;
-
-    cout << "Poin sebelum Quarter: " << gameState.getTable().getPoint() << endl;
-    abilityQuarter.get();
-    cout << "Poin sesudah Quarter: " << gameState.getTable().getPoint() << endl;
-
-    // abilityReverse.get();
-    // gatau maudicek apa
-
-    abilitySwap.get();
-    gameState.printAllPlayers();
-
-    abilitySwitch.get();
-    gameState.printAllPlayers();
-
-    abilityAbilityles.get();
-    // gatau mau dicek apaan cok
-
-
-
-    // Combo c;
-    // Combo c1;
-    // Combo c2;
-    // Table t;
-    // Player p(1);
-    // RegularDeck regDeck(52);
-    // regDeck.shuffleDeck();
-    // RegularCard card0(1,0);
-    // RegularCard card1(5,0);
-    // RegularCard card2(7,0);
-    // RegularCard card3(10,0);
-    // RegularCard card4(12,0);
-    // RegularCard card5(13,2);
-    // RegularCard card6(13,0);
-    // t + regDeck.getCard(0);
-    // t + regDeck.getCard(1);
-    // t + regDeck.getCard(2);
-    // t + regDeck.getCard(3);
-    // t + regDeck.getCard(4);
-    // p + regDeck.getCard(5);
-    // p + regDeck.getCard(6);
-    // cout << "Player inv:" << endl;
-    // for(auto card : p.getRegularInv()){
-    //     card.printInfo();
-    // }
-    // cout << "Table inv:" << endl;
-    // for(auto card : t.getRegularInv()){
-    //     card.printInfo();
-    // }
-    // vector<RegularCard> vec1 = c.combineAndSortRegularCard(p.getRegularInv(), t.getRegularInv());
-    // cout << "Combined inv:" << endl;
-    // for(auto card : vec1){
-    //     card.printInfo();
-    // }
-    // float result = c1.value(vec1, t.getRegularInv(), p.getRegularInv()); //c.combineAndSortRegularCard(t.getRegularInv(), p.getRegularInv());
-    // cout << "vec2" << endl;
-    // vector<RegularCard> vec2 = c2.Flush(vec1);
-    // for(auto card : vec2){
-    //     card.printInfo();
-    // }
-    /*for(auto card : result){
-        card.printInfo();
-    }*/
-
-    //result.sortVector()
-    /*RegularDeck regDeck(52);
-    regDeck.shuffleDeck();
-    regDeck.getCard(0).printInfo();
-    Player player(1);
-    player.setName("one");
-    cout << player.getName() << "'s Inventory:" << endl;
-    cout << player.getRegularInvSize() << endl;
-    player + regDeck.getCard(2);
-    player + regDeck.getCard(3);
-    player + regDeck.getCard(4);
-    player + regDeck.getCard(5);
-    player + regDeck.getCard(6);
-    player + regDeck.getCard(7);
-    cout << player.getName() << "'s Inventory:" << endl;
-    for(auto card : player.getRegularInv()){
-        card.printInfo();
-    }
-    cout << player.getRegularInvSize() << endl;
-    player - 2;
-    cout << player.getName() << "'s Inventory:" << endl;
-    for(auto card : player.getRegularInv()){
-        card.printInfo();
-    }
-    cout << player.getRegularInvSize() << endl;*/
-    /* Player player2(2);
-    string name;
-    cout << "Enter Player Name:";
-    cin >> name;
-    string name2;
-    cout << "Enter Player Name:";
-    cin >> name2;
-    player.setName(name);
-    player2.setName(name2);
-    player.addRegularCard(regDeck.getCard(0), 2);
-    player.addRegularCard(regDeck.getCard(1), 2);
-    cout << player.getName() << "'s Inventory:" << endl;
-    for(auto card : player.getRegularInv()){
-        card.printInfo();
-    }
-    cout << player2.getName() << "'s Inventory:" << endl;
-    player2.addRegularCard(regDeck.getCard(2), 2);
-    player2.addRegularCard(regDeck.getCard(3), 2);
-    for(auto card : player2.getRegularInv()){
-        card.printInfo();
-    } */
-    /*for(int i = 0; i < 7; i++){
-        string name;
-        cout << "Enter Player " << i+1 << " Name:";
-        cin >> name;
-        Player player(i + 1);
-        player.setName(name);
-        players.push_back(player);
-        for (int j = 0; j < 2; j++) {
-            player.addRegularCard(regDeck.getCard(i*2 + j), 2);
-        }
-    }
-    for (const Player& player : players) {
-    cout << player.getName() << "'s Inventory:" << endl;
-    cout << "Regular Cards:" << endl;
-    const auto& inv = player.getRegularInv();
-    cout << "Inventory size: " << inv.size() << endl; // add this line
-    for(auto card : inv){
-        card.printInfo();
-    }*/
-
-    /*for(int i = 0; i < 7; i++){
-        cout << players[i].getName() << endl;
-    }*/
-    /*RegularDeck regDeck(52);
-    regDeck.shuffleDeck();
-    for(int i = 0; i < 52; i++){
-        RegularCard card = regDeck.getCard(i);
-        card.printInfo();
-    }*/
+    
 }
     

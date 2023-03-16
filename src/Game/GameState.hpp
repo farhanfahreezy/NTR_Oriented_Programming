@@ -105,7 +105,7 @@ class GameState{
          * @brief Bagiin kartu regular ke player
          * 
          */
-        void shareRegularCardToPlayers();
+        void shareRegularCardToPlayers(RegularDeck regDeck);
 
         /**
          * @brief Print all players with their cards

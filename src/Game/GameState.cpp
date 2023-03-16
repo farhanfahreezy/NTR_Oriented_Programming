@@ -195,8 +195,8 @@ void GameState::setPlayersName(){
 
 }
 
-void GameState::shareRegularCardToPlayers(){
-    RegularDeck regDeck(52);
+void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
+    
     regDeck.shuffleDeck();
     for(int i = 0; i<getNumberOfPlayer();i++){
         Player &player = this->getPlayerWithId(i);

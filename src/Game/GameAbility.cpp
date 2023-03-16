@@ -12,10 +12,14 @@ void AbilityReroll::get() const {
     Player &player = state.getPlayerWithId(currentPlayer.getId());
     
     table + player.getRegularInv().at(0);
+    player.removeRegularCard(0);
     table + player.getRegularInv().at(0);
+    player.removeRegularCard(0);
 
     player + table.getRegularInv().at(0);
+    table.removeRegularCard(0);
     player + table.getRegularInv().at(0);
+    table.removeRegularCard(0);
 
 
 }
@@ -211,5 +215,5 @@ void AbilityAbilityless::get() const {
     }
 
     Player &player = state.getPlayerWithId(p1);
-    player.removeAbilityCard();
+    player.setAbilityMati(false);
 }
