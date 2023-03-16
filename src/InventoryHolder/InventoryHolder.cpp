@@ -31,6 +31,10 @@ const vector<RegularCard>& InventoryHolder::getRegularInv() const{
     return regularInv;
 }
 
+vector<RegularCard>& InventoryHolder::getRegularInvMod(){
+    return regularInv;
+}
+
 const vector<AbilityCard>& InventoryHolder::getAbilityInv() const {
     return abilityInv;
 }
