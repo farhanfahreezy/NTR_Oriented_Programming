@@ -11,7 +11,8 @@ int main(){
         cout << *i << " ";
     cout << endl;
 
-    int max = Vectors::max<int>(v);
-    cout << "max: " << max << endl;
+    int i;
+    int max = Vectors::max<int>(v, i);
+    cout << "max: " << i << " -> " << max << endl;
     return 0;
 }

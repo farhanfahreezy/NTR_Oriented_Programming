@@ -2,6 +2,8 @@
 #include <stack>
 #include <IO/CommandParser.hpp>
 #include <Game/GameCommands.hpp>
+#include <Combo/Combo.hpp>
+#include <Util/Vectors.hpp>
 
 GameState GameState::defaultState = GameState(0);
 GameState& GameState::currentState = GameState::defaultState;
@@ -87,8 +89,30 @@ void GameState::advance(){
     }
 
     if (round == 7) {
-        /** TODO: Wrap up current game here: determine the winner or advance to the next game */
+        /** Wrap up current game here */
         cout << "Akhir dari permainan ke-" << gameNum << "!" << endl;
+
+        /** Award points */
+        vector<Combo> combos;
+        for(int i = 0; i < players.size(); ++i)
+            combos.push_back(Combo(players.at(i).getRegularInv(), table.getRegularInv()));
+        
+        int maxPlayer;
+        Vectors::max<Combo>(combos, maxPlayer);
+
+        Player& pointWinner = getPlayerWithId(maxPlayer);
+        cout
+            << "Pemenang permainan ini adalah " << pointWinner.getName() << "!\n"
+            << "Poin sebesar " << table.getPoint() << " diberikan kepada " << pointWinner.getName() << endl;
+        pointWinner.setPoint(pointWinner.getPoint() + table.getPoint());
+
+        /** Reset players */
+        for(auto& p : players){
+            p - 2;
+            p.setAbilityMati(false);
+        }
+        /** Reset table */
+        
 
         ++gameNum;
         round = 1;
