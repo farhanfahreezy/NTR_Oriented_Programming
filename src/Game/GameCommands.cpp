@@ -204,7 +204,7 @@ const Command
             if(argv.size() != 0)return false;
             auto& p = GameState::getCurrentState().getCurrentPlayer();
 
-            if(!p.hasAbilityCard(AbilityCard::ABILITY_REROLL_ID)){
+            if(!p.hasAbilityCard(AbilityCard::ABILITY_ABILITYLESS_ID)){
                 cout << "Ets, tidak bisa. Kamu tidak punya kartu Ability ABILITYLESS.\nSilahkan lakukan perintah lain." << endl;
                 return false;
             }else if(p.getAbilityMati()){
