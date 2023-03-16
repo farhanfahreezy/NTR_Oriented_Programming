@@ -59,4 +59,10 @@ void Table::fromFile(File::Read& reader){
     }
 }
 
-
+void Table::printTableInfo() {
+    cout << "Total Points on the Table : " << this->getPoint() << endl;
+    for (int i=0;i<tableDeck.size();i++) {
+        cout << i << ". ";
+        tableDeck[i].printInfo();
+    }
+}
