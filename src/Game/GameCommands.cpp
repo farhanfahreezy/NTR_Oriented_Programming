@@ -83,13 +83,6 @@ const Command
             return true;
         }),
     
-    /*GameCommands::COMMAND_REROLL = Command::withName("reroll")
-        .handles([&](vector<string>& argv)->bool{
-            if(argv.size() != 0)return false;
-
-            return true;
-        }),*/
-    
     GameCommands::COMMAND_REROLL = Command::withName("reroll")
         .handles([](vector<string>& argv)->bool{
             if(argv.size() != 0)return false;
@@ -104,6 +97,7 @@ const Command
             }
             AbilityReroll a;
             a.get();
+            p.removeAbilityCard();
 
             return true;
         }),
@@ -122,6 +116,7 @@ const Command
             }
             AbilityQuadruple a;
             a.get();
+            p.removeAbilityCard();
 
             return true;
         }),
@@ -140,6 +135,7 @@ const Command
             }
             AbilityQuarter a;
             a.get();
+            p.removeAbilityCard();
 
             return true;
         }),
@@ -158,6 +154,7 @@ const Command
             }
             AbilityReverse a;
             a.get();
+            p.removeAbilityCard();
 
             // The player keeps their turn after REVERSE-ing
             return false;
@@ -177,6 +174,7 @@ const Command
             }
             AbilitySwap a;
             a.get();
+            p.removeAbilityCard();
 
             return true;
         }),
@@ -195,6 +193,7 @@ const Command
             }
             AbilitySwitch a;
             a.get();
+            p.removeAbilityCard();
 
             return true;
         }),
@@ -213,6 +212,7 @@ const Command
             }
             AbilityAbilityless a;
             a.get();
+            p.removeAbilityCard();
 
             return true;
         });
