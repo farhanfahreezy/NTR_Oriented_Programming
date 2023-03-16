@@ -3,6 +3,7 @@
 Dalam rangka merayakan pesta panen gula di kerajaan permen, akan diadakan kompetisi massal permainan kartu ala Kerajaan Permen. Ratu kerajaan permen ingin mencari pemain kartu terhebat di kerajaannya. Namun karena Ratu tidak bisa memantau permainan satu-persatu, penulis akan diminta untuk membuatkan sistem agar permainan dapat berjalan dengan adil. 
  
 Program merupakan menggunakan paradigma pemrograman secara objek dan menggunakan konsep-konsep yang sesuai dengannya seperti inheritance & polymorphism, method/operator overloading, template & generic classes, exception, C++ standard template library, dan abstract base class.
+
 ## Technologies Used
 1. C++
 2. makefile
@@ -13,26 +14,7 @@ Program merupakan menggunakan paradigma pemrograman secara objek dan menggunakan
 4. Buka terminal pada perangkat dan ubah directory pada repository (../NTR_Oriented_Programming)
 5. Ketik "make build"
 6. Jalankan binary .exe yang terbentuk
-## Struktur data
-├───.idea
-├───.vscode
-├───bin
-│   └───test
-├───doc
-├───src
-│   ├───Ability
-│   ├───Card
-│   ├───Combo
-│   ├───Deck
-│   ├───Game
-│   ├───InventoryHolder
-│   ├───IO
-│   ├───Player
-│   ├───Table
-│   ├───Util
-│   └───Value
-└───test
-    └───files
+
 ## Anggota Kelompok
 1. Alex Sander (13521061)
 2. Ariel Jovananda (13521086)
