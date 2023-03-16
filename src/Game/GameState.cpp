@@ -106,22 +106,24 @@ void GameState::advance(){
             << "Poin sebesar " << table.getPoint() << " diberikan kepada " << pointWinner.getName() << endl;
         pointWinner.setPoint(pointWinner.getPoint() + table.getPoint());
 
-        /** Reset players */
-        for(auto& p : players){
-            p - 2;
-            p.setAbilityMati(false);
+        if(pointWinner.getPoint() >= table.getMaxPoint()){
+            /** End game if a player reaches point 1<<32 */
+            cout << pointWinner.getName() << " menang! Permainan selesai" << endl;
+            finished = true;
+        }else{
+            /** Reset players and the table */
+            for(auto& p : players)
+                p.setAbilityMati(false);
+            cout << "Mengambil kartu Player" << endl;
+            retractPlayersCard();
+            cout << "Membagikan RegularCard ke Player" << endl;
+            shareRegularCardToPlayers();
+            tables.retractCardFromDisplay();
+
+            /** Advance to the next game */
+            ++gameNum;
+            round = 1;
         }
-        /** Reset table */
-        
-
-        ++gameNum;
-        round = 1;
-        cout << "Mengambil kartu Player" << endl;
-        retractPlayersCard();
-        cout << "Membagikan RegularCard ke Player" << endl;
-        shareRegularCardToPlayers();
-        tables.retractCardFromDisplay();
-
     }
 }
 
@@ -253,8 +255,8 @@ void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
 
 void GameState::shareRegularCardToPlayers(){
     Table &tables = this->getTable();
-    // vector<RegularCard> &RegCard = tables.getRegularInvMod();
-    // tables.shuffle(RegCard);
+    vector<RegularCard> &RegCard = tables.getRegularInv();
+    Vectors::shuffle_vec<RegularCard>(RegCard);
     for(int i = 0; i<getNumberOfPlayer();i++){
         Player &player = this->getPlayerWithId(i);
         player + tables.getRegularInv().at(0);
