@@ -15,6 +15,7 @@ build: build-all clean-obj
 
 # build-all		- Compiles object files and builds a release-executable file
 build-all: clean-obj all
+	@$(GPP) $(CPPFLAGS) -c $(SOURCE_FOLDER)/main.cpp							-o $(OUTPUT_FOLDER)/main.o
 	@$(GPP) $(CPPFLAGS) $(OUTPUT_FOLDER)/*.o									-o $(OUTPUT_FOLDER)/$(BIN_NAME).exe
 
 ### RELEASE COMPILE RECIPES ###
