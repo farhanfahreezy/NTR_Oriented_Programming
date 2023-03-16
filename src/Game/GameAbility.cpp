@@ -74,15 +74,17 @@ void AbilityReverse::get() const {
     string name = state.getCurrentPlayer().getName();
     Table& table = state.getTable();
     Player currentPlayer = state.getCurrentPlayer();
-    cout << currentPlayer.getName() << " melakukan Reverse!" << endl;
+    // printnya kedouble?
+    // cout << currentPlayer.getName() << " melakukan Reverse!" << endl;
 
     state.reverseTurn();
     auto
         newTurn = state.getCurrentTurnQueue(),
         nextRoundTurn = state.turnStartFrom((state.getFirstPlayerIdx() + 1) % state.getNumberOfPlayer());
     
-    cout << name << " melakukan reverse!" << endl;
+    cout << name << " melakukan REVERSE!" << endl;
     cout << "Sisa urutan eksekusi ronde ini : ";
+    // print urutannya masih ada 0
     while(!newTurn.empty()){
         cout << newTurn.front() << " ";
         newTurn.pop();

@@ -30,7 +30,7 @@ class GameState{
         /**
          * Gets the current active player.
         */
-        const Player& getCurrentPlayer() const;
+        Player& getCurrentPlayer();
 
         /**
          * @brief Get the player with the given id.
