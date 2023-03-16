@@ -58,5 +58,3 @@ void Table::fromFile(File::Read& reader){
         tableDeck.push_back(c);
     }
 }
-
-
