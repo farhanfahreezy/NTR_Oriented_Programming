@@ -103,6 +103,14 @@ test-cmd: clean-obj testb-cmd
 testb-cmd: io
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/CommandTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/CommandTest.exe
 
+# test-vectors
+test-vectors: clean-obj testb-vectors
+	@$(TEST_BIN_FOLDER)/VectorsTest.exe
+
+testb-vectors:
+	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/VectorsTest.cpp -o $(TEST_BIN_FOLDER)/VectorsTest.exe
+
+# test-ComboTest
 test-ComboTest: clean-obj testb-ComboTest
 	@$(TEST_BIN_FOLDER)/ComboTest.exe
 
