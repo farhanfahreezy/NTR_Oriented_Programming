@@ -27,6 +27,7 @@ public:
     long long int getPoint() const;
     const std::vector<RegularCard>& getRegularInv() const ;
     const std::vector<AbilityCard>& getAbilityInv() const ;
+    vector<RegularCard>& getRegularInvMod();
     int getRegularInvSize() const;
     int getAbilityInvSize() const;
 

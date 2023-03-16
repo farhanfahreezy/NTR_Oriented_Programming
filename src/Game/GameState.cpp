@@ -80,7 +80,7 @@ void GameState::advance(){
         turn = turnStartFrom(getFirstPlayerIdx());
         
         tables.pullCardToDisplay();
-        if(round!=1){
+        if(round==2){
             cout << "Membagikan AbilityCard ke Player" << endl;
             shareAbilityCardToPlayers();
         }
@@ -118,9 +118,10 @@ void GameState::advance(){
         round = 1;
         cout << "Mengambil kartu Player" << endl;
         retractPlayersCard();
+        tables.retractCardFromDisplay();
         cout << "Membagikan RegularCard ke Player" << endl;
         shareRegularCardToPlayers();
-        tables.retractCardFromDisplay();
+        
 
     }
 }
@@ -253,8 +254,8 @@ void GameState::shareRegularCardToPlayers(RegularDeck regDeck){
 
 void GameState::shareRegularCardToPlayers(){
     Table &tables = this->getTable();
-    // vector<RegularCard> &RegCard = tables.getRegularInvMod();
-    // tables.shuffle(RegCard);
+    vector<RegularCard> &RegCard = tables.getRegularInvMod();
+    Vectors::shuffle_vec(RegCard);
     for(int i = 0; i<getNumberOfPlayer();i++){
         Player &player = this->getPlayerWithId(i);
         player + tables.getRegularInv().at(0);
