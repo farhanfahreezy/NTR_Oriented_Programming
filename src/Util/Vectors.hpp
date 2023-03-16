@@ -17,17 +17,23 @@ class Vectors{
         }
 
         /**
-         * Iterates through the vector and returns the largest element.
+         * Iterates through the vector and returns the largest element. Also stores the largest element index in an out parameter.
          * 
          * @attention Assumes `vec` is not empty and comparison operators are defined for T.
          * 
          * @param vec The vector to search through.
+         * @param idx Out parameter for storing the index of the largest element.
         */
         template<class T>
-        static T max(const vector<T>& vec){
-            auto i = vec.cbegin(), found = i;
-            while(++i != vec.cend())
-                if(*found < *i)found = i;
+        static T max(vector<T>& vec, int& idx){
+            T* found = &vec.at(0);
+            idx = 0;
+            for(int i = 1; i < vec.size(); ++i){
+                if(*found < vec.at(i)){
+                    found = &vec.at(i);
+                    idx = i;
+                }
+            }
             return *found;
         }
 };
