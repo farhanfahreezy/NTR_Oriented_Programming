@@ -62,11 +62,17 @@ const int GameState::getFirstPlayerIdx() const{
 void GameState::advance(){
     
     /** Get current player */
+    if(turn.size()==6){
+        cout << "Membagikan AbilityCard ke Player" << endl;
+        shareAbilityCardToPlayers();
+    }
     currentPlayerIdx = turn.front();
     turn.pop();
 
     /** Wait for and call next command */
+    getPlayerWithId(currentPlayerIdx).printPlayerInfo();
     do cout << ":: " << getCurrentPlayer().getName() << "'s turn > "; while(!CommandParser::getNext());
+    cout << endl;
 
     if(turn.empty()){
         /** End of round; initiate the next round */
@@ -74,6 +80,12 @@ void GameState::advance(){
 
         ++round;
         turn = turnStartFrom(getFirstPlayerIdx());
+
+        cout << "Mengambil kartu Player" << endl;
+        retractPlayersCard();
+        cout << "Membagikan RegularCard ke Player" << endl;
+        shareRegularCardToPlayers();
+        
     }
 
     if (round == 7) {
@@ -248,11 +260,11 @@ void GameState::shareRegularCardToPlayers(){
 
 void GameState::shareAbilityCardToPlayers(){
     Table &tables = this->getTable();
-    // vector<AbilityCard> &AbCard = tables.getAbilityInvMod();
-    // tables.shuffle(AbCard);
+    vector<AbilityCard> AbCard = tables.getAbilityInv();
+    Vectors::shuffle_vec(AbCard);
     for(int i = 0; i<getNumberOfPlayer();i++){
         Player &player = this->getPlayerWithId(i);
-        player + tables.getAbilityInv().at(i);
+        player + AbCard.at(i);
     }
 }
 
@@ -260,11 +272,10 @@ void GameState::retractPlayersCard(){
     Table &tables = this->getTable();
     for(int i = 0; i<getNumberOfPlayer();i++){
         Player &player = this->getPlayerWithId(i);
-        tables + player.getRegularInv().at(0);
-        player.removeRegularCard(0);
-        tables + player.getRegularInv().at(0);
-        player.removeRegularCard(0);
-
+        while(player.getRegularInvSize()!=0){
+            tables + player.getRegularInv().at(0);
+            player.removeRegularCard(0);
+        }
         if(player.getAbilityInvSize()!=0){
             player.removeAbilityCard();
         }

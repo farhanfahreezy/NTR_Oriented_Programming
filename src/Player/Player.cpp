@@ -85,8 +85,13 @@ void Player::fromFile(File::Read& reader){
 
 void Player::printPlayerInfo(){
     cout << getName() << "'s Inventory:" << endl;
+    cout << "Regular Card: " <<  endl;
+    int i = 1;
     for(auto card : getRegularInv()){
+        cout << "  " << i << ". ";
         card.printInfo();
+        i++;
+
     }
     for(auto card : getAbilityInv()){
         card.printInfo();

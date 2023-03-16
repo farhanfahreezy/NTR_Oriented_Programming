@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <IO/File.hpp>
+#include <Util/Vectors.hpp>
 
 using namespace std;
 
@@ -59,22 +60,23 @@ int main(){
     GameState &gameState = GameState::getCurrentState();
 
     // Main loop
-    // while(!gameState.isComplete()){
-    //     gameState.advance();
-    // }
-    cout << "Tarik kartu" << endl;
-    gameState.retractPlayersCard();
-    gameState.printAllPlayers();
-
-    cout << "Tes 1 kartu" << endl;
-    gameState.shareRegularCardToPlayers();
-    gameState.printAllPlayers();
-    gameState.retractPlayersCard();
+    
+    while(!gameState.isComplete()){
         gameState.advance();
-    cout << "Tes 2 kartu" << endl;
-    gameState.shareRegularCardToPlayers();
-    gameState.printAllPlayers();
-    gameState.retractPlayersCard();
+    }
+    // cout << "Tarik kartu" << endl;
+    // gameState.retractPlayersCard();
+    // gameState.printAllPlayers();
+
+    // cout << "Tes 1 kartu" << endl;
+    // gameState.shareAbilityCardToPlayers();
+    // gameState.printAllPlayers();
+    // gameState.retractPlayersCard();
+    //     // gameState.advance();
+    // cout << "Tes 2 kartu" << endl;
+    // gameState.shareAbilityCardToPlayers();
+    // gameState.printAllPlayers();
+    // gameState.retractPlayersCard();
 
     std::cout << " ____   ______  ____                  ____   ___   __  _    ___  ____  \n";
     std::cout << "|    \\ |      ||    \\                |    \\ /   \\ |  |/ ]  /  _]|    \\ \n";
