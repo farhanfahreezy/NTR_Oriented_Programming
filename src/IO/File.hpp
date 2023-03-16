@@ -13,7 +13,10 @@ class File{
         */
         class Read{
             private:
+                static const char NOIGNOREPREFIX = '\0';
+
                 ifstream fs;
+                char ignoreCh;
             
             public:
                 /**
@@ -21,7 +24,7 @@ class File{
                  * 
                  * @param path Path to the file.
                 */
-                Read(string path): fs(path){}
+                Read(string path): fs(path), ignoreCh(NOIGNOREPREFIX){}
 
                 /**
                  * Closes the file stream.
@@ -31,12 +34,16 @@ class File{
                 }
 
                 /**
-                 * Reads a line from the file stream and stores it into `line`. Returns whether read operation is successful.
+                 * Reads a line from the file stream and stores it into an out parameter. Returns whether read operation is successful.
                  * 
                  * @param line Out parameter for file line.
                 */
                 bool readLine(string& line){
-                    return (bool)getline(fs, line);
+                    bool success;
+                    do{
+                        success = (bool)getline(fs, line);
+                    }while(ignoreCh != NOIGNOREPREFIX && line.size() > 0 && line.at(0) == ignoreCh);
+                    return success;
                 }
 
                 /**
@@ -47,6 +54,15 @@ class File{
                 void each(function<void(string&)> cons){
                     string line;
                     while(readLine(line))cons(line);
+                }
+
+                /**
+                 * Sets the ignore prefix. Lines starting with the given prefix will be ignored by the stream reader.
+                 * 
+                 * @param ch The ignore prefix.
+                */
+                void ignore(char ch){
+                    ignoreCh = ch;
                 }
 
                 /**

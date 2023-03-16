@@ -11,6 +11,9 @@ class CommandParser{
         static istream* is;
         static ostream* os;
         static map<string,Command> commands;
+
+        static string errmsg;
+        static char ignorePrefix;
     
     public:
         /**
@@ -38,6 +41,13 @@ class CommandParser{
          * @param command The command object.
         */
         static void reg(const Command& command);
+
+        /**
+         * Sets the error message the parser displays when an invalid command is received.
+         * 
+         * @param msg The new error message to be used.
+        */
+        static void setErrMsg(string msg);
 };
 
 #endif

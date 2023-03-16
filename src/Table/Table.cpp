@@ -37,7 +37,9 @@ void Table::resetPot(){
 }
 
 void Table::toFile(File::Write& writer) const{
+    writer << "# Informasi table\n";
     InventoryHolder::toFile(writer);
+    writer << "## TABLE\n";
     writer << tableDeck.size() << '\n';
     for(int i = 0; i < tableDeck.size(); ++i)
         tableDeck.at(i).toFile(writer);

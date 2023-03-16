@@ -54,7 +54,7 @@ const int GameState::getRound() const{
 }
 
 const int GameState::getFirstPlayerIdx() const{
-    return (gameNum - 1) * 7 + (round - 1);
+    return ((gameNum - 1) * 7 + (round - 1)) % players.size();
 }
 
 void GameState::advance(){
@@ -64,21 +64,22 @@ void GameState::advance(){
     turn.pop();
 
     /** Wait for and call next command */
-    do cout << "|| Player " << currentPlayerIdx << " >> "; while(!CommandParser::getNext());
+    do cout << ":: " << getCurrentPlayer().getName() << "'s turn > "; while(!CommandParser::getNext());
 
     if(turn.empty()){
         /** End of round; initiate the next round */
-        /** TODO: Wrap up current round here: award points, etc. */
+        cout << "Akhir dari ronde ke-" << round << "!" << endl;
 
         ++round;
         turn = turnStartFrom(getFirstPlayerIdx());
     }
 
     if (round == 7) {
+        /** TODO: Wrap up current game here: determine the winner or advance to the next game */
+        cout << "Akhir dari permainan ke-" << gameNum << "!" << endl;
+
         ++gameNum;
         round = 1;
-
-        /** TODO: Wrap up current game here: determine the winner or advance to the next game */
     }
 }
 
@@ -130,6 +131,7 @@ int GameState::getNumberOfPlayer(){
 
 void GameState::toFile(File::Write& writer) const{
     auto q = turn;
+    writer << "# Informasi state permainan\n";
     writer << gameNum << ' ' << round << ' ' << currentPlayerIdx
         << ' ' << reversed << ' ' << finished
         << ' ' << players.size() << ' ' << q.size() << '\n';
@@ -167,13 +169,10 @@ void GameState::fromFile(File::Read& reader){
     getline(ss1, s, ' ');
     int qSize = stoi(s);
 
-    players.clear();
     for(; !turn.empty(); turn.pop());
 
     for(int i = 0; i < pSize; ++i){
-        Player p;
-        p.fromFile(reader);
-        players.push_back(p);
+        players.at(i).fromFile(reader);
     }
     
     reader >> s;

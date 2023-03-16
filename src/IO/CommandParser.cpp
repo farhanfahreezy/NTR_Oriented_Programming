@@ -6,6 +6,8 @@ istream* CommandParser::is = &cin;
 ostream* CommandParser::os = &cout;
 map<string,Command> CommandParser::commands;
 
+string CommandParser::errmsg = "ERR: No command found";
+
 void CommandParser::changeIn(istream& s){
     is = &s;
 }
@@ -37,6 +39,7 @@ bool CommandParser::getNext(){
         bool success = toInvoke->second.invoke(argv);
         return success;
     }
+    *os << errmsg << endl;
     return false;
 }
 
@@ -44,4 +47,8 @@ void CommandParser::reg(const Command& command){
     string name = command.getName();
     if(commands.find(name) != commands.end())commands.erase(name);
     commands.insert(pair<string,Command>(name, command));
+}
+
+void CommandParser::setErrMsg(string msg){
+    errmsg = msg;
 }

@@ -70,7 +70,7 @@ int main(){
     gameState.shareRegularCardToPlayers();
     gameState.printAllPlayers();
     gameState.retractPlayersCard();
-
+        gameState.advance();
     cout << "Tes 2 kartu" << endl;
     gameState.shareRegularCardToPlayers();
     gameState.printAllPlayers();
