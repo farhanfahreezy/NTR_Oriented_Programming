@@ -41,8 +41,8 @@ vector<RegularCard> Combo::sortByColor() const{
 
 }
 
-vector<RegularCard> Combo :: sortByValue() const{
-    vector<RegularCard> combined = this->com;
+vector<RegularCard> Combo :: sortByValue(vector<RegularCard> combo) const{
+    vector<RegularCard> combined = combo;
     int n = combined.size();
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -362,7 +362,7 @@ vector<RegularCard> Combo::StraightFlush() const{
     return StraightFlush;
 }
 
-int Combo::getCombo(){
+int Combo::getCombo() const{
     if (this->value() < 1.4) {
         //cout << "High Card!" << endl;
         return 0; // HIGH CARD
@@ -397,46 +397,133 @@ int Combo::getCombo(){
 float Combo :: value() const{
     if(this->StraightFlush().size() == 5){
         vector<RegularCard> result = this->StraightFlush();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 11.2;
     }
     if(this->FourOfAKind().size() == 4){
         vector<RegularCard> result = this->FourOfAKind();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 9.8;
     }
     if(this->FullHouse().size() == 5){
         vector<RegularCard> result = this->ThreeOfAKind();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 8.4;
     }
     if(this->Flush().size() == 5){
         vector<RegularCard> result = this->Flush();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 7.0;
     }
     if(this->Straight().size() == 5){
         vector<RegularCard> result = this->Straight();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 5.6;
     }
     if(this->ThreeOfAKind().size() == 3){
         vector<RegularCard> result = this->ThreeOfAKind();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 4.2;
     }
     if(this->TwoPair().size() == 4){
         vector<RegularCard> result = this->TwoPair();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 2.8;
     }
     if(this->Pair().size() == 2){
          vector<RegularCard> result = this->Pair();
-        result = this->sortByValue();
+        result = this->sortByValue(result);
         return result[0].value() + 1.4;
     }
     if(this->HighCard().size() == 1){
         return this->HighCard()[0].value();
     }
     return 0.0;
+}
+
+float Combo:: TieBreaker() const{
+    float val = this->value();
+    if(this->getCombo() == 8){
+        if(this->ThreeOfAKind().size() == 3){
+            vector<RegularCard> result = this->ThreeOfAKind();
+            result = this->sortByValue(result);
+            return result[0].value() + 4.2;
+        }
+        if(this->TwoPair().size() == 4){
+            vector<RegularCard> result = this->TwoPair();
+            result = this->sortByValue(result);
+            return result[0].value() + 2.8;
+        }
+        if(this->Pair().size() == 2){
+            vector<RegularCard> result = this->Pair();
+            result = this->sortByValue(result);
+            return result[0].value() + 1.4;
+        }
+        if(this->HighCard().size() == 1){
+            return this->HighCard()[0].value();
+        }
+    }
+    if(this->getCombo() == 5){
+        //kasus flush
+        int color = this->Flush()[0].getColor();
+        if(player[0].getColor() == player[1].getColor()){
+            if(player[0].value() > player[1].value()){
+                if(player[0].getColor() == color){
+                    return player[0].value() + 1.4;
+                }
+                else{
+                    return player[0].value();
+                }
+            }else{
+                if(player[1].getColor() == color){
+                    return player[1].value() + 1.4;
+                }
+                else{
+                    return player[1].value();
+                }
+
+            }
+        }
+        for(int i = 0; i < player.size(); i++){
+            if(player[i].getColor() == color){
+                return player[i].value() + 1.4;
+            }
+        }
+        return this->HighCard()[0].value();
+    }
+    if(this->getCombo() == 4){
+        if(this->ThreeOfAKind().size() == 3){
+            vector<RegularCard> result = this->ThreeOfAKind();
+            result = this->sortByValue(result);
+            return result[0].value() + 4.2;
+        }
+        if(this->TwoPair().size() == 4){
+            vector<RegularCard> result = this->TwoPair();
+            result = this->sortByValue(result);
+            return result[0].value() + 2.8;
+        }
+        if(this->Pair().size() == 2){
+            vector<RegularCard> result = this->Pair();
+            result = this->sortByValue(result);
+            return result[0].value() + 1.4;
+        }
+        if(this->HighCard().size() == 1){
+            return this->HighCard()[0].value();
+        }
+    }
+    else{
+        return this->HighCard()[0].value();
+    }
+    return 0.0;
+
+}
+
+bool Combo::operator>(const Combo& c) const{
+    if(this->value() > c.value()){
+        return true;
+    }
+    if(this->value() == c.value()){
+        return this->TieBreaker() > c.TieBreaker();
+    }
+    return false;
 }

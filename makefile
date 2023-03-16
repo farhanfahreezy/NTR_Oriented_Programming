@@ -102,3 +102,10 @@ test-cmd: clean-obj testb-cmd
 
 testb-cmd: io
 	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/CommandTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/CommandTest.exe
+
+test-ComboTest: clean-obj testb-ComboTest
+	@$(TEST_BIN_FOLDER)/ComboTest.exe
+
+testb-ComboTest: all
+	@$(GPP) $(CPPFLAGS) $(TEST_FOLDER)/ComboTest.cpp $(OUTPUT_FOLDER)/*.o -o $(TEST_BIN_FOLDER)/ComboTest.exe
+
